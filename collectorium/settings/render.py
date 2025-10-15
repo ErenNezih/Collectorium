@@ -50,16 +50,39 @@ SECURE_HSTS_PRELOAD = True
 # ============================================================================
 
 # Render provides DATABASE_URL automatically
-DATABASE_URL = os.environ.get('DATABASE_URL')
+DATABASE_URL = os.environ.get('DATABASE_URL', '')
 
 if DATABASE_URL:
-    DATABASES = {
-        'default': dj_database_url.parse(
-            DATABASE_URL,
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
-    }
+    # Parse and validate
+    try:
+        DATABASES = {
+            'default': dj_database_url.config(
+                default=DATABASE_URL,
+                conn_max_age=600,
+                conn_health_checks=True,
+                ssl_require=False,
+            )
+        }
+    except Exception as e:
+        # Fallback: manual PostgreSQL config
+        import re
+        # Extract from postgresql://user:pass@host:port/dbname
+        match = re.match(r'postgresql://([^:]+):([^@]+)@([^:]+):?(\d+)?/(.+)', DATABASE_URL)
+        if match:
+            user, password, host, port, dbname = match.groups()
+            DATABASES = {
+                'default': {
+                    'ENGINE': 'django.db.backends.postgresql',
+                    'NAME': dbname,
+                    'USER': user,
+                    'PASSWORD': password,
+                    'HOST': host,
+                    'PORT': port or '5432',
+                    'CONN_MAX_AGE': 600,
+                }
+            }
+        else:
+            raise ValueError(f'Invalid DATABASE_URL format: {e}')
 else:
     raise ValueError('DATABASE_URL environment variable is required!')
 
