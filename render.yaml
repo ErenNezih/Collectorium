@@ -1,0 +1,29 @@
+services:
+  # Django Web Service
+  - type: web
+    name: collectorium
+    env: python
+    region: frankfurt
+    plan: free
+    branch: main
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn collectorium.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: DJANGO_SETTINGS_MODULE
+        value: collectorium.settings.render
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: False
+    autoDeploy: true
+
+databases:
+  # PostgreSQL Database
+  - name: collectorium-db
+    region: frankfurt
+    plan: free
+    databaseName: collectorium
+    user: collectorium
+
