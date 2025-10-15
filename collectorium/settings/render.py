@@ -154,12 +154,16 @@ LOGGING = {
 INSTALLED_APPS = [app for app in INSTALLED_APPS if 'debug_toolbar' not in app]
 MIDDLEWARE = [mw for mw in MIDDLEWARE if 'debug_toolbar' not in mw]
 
-# Template caching
+# Template caching (APP_DIRS must be False when custom loaders are set)
+TEMPLATES[0]['APP_DIRS'] = False
 TEMPLATES[0]['OPTIONS']['loaders'] = [
-    ('django.template.loaders.cached.Loader', [
-        'django.template.loaders.filesystem.Loader',
-        'django.template.loaders.app_directories.Loader',
-    ]),
+    (
+        'django.template.loaders.cached.Loader',
+        [
+            'django.template.loaders.filesystem.Loader',
+            'django.template.loaders.app_directories.Loader',
+        ],
+    ),
 ]
 
 # Session configuration
