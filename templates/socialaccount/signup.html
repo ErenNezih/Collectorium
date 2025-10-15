@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Hesap Oluştur - Collectorium{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div class="w-full max-w-md">
+        <div class="bg-white rounded-2xl shadow-2xl px-8 py-10 border border-blue-100">
+            <!-- Logo or Icon -->
+            <div class="flex justify-center mb-6">
+                <div class="w-20 h-20 bg-gradient-to-br from-brand-navy to-blue-600 rounded-full flex items-center justify-center">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Title -->
+            <h1 class="font-orbitron text-2xl font-bold text-center text-gray-900 mb-2">
+                Hesabınızı Tamamlayın
+            </h1>
+            
+            <p class="text-center text-gray-600 mb-6">
+                Google hesabınız doğrulandı. Birkaç bilgi daha ekleyelim.
+            </p>
+
+            <!-- Redirect Message -->
+            <div class="bg-blue-50 border-l-4 border-brand-navy p-4 mb-6 rounded-r-lg">
+                <p class="text-sm text-brand-navy font-medium">
+                    🎉 Sizi özel kayıt sayfamıza yönlendiriyoruz...
+                </p>
+            </div>
+
+            <!-- Auto-redirect script -->
+            <script>
+                // Eğer custom onboarding sayfamız varsa oraya yönlendir
+                setTimeout(function() {
+                    window.location.href = "{% url 'google_onboarding_complete' %}";
+                }, 1500);
+            </script>
+
+            <!-- Manual link in case auto-redirect fails -->
+            <div class="text-center">
+                <p class="text-sm text-gray-600">
+                    Yönlendirilmediyseniz, 
+                    <a href="{% url 'google_onboarding_complete' %}" class="text-brand-navy hover:underline font-semibold">buraya tıklayın</a>.
+                </p>
+            </div>
+        </div>
+
+        <!-- Collectorium Branding -->
+        <div class="text-center mt-6">
+            <p class="text-sm text-gray-500">
+                <span class="font-orbitron font-bold text-brand-navy">Collectorium</span> ailesine hoş geldiniz
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

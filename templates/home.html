@@ -1,0 +1,425 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="relative min-h-screen overflow-hidden hero-section">
+  <!-- Sinematik Arka Plan -->
+  <div class="absolute inset-0 hero-background">
+    <!-- Arka plan görseli -->
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-navy via-gray-900 to-black">
+      {% load static %}
+      <img src="{% static 'images/hero/hero_background.jpg' %}" 
+           alt="Collectorium Background" 
+           class="w-full h-full object-cover opacity-30"
+           onerror="this.style.display='none'">
+    </div>
+    
+    <!-- Karartma ve bulanıklık overlay - Sinematik -->
+    <div class="absolute inset-0 bg-gradient-to-b from-brand-navy/70 via-brand-navy/30 to-brand-navy/80 backdrop-blur-[2px]"></div>
+    
+    <!-- Animasyonlu gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-tr from-brand-red/15 via-transparent to-blue-900/15 animate-pulse-slow"></div>
+    
+    <!-- Vignette efekti -->
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,transparent_50%,rgba(11,31,58,0.6)_100%)]"></div>
+  </div>
+  
+  <!-- Süzülen Koleksiyon Parçaları - Minimalist ve Dengeli -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden">
+    {% load static %}
+    
+    <!-- ARKA PLAN KATMANI - Çok Soluk Derinlik Efekti -->
+    <div class="hidden lg:block absolute top-1/4 left-1/5 floating-collection-item-5" style="animation-delay: 4s; z-index: 1;">
+      <img src="{% static 'images/hero/hero_item_5.png' %}" 
+           alt="Background Ambiance" 
+           class="w-24 h-auto opacity-10 blur-lg transform rotate-12"
+           onerror="this.parentElement.remove()">
+    </div>
+    
+    <div class="hidden lg:block absolute bottom-1/4 right-1/5 floating-collection-item-6" style="animation-delay: 5s; z-index: 1;">
+      <img src="{% static 'images/hero/hero_item_6.png' %}" 
+           alt="Background Ambiance" 
+           class="w-28 h-auto opacity-12 blur-lg transform -rotate-8"
+           onerror="this.parentElement.remove()">
+    </div>
+    
+    <!-- SOL TARAF -->
+    <!-- Sol Üst - Charizard -->
+    <div class="absolute top-10 lg:top-12 left-4 lg:left-8 floating-collection-item-1" style="animation-delay: 0s; z-index: 3;">
+      <img src="{% static 'images/hero/hero_item_1.png' %}" 
+           alt="Charizard Card" 
+           class="w-28 lg:w-36 h-auto opacity-90 transform rotate-6 hover:scale-110 hover:rotate-3 hover:brightness-110 transition-all duration-700 ease-out"
+           style="filter: drop-shadow(0 30px 60px rgba(0,0,0,0.65)) drop-shadow(0 20px 40px rgba(0,0,0,0.55)) drop-shadow(0 10px 20px rgba(0,0,0,0.45)) drop-shadow(0 0 25px rgba(255,100,0,0.35));"
+           onerror="this.parentElement.remove()">
+    </div>
+    
+    <!-- Sol Orta - Blue-Eyes (1.5x BÜYÜK - HERO) -->
+    <div class="absolute top-1/3 left-6 lg:left-10 floating-collection-item-2" style="animation-delay: 1.5s; z-index: 5;">
+      <img src="{% static 'images/hero/hero_item_5.png' %}" 
+           alt="Blue-Eyes Dragon" 
+           class="w-48 sm:w-56 lg:w-64 xl:w-72 h-auto opacity-95 transform -rotate-8 hover:scale-105 transition-all duration-700 hover:rotate-[-6deg]"
+           style="filter: drop-shadow(0 35px 70px rgba(0,0,0,0.6)) drop-shadow(0 22px 45px rgba(0,0,0,0.5)) drop-shadow(0 12px 25px rgba(0,0,0,0.4)) drop-shadow(0 0 35px rgba(30,58,138,0.6)) drop-shadow(0 0 55px rgba(59,130,246,0.45)) drop-shadow(0 0 75px rgba(96,165,250,0.3));"
+           onerror="this.parentElement.remove()">
+    </div>
+    
+    <!-- Sol Alt - Spider-Man -->
+    <div class="absolute bottom-16 lg:bottom-20 left-4 lg:left-8 floating-collection-item-3" style="animation-delay: 3s; z-index: 3;">
+      <img src="{% static 'images/hero/hero_item_3.png' %}" 
+           alt="Spider-Man Comic" 
+           class="w-28 lg:w-36 h-auto opacity-90 transform rotate-3 hover:scale-110 hover:rotate-1 hover:brightness-110 transition-all duration-700 ease-out"
+           style="filter: drop-shadow(0 30px 60px rgba(0,0,0,0.65)) drop-shadow(0 20px 40px rgba(0,0,0,0.55)) drop-shadow(0 10px 20px rgba(0,0,0,0.45)) drop-shadow(0 0 25px rgba(220,38,38,0.45));"
+           onerror="this.parentElement.remove()">
+    </div>
+    
+    <!-- SAĞ TARAF - PS2 Oyunları -->
+    <!-- Sağ Üst - Figure -->
+    <div class="absolute top-12 lg:top-16 right-4 lg:right-8 floating-collection-item-4" style="animation-delay: 1s; z-index: 3;">
+      <img src="{% static 'images/hero/hero_item_2.png' %}" 
+           alt="Collectible Figure" 
+           class="w-28 lg:w-36 h-auto opacity-90 transform -rotate-6 hover:scale-110 hover:-rotate-3 hover:brightness-110 transition-all duration-700 ease-out"
+           style="filter: drop-shadow(0 30px 60px rgba(0,0,0,0.65)) drop-shadow(0 20px 40px rgba(0,0,0,0.55)) drop-shadow(0 10px 20px rgba(0,0,0,0.45)) drop-shadow(0 0 30px rgba(59,130,246,0.55)) drop-shadow(0 0 45px rgba(96,165,250,0.35));"
+           onerror="this.parentElement.remove()">
+    </div>
+    
+    <!-- Sağ Orta - God of War (1.5x BÜYÜK - HERO) -->
+    <div class="absolute top-1/3 right-6 lg:right-10 floating-collection-item-5" style="animation-delay: 2s; z-index: 5;">
+      <img src="{% static 'images/hero/hero_item_4.png' %}" 
+           alt="God of War PS2" 
+           class="w-44 sm:w-52 lg:w-60 xl:w-68 h-auto opacity-95 transform rotate-4 hover:scale-105 transition-all duration-700 hover:rotate-6"
+           style="filter: drop-shadow(0 35px 70px rgba(0,0,0,0.6)) drop-shadow(0 22px 45px rgba(0,0,0,0.5)) drop-shadow(0 12px 25px rgba(0,0,0,0.4)) drop-shadow(0 0 20px rgba(220,38,38,0.25)) drop-shadow(0 0 35px rgba(239,68,68,0.15));"
+           onerror="this.parentElement.remove()">
+    </div>
+    
+    <!-- Sağ Alt - DBZ Game -->
+    <div class="absolute bottom-16 lg:bottom-20 right-4 lg:right-8 floating-collection-item-6" style="animation-delay: 3.5s; z-index: 3;">
+      <img src="{% static 'images/hero/hero_item_6.png' %}" 
+           alt="Dragon Ball Z PS2" 
+           class="w-28 lg:w-36 h-auto opacity-90 transform -rotate-3 hover:scale-110 hover:-rotate-1 hover:brightness-110 transition-all duration-700 ease-out"
+           style="filter: drop-shadow(0 30px 60px rgba(0,0,0,0.65)) drop-shadow(0 20px 40px rgba(0,0,0,0.55)) drop-shadow(0 10px 20px rgba(0,0,0,0.45)) drop-shadow(0 0 25px rgba(234,179,8,0.45));"
+           onerror="this.parentElement.remove()">
+    </div>
+    
+    <!-- ÇOK BÜYÜK EKRANLAR İÇİN - Extra Derinlik Kartı (Orta) -->
+    <div class="hidden 2xl:block absolute top-1/3 left-1/2 -translate-x-1/2 floating-collection-item-1" style="animation-delay: 6s; z-index: 1;">
+      <img src="{% static 'images/hero/hero_item_1.png' %}" 
+           alt="Central Ambiance" 
+           class="w-32 h-auto opacity-15 blur-md transform rotate-12"
+           onerror="this.parentElement.remove()">
+    </div>
+  </div>
+  
+  <!-- Ana İçerik -->
+  <div class="relative z-10 mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+          <div class="text-center">
+            <!-- Ana Başlık -->
+            <h1 class="font-orbitron text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl">
+              <span class="block drop-shadow-2xl super-saiyan-text">Collectorium</span>
+              <span class="block text-brand-red text-3xl sm:text-4xl lg:text-5xl xl:text-6xl mt-4 drop-shadow-2xl" style="text-shadow: 0 4px 20px rgba(0,0,0,0.8), 0 2px 10px rgba(0,0,0,0.6);">Koleksiyonun Başladığı Yer</span>
+            </h1>
+      
+      <!-- Alt Başlık -->
+      <p class="mt-8 max-w-3xl mx-auto text-xl leading-8 text-gray-100 sm:text-2xl font-medium" style="text-shadow: 0 3px 20px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.8), 0 0 30px rgba(0,0,0,0.6);">
+        Türkiye'nin ilk ve tek koleksiyon pazar yerinde aradığın parçaları bul, kendi koleksiyonunu sat.
+      </p>
+      
+      <!-- CTA Butonları -->
+      <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
+        <a href="{% url 'marketplace' %}" 
+           class="group relative inline-flex items-center justify-center rounded-xl bg-brand-red px-8 py-4 text-lg font-semibold text-white shadow-2xl hover:bg-brand-red/90 hover:shadow-[0_20px_60px_rgba(230,57,70,0.6)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 overflow-hidden">
+          <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
+          <svg class="mr-3 h-6 w-6 group-hover:rotate-12 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <span class="relative">Hemen Keşfet</span>
+        </a>
+        {% if user.is_authenticated and user.role == 'seller' %}
+        <a href="{% url 'listings:listing_create' %}" 
+           class="group relative inline-flex items-center justify-center rounded-xl border-2 border-white/90 backdrop-blur-sm bg-white/5 px-8 py-4 text-lg font-semibold text-white hover:bg-white hover:text-brand-navy hover:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 overflow-hidden">
+          <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
+          <span class="relative">İlan Oluştur</span>
+          <svg class="ml-3 h-6 w-6 group-hover:translate-x-1 group-hover:rotate-90 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+        </a>
+        {% else %}
+        <a href="{% url 'account_signup' %}" 
+           class="group relative inline-flex items-center justify-center rounded-xl border-2 border-white/90 backdrop-blur-sm bg-white/5 px-8 py-4 text-lg font-semibold text-white hover:bg-white hover:text-brand-navy hover:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 overflow-hidden">
+          <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
+          <span class="relative">Satışa Başla</span>
+          <svg class="ml-3 h-6 w-6 group-hover:translate-x-2 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+        {% endif %}
+      </div>
+      
+            <!-- İstatistikler -->
+            <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+              <div class="group text-center backdrop-blur-md bg-white/10 rounded-xl p-6 border border-white/20 hover:bg-white/15 hover:border-white/30 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl">
+                <div class="text-3xl sm:text-4xl font-bold text-white drop-shadow-lg group-hover:scale-110 transition-transform duration-300">{{ stats.total_listings|default:0 }}+</div>
+                <div class="text-sm sm:text-base text-gray-100 mt-2 font-medium">Aktif İlan</div>
+              </div>
+              <div class="group text-center backdrop-blur-md bg-white/10 rounded-xl p-6 border border-white/20 hover:bg-white/15 hover:border-white/30 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl">
+                <div class="text-3xl sm:text-4xl font-bold text-white drop-shadow-lg group-hover:scale-110 transition-transform duration-300">{{ stats.total_stores|default:0 }}+</div>
+                <div class="text-sm sm:text-base text-gray-100 mt-2 font-medium">Doğrulanmış Mağaza</div>
+              </div>
+              <div class="group text-center backdrop-blur-md bg-white/10 rounded-xl p-6 border border-white/20 hover:bg-white/15 hover:border-white/30 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl">
+                <div class="text-3xl sm:text-4xl font-bold text-white drop-shadow-lg group-hover:scale-110 transition-transform duration-300">{{ stats.total_categories|default:0 }}+</div>
+                <div class="text-sm sm:text-base text-gray-100 mt-2 font-medium">Kategori</div>
+              </div>
+              <div class="group text-center backdrop-blur-md bg-white/10 rounded-xl p-6 border border-white/20 hover:bg-white/15 hover:border-white/30 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl">
+                <div class="text-3xl sm:text-4xl font-bold text-white drop-shadow-lg group-hover:scale-110 transition-transform duration-300">{{ stats.total_reviews|default:0 }}+</div>
+                <div class="text-sm sm:text-base text-gray-100 mt-2 font-medium">Değerlendirme</div>
+              </div>
+            </div>
+    </div>
+  </div>
+  
+  <!-- Scroll İndikatörü -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+    <div class="relative">
+      <div class="absolute inset-0 blur-md bg-white/30 rounded-full"></div>
+      <svg class="w-6 h-6 relative" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- Categories Section -->
+<div class="bg-white py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl lg:text-center">
+      <h2 class="font-orbitron text-3xl font-bold tracking-tight text-brand-ink sm:text-4xl">Kategorileri Keşfet</h2>
+      <p class="mt-4 text-lg leading-8 text-brand-mute">Pokémon kartlarından nadir çizgi romanlara, aradığın her şey burada.</p>
+    </div>
+    <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
+      {% if featured_categories %}
+      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {% for category in featured_categories %}
+        <div class="group flex flex-col rounded-2xl bg-white shadow-card ring-1 ring-brand-line hover:shadow-xl hover:ring-brand-red/20 transition-all duration-300">
+          <div class="p-8">
+            <h3 class="text-xl font-semibold leading-7 text-brand-ink group-hover:text-brand-red transition-colors duration-200">{{ category.name }}</h3>
+            <p class="mt-2 text-base leading-7 text-brand-mute">{{ category.description|default:"Bu kategorideki binlerce ürünü incele." }}</p>
+            {% if category.listing_count %}
+            <p class="mt-3 text-sm text-brand-red font-medium">{{ category.listing_count }} ilan mevcut</p>
+            {% endif %}
+          </div>
+          <div class="p-8 pt-0">
+            <a href="{% url 'marketplace' %}?category={{ category.slug }}" class="font-semibold text-brand-red hover:text-brand-red/80 transition-colors duration-200">
+              Daha Fazla <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="text-center py-12">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+        </svg>
+        <h3 class="mt-2 text-sm font-medium text-brand-ink">Henüz kategori yok</h3>
+        <p class="mt-1 text-sm text-brand-mute">İlk kategorileri admin panelinden ekleyebilirsiniz.</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- New Products Section -->
+<div class="bg-gray-50 py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="sm:flex sm:items-baseline sm:justify-between">
+      <h2 class="font-orbitron text-3xl font-bold tracking-tight text-brand-ink">Yeni Eklenen İlanlar</h2>
+      <a href="{% url 'marketplace' %}" class="hidden text-sm font-semibold text-brand-red hover:text-brand-red/90 sm:block">
+        Tüm ürünler<span aria-hidden="true"> &rarr;</span>
+      </a>
+    </div>
+    <div id="new-products" class="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+      {% if new_listings %}
+        {% for listing in new_listings %}
+        <div class="group relative bg-white rounded-lg shadow-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-200 hover:border-brand-red/20">
+          <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-lg bg-gray-200 relative">
+            {% if listing.images.first %}
+              <img src="{{ listing.images.first.image.url }}" alt="{{ listing.title }}"
+                   class="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-300">
+            {% else %}
+              <div class="h-full w-full flex items-center justify-center bg-gray-100">
+                <svg class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+            {% endif %}
+            
+            <!-- Yeni Badge -->
+            <div class="absolute top-2 left-2">
+              <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                Yeni
+              </span>
+            </div>
+            
+            <!-- Durum Badge -->
+            <div class="absolute top-2 right-2">
+              <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium 
+                {% if listing.condition == 'new' %}bg-green-100 text-green-800
+                {% elif listing.condition == 'like_new' %}bg-blue-100 text-blue-800
+                {% elif listing.condition == 'good' %}bg-yellow-100 text-yellow-800
+                {% elif listing.condition == 'fair' %}bg-orange-100 text-orange-800
+                {% else %}bg-red-100 text-red-800{% endif %}">
+                {{ listing.get_condition_display }}
+              </span>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="text-sm font-medium text-brand-ink line-clamp-2">
+              <a href="{% url 'listing_detail' listing.id %}" class="hover:text-brand-red transition-colors duration-200">
+                {{ listing.title }}
+              </a>
+            </h3>
+            <p class="mt-1 text-xs text-brand-mute">{{ listing.product.name }}</p>
+            <p class="mt-1 text-xs text-brand-mute">by {{ listing.store.name }}</p>
+            <div class="mt-3 flex items-center justify-between">
+              <span class="text-lg font-bold text-brand-navy">
+                {{ listing.price }} {{ listing.currency }}
+              </span>
+              <div class="flex items-center space-x-1">
+                {% if listing.store.is_verified %}
+                <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                {% endif %}
+                <span class="text-xs text-brand-mute">{{ listing.created_at|timesince }} önce</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-span-full text-brand-mute p-8 border-2 border-dashed border-gray-300 rounded-2xl text-center">
+          <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+          </svg>
+          <h3 class="text-lg font-medium text-brand-ink">Henüz ilan eklenmemiş</h3>
+          <p class="mt-1 text-sm text-brand-mute">İlk ilanı sen ekle!</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- Popular Products Section -->
+{% if popular_listings %}
+<div class="bg-white py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="sm:flex sm:items-baseline sm:justify-between">
+      <h2 class="font-orbitron text-3xl font-bold tracking-tight text-brand-ink">Popüler İlanlar</h2>
+      <a href="{% url 'marketplace' %}" class="hidden text-sm font-semibold text-brand-red hover:text-brand-red/90 sm:block">
+        Tüm ürünler<span aria-hidden="true"> &rarr;</span>
+      </a>
+    </div>
+    <div id="popular-products" class="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+      {% for listing in popular_listings %}
+      <div class="group relative bg-white rounded-lg shadow-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-200 hover:border-brand-red/20">
+        <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-lg bg-gray-200 relative">
+          {% if listing.images.first %}
+            <img src="{{ listing.images.first.image.url }}" alt="{{ listing.title }}"
+                 class="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-300">
+          {% else %}
+            <div class="h-full w-full flex items-center justify-center bg-gray-100">
+              <svg class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+          {% endif %}
+          
+          <!-- Popüler Badge -->
+          <div class="absolute top-2 left-2">
+            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+              <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              Popüler
+            </span>
+          </div>
+          
+          <!-- Rating Badge -->
+          {% if listing.avg_rating %}
+          <div class="absolute top-2 right-2">
+            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+              <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              {{ listing.avg_rating|floatformat:1 }}
+            </span>
+          </div>
+          {% endif %}
+        </div>
+        <div class="p-4">
+          <h3 class="text-sm font-medium text-brand-ink line-clamp-2">
+            <a href="{% url 'listing_detail' listing.id %}" class="hover:text-brand-red transition-colors duration-200">
+              {{ listing.title }}
+            </a>
+          </h3>
+          <p class="mt-1 text-xs text-brand-mute">{{ listing.product.name }}</p>
+          <p class="mt-1 text-xs text-brand-mute">by {{ listing.store.name }}</p>
+          <div class="mt-3 flex items-center justify-between">
+            <span class="text-lg font-bold text-brand-navy">
+              {{ listing.price }} {{ listing.currency }}
+            </span>
+            <div class="flex items-center space-x-1">
+              {% if listing.store.is_verified %}
+              <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              {% endif %}
+              <span class="text-xs text-brand-mute">{{ listing.review_count }} yorum</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Verified Stores Section -->
+{% if verified_stores %}
+<div class="bg-gray-50 py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl lg:text-center">
+      <h2 class="font-orbitron text-3xl font-bold tracking-tight text-brand-ink sm:text-4xl">Doğrulanmış Mağazalar</h2>
+      <p class="mt-4 text-lg leading-8 text-brand-mute">Güvenilir satıcılardan koleksiyon parçaları keşfet.</p>
+    </div>
+    <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+      {% for store in verified_stores %}
+      <div class="group flex flex-col items-center text-center bg-white rounded-2xl shadow-card hover:shadow-xl transition-all duration-300 p-8 border border-gray-200 hover:border-brand-red/20">
+        {% if store.logo %}
+          <img class="h-16 w-16 rounded-full object-cover" src="{{ store.logo.url }}" alt="{{ store.name }}">
+        {% else %}
+          <div class="h-16 w-16 rounded-full bg-brand-red flex items-center justify-center">
+            <span class="text-xl font-medium text-white">{{ store.name|first|upper }}</span>
+          </div>
+        {% endif %}
+        <h3 class="mt-4 text-lg font-semibold leading-7 text-brand-ink group-hover:text-brand-red transition-colors duration-200">{{ store.name }}</h3>
+        {% if store.bio %}
+          <p class="mt-2 text-sm leading-6 text-brand-mute">{{ store.bio|truncatechars:100 }}</p>
+        {% endif %}
+        <div class="mt-4 flex items-center space-x-2">
+          <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+          </svg>
+          <span class="text-sm font-medium text-blue-600">Doğrulanmış</span>
+        </div>
+        <a href="#" class="mt-4 text-sm font-semibold text-brand-red hover:text-brand-red/80 transition-colors duration-200">
+          Mağazayı Görüntüle <span aria-hidden="true">→</span>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}
+

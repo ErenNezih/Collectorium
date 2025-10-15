@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}E-posta Doğrulama Gönderildi - Collectorium{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div class="w-full max-w-md">
+        <div class="bg-white rounded-2xl shadow-2xl px-8 py-10 border border-green-100">
+            <!-- Success Icon -->
+            <div class="flex justify-center mb-6">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
+                    <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Title -->
+            <h1 class="font-orbitron text-2xl font-bold text-center text-gray-900 mb-3">
+                E-posta Gönderildi!
+            </h1>
+
+            <!-- Success Message -->
+            <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-6 rounded-r-lg">
+                <p class="text-sm text-green-800">
+                    E-posta adresinizi doğrulamak için size bir bağlantı gönderdik. Lütfen gelen kutunuzu kontrol edin.
+                </p>
+            </div>
+
+            <!-- Action Button -->
+            <a href="{% url 'home' %}" 
+               class="block w-full text-center px-6 py-3 bg-gradient-to-r from-brand-navy to-blue-700 text-white font-semibold rounded-xl hover:from-blue-800 hover:to-brand-navy transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                Ana Sayfaya Dön
+            </a>
+        </div>
+
+        <!-- Collectorium Branding -->
+        <div class="text-center mt-6">
+            <p class="text-sm text-gray-500">
+                <span class="font-orbitron font-bold text-brand-navy">Collectorium</span> - Güvenli platformunuz
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

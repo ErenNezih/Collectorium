@@ -1,0 +1,75 @@
+{% extends 'accounts/profile.html' %}
+
+{% block title %}İlanlarım - Collectorium{% endblock %}
+
+{% block profile_content %}
+<div class="bg-white p-6 sm:p-8 rounded-lg shadow-md">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b pb-4">
+        <div>
+            <h2 class="text-2xl font-bold text-brand-navy">İlanlarım</h2>
+            <p class="text-sm text-brand-mute mt-1">Mağazanızda yayınlanan tüm ilanları buradan yönetebilirsiniz.</p>
+        </div>
+        <a href="{% url 'listings:listing_create' %}" class="mt-4 sm:mt-0 w-full sm:w-auto inline-flex items-center justify-center rounded-lg bg-brand-red px-5 py-2.5 text-sm font-semibold text-white shadow-lg hover:bg-brand-red/90 transition-all duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+            </svg>
+            Yeni İlan Ekle
+        </a>
+    </div>
+
+    {% if listings %}
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left text-gray-500">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                    <th scope="col" class="px-6 py-3">İlan</th>
+                    <th scope="col" class="px-6 py-3">Fiyat</th>
+                    <th scope="col" class="px-6 py-3">Stok</th>
+                    <th scope="col" class="px-6 py-3">Durum</th>
+                    <th scope="col" class="px-6 py-3 text-center">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for listing in listings %}
+                <tr class="bg-white border-b hover:bg-gray-50">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        <div class="flex items-center">
+                            {% with listing.get_primary_image as primary_image %}
+                            <img class="w-16 h-16 rounded-md object-cover mr-4" src="{{ primary_image.image.url if primary_image else 'https://via.placeholder.com/150' }}" alt="{{ listing.title }}">
+                            {% endwith %}
+                            <a href="#" class="hover:text-brand-red">{{ listing.title }}</a>
+                        </div>
+                    </th>
+                    <td class="px-6 py-4 font-semibold">{{ listing.price }} ₺</td>
+                    <td class="px-6 py-4">{{ listing.stock }}</td>
+                    <td class="px-6 py-4">
+                        {% if listing.is_active %}
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Aktif</span>
+                        {% else %}
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Pasif</span>
+                        {% endif %}
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                        <a href="{% url 'listings:listing_edit' listing.pk %}" class="font-medium text-brand-navy hover:underline mr-4">Düzenle</a>
+                        <a href="{% url 'listings:listing_delete' listing.pk %}" class="font-medium text-red-600 hover:underline">Sil</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <div class="text-center py-12 border-2 border-dashed rounded-lg">
+            <p class="text-brand-mute">Henüz hiç ilan oluşturmadınız.</p>
+            <a href="{% url 'listings:listing_create' %}" class="mt-4 inline-block bg-brand-navy text-white font-bold py-2 px-4 rounded-md hover:bg-brand-navy/90 transition duration-300">
+                İlk İlanını Oluştur
+            </a>
+        </div>
+    {% endif %}
+
+    {% if is_paginated %}
+        <nav class="mt-8 flex justify-center">
+            </nav>
+    {% endif %}
+</div>
+{% endblock %}

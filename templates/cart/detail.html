@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}Sepetim - Collectorium{% endblock %}
+
+{% block content %}
+<div class="bg-gray-100">
+    <div class="container mx-auto px-4 py-12">
+        <h1 class="text-3xl font-bold text-brand-navy mb-8 border-b pb-4">Sepetim</h1>
+
+        {% if cart %}
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Sepet Ürünleri -->
+            <div class="w-full lg:w-2/3">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    {% for item in cart %}
+                    <div class="p-6 border-b border-gray-200 flex items-center space-x-4 hover:bg-gray-50 transition-colors duration-200">
+                        <!-- Ürün Görseli -->
+                        <div class="flex-shrink-0 w-24 h-24 bg-gray-200 rounded-lg overflow-hidden">
+                            {% if item.listing.images.first %}
+                                <img src="{{ item.listing.images.first.image.url }}" alt="{{ item.listing.title }}"
+                                     class="w-full h-full object-cover">
+                            {% else %}
+                                <div class="w-full h-full flex items-center justify-center">
+                                    <svg class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Ürün Bilgileri -->
+                        <div class="flex-grow">
+                            <h3 class="text-lg font-semibold text-brand-ink hover:text-brand-red transition-colors duration-200">
+                                <a href="{% url 'listing_detail' item.listing.id %}">{{ item.listing.title }}</a>
+                            </h3>
+                            <p class="text-sm text-brand-mute">{{ item.listing.product.name }}</p>
+                            <p class="text-sm text-brand-mute">Satıcı: {{ item.listing.store.name }}</p>
+                            <p class="text-sm font-medium text-brand-navy mt-2">{{ item.price }} ₺ / adet</p>
+                        </div>
+
+                        <!-- Miktar Güncelleme -->
+                        <div class="flex items-center space-x-2">
+                            <form method="post" action="{% url 'cart:cart_add' item.listing.id %}" class="flex items-center space-x-2">
+                                {% csrf_token %}
+                                {{ item.update_quantity_form.quantity }}
+                                {{ item.update_quantity_form.override }}
+                                <button type="submit" class="bg-brand-red text-white px-3 py-1 rounded-md text-sm hover:bg-red-700 transition duration-200">
+                                    Güncelle
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Toplam Fiyat -->
+                        <div class="flex-shrink-0 w-24 text-right">
+                            <p class="text-lg font-bold text-brand-navy">{{ item.total_price }} ₺</p>
+                        </div>
+
+                        <!-- Sil Butonu -->
+                        <div class="flex-shrink-0">
+                            <a href="{% url 'cart:cart_remove' item.listing.id %}"
+                               class="text-red-600 hover:text-red-800 transition-colors duration-200"
+                               onclick="return confirm('Bu ürünü sepetten çıkarmak istediğinize emin misiniz?');">
+                                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Sipariş Özeti -->
+            <div class="w-full lg:w-1/3">
+                <div class="bg-white rounded-lg shadow-md p-6 sticky top-24">
+                    <h2 class="text-lg font-medium text-brand-navy border-b pb-4">Sipariş Özeti</h2>
+                    <div class="mt-4 space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <p class="text-brand-mute">Ara Toplam ({{ cart|length }} ürün)</p>
+                            <p class="text-brand-ink font-medium">{{ cart.get_total_price|floatformat:2 }} ₺</p>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <p class="text-brand-mute">Kargo</p>
+                            <p class="text-brand-ink font-medium">Ücretsiz</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t flex items-center justify-between">
+                        <p class="text-base font-semibold text-brand-navy">Toplam</p>
+                        <p class="text-base font-semibold text-brand-navy">{{ cart.get_total_price|floatformat:2 }} ₺</p>
+                    </div>
+                    <div class="mt-6">
+                        <a href="{% url 'orders:order_create' %}"
+                           class="block w-full bg-brand-red text-white text-center font-bold py-3 px-4 rounded-md hover:bg-red-700 transition duration-300">
+                            Ödemeye Geç
+                        </a>
+                    </div>
+                    <div class="mt-4">
+                        <a href="{% url 'marketplace' %}"
+                           class="block w-full bg-gray-200 text-brand-ink text-center font-medium py-3 px-4 rounded-md hover:bg-gray-300 transition duration-300">
+                            Alışverişe Devam Et
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <!-- Boş Sepet Durumu -->
+        <div class="bg-white rounded-lg shadow-md p-12 text-center">
+            <svg class="mx-auto h-24 w-24 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <h2 class="mt-4 text-2xl font-semibold text-brand-ink">Sepetiniz Boş</h2>
+            <p class="mt-2 text-brand-mute">Henüz sepetinize ürün eklemediniz.</p>
+            <div class="mt-6">
+                <a href="{% url 'marketplace' %}"
+                   class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-brand-red hover:bg-red-700 transition duration-300">
+                    Alışverişe Başla
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

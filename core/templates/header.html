@@ -1,0 +1,68 @@
+<header x-data="{ mobileMenuOpen: false }" class="sticky top-0 z-40 bg-white/80 backdrop-blur-lg border-b border-brand-line">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+      <div class="flex items-center">
+        <a href="{% url 'home' %}" class="font-orbitron text-2xl font-bold text-brand-navy">
+          Collectorium
+        </a>
+        <nav class="hidden lg:ml-10 lg:flex lg:items-baseline lg:space-x-8">
+          <a href="#" class="text-sm font-medium text-brand-ink hover:text-brand-navy">Marketplace</a>
+          <a href="#" class="text-sm font-medium text-brand-mute hover:text-brand-navy">Mağazalar</a>
+          <a href="#" class="text-sm font-medium text-brand-mute hover:text-brand-navy">Destek</a>
+        </nav>
+      </div>
+
+      <div class="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">
+        <div class="w-full max-w-lg lg:max-w-xs">
+          <label for="search" class="sr-only">Ara</label>
+          <div class="relative">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <input id="search" name="search" class="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-brand-ink ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-brand-navy sm:text-sm sm:leading-6" placeholder="Ürün, kategori veya mağaza ara..." type="search">
+          </div>
+        </div>
+      </div>
+
+      <div class="hidden lg:flex lg:items-center lg:space-x-4 ml-4">
+        {% if user.is_authenticated %}
+          <a href="#" class="text-sm font-medium text-brand-mute hover:text-brand-navy">Profilim</a>
+          <a href="{% url 'account_logout' %}" class="text-sm font-medium text-brand-mute hover:text-brand-navy">Çıkış Yap</a>
+        {% else %}
+          <a href="{% url 'account_login' %}" class="text-sm font-medium text-brand-mute hover:text-brand-navy">Giriş Yap</a>
+          <a href="{% url 'account_signup' %}" class="text-sm font-medium text-brand-mute hover:text-brand-navy">Kayıt Ol</a>
+        {% endif %}
+        <a href="#" class="ml-4 inline-flex items-center justify-center rounded-md border border-transparent bg-brand-red px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red">İlan Ver</a>
+      </div>
+
+      <div class="flex items-center lg:hidden ml-4">
+        <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="inline-flex items-center justify-center rounded-md bg-gray-100 p-2 text-gray-400 hover:bg-gray-200 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-navy focus:ring-offset-2" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="sr-only">Menüyü aç</span>
+          <svg :class="{'hidden': mobileMenuOpen, 'block': !mobileMenuOpen }" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+          <svg :class="{'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="lg:hidden" id="mobile-menu">
+    <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3 border-t border-brand-line">
+      <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-brand-ink hover:bg-gray-50">Marketplace</a>
+      <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-brand-mute hover:bg-gray-50">Mağazalar</a>
+      <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-brand-mute hover:bg-gray-50">Destek</a>
+    </div>
+    <div class="border-t border-gray-200 pt-4 pb-3">
+      <div class="space-y-1 px-2">
+        {% if user.is_authenticated %}
+          <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-brand-mute hover:bg-gray-50">Profilim</a>
+          <a href="{% url 'account_logout' %}" class="block rounded-md px-3 py-2 text-base font-medium text-brand-mute hover:bg-gray-50">Çıkış Yap</a>
+        {% else %}
+          <a href="{% url 'account_login' %}" class="block rounded-md px-3 py-2 text-base font-medium text-brand-mute hover:bg-gray-50">Giriş Yap</a>
+          <a href="{% url 'account_signup' %}" class="block rounded-md px-3 py-2 text-base font-medium text-brand-mute hover:bg-gray-50">Kayıt Ol</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</header>

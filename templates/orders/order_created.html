@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Siparişiniz Alındı - Collectorium{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-20 text-center">
+    <div class="max-w-2xl mx-auto">
+        <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-20 w-20 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg>
+        <h1 class="text-4xl font-bold text-brand-navy mt-4">Teşekkürler!</h1>
+        <p class="mt-2 text-lg text-brand-mute">Siparişiniz başarıyla oluşturuldu.</p>
+        
+        {% if order %}
+        <p class="mt-6 bg-gray-100 p-4 rounded-lg inline-block">
+            Sipariş Numaranız: <strong class="text-brand-ink font-mono">{{ order.id }}</strong>
+        </p>
+        {% endif %}
+
+        <div class="mt-8">
+            <a href="{% url 'my_orders' %}" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-brand-red hover:bg-red-700">
+                Siparişlerime Git
+            </a>
+            <a href="{% url 'marketplace' %}" class="ml-4 inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-brand-navy bg-white hover:bg-gray-50">
+                Alışverişe Devam Et
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

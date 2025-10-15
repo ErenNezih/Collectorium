@@ -1,0 +1,145 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "TCG Kartları",
+      "slug": "tcg-kartlari",
+      "parent": null,
+      "description": "Trading Card Game kartları",
+      "image": "",
+      "created_at": "2024-10-10T20:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Aksiyon Figürleri",
+      "slug": "aksiyon-figurleri",
+      "parent": null,
+      "description": "Aksiyon figürleri ve oyuncaklar",
+      "image": "",
+      "created_at": "2024-10-10T20:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Çizgi Romanlar",
+      "slug": "cizgi-romanlar",
+      "parent": null,
+      "description": "Çizgi romanlar ve grafik romanlar",
+      "image": "",
+      "created_at": "2024-10-10T20:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Pokémon Base Set",
+      "slug": "pokemon-base-set",
+      "category": 1,
+      "brand": "Pokémon",
+      "description": "Orijinal Pokémon Base Set kartları",
+      "created_at": "2024-10-10T20:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Marvel Legends Spider-Man",
+      "slug": "marvel-legends-spider-man",
+      "category": 2,
+      "brand": "Hasbro",
+      "description": "Marvel Legends serisi Spider-Man figürü",
+      "created_at": "2024-10-10T20:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "Batman: The Dark Knight Returns",
+      "slug": "batman-dark-knight-returns",
+      "category": 3,
+      "brand": "DC Comics",
+      "description": "Frank Miller'ın klasik Batman çizgi romanı",
+      "created_at": "2024-10-10T20:00:00Z"
+    }
+  },
+  {
+    "model": "stores.store",
+    "pk": 1,
+    "fields": {
+      "owner": 1,
+      "name": "Koleksiyon Dünyası",
+      "slug": "koleksiyon-dunyasi",
+      "bio": "Türkiye'nin en kapsamlı koleksiyon mağazası",
+      "logo": "",
+      "is_verified": true,
+      "created_at": "2024-10-10T20:00:00Z",
+      "updated_at": "2024-10-10T20:00:00Z"
+    }
+  },
+  {
+    "model": "listings.listing",
+    "pk": 1,
+    "fields": {
+      "store": 1,
+      "product": 1,
+      "title": "Pokémon Charizard - Nadir Kart",
+      "description": "Orijinal Base Set Charizard kartı. Mükemmel durumda, PSA değerlendirmesi için hazır.",
+      "price": "2500.00",
+      "currency": "TRY",
+      "condition": "like_new",
+      "stock": 1,
+      "is_active": true,
+      "created_at": "2024-10-10T20:00:00Z",
+      "updated_at": "2024-10-10T20:00:00Z"
+    }
+  },
+  {
+    "model": "listings.listing",
+    "pk": 2,
+    "fields": {
+      "store": 1,
+      "product": 2,
+      "title": "Spider-Man Marvel Legends Figür",
+      "description": "Hasbro Marvel Legends serisi Spider-Man figürü. Kutusunda, hiç açılmamış.",
+      "price": "450.00",
+      "currency": "TRY",
+      "condition": "new",
+      "stock": 2,
+      "is_active": true,
+      "created_at": "2024-10-10T20:00:00Z",
+      "updated_at": "2024-10-10T20:00:00Z"
+    }
+  },
+  {
+    "model": "listings.listing",
+    "pk": 3,
+    "fields": {
+      "store": 1,
+      "product": 3,
+      "title": "Batman: The Dark Knight Returns - Çizgi Roman",
+      "description": "Frank Miller'ın klasik eseri. İlk baskı, mükemmel durumda.",
+      "price": "180.00",
+      "currency": "TRY",
+      "condition": "good",
+      "stock": 1,
+      "is_active": true,
+      "created_at": "2024-10-10T20:00:00Z",
+      "updated_at": "2024-10-10T20:00:00Z"
+    }
+  }
+]
+
+
+
+
+
+

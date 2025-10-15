@@ -1,0 +1,18 @@
+{# 
+  Kullanım Örneği:
+  {% include 'includes/category-card.html' with category_name="TCG Kartları" category_url="#" %}
+#}
+<a href="{{ category_url|default:'#' }}" class="group block rounded-2xl bg-white p-6 shadow-card ring-1 ring-brand-line/50 transition-shadow duration-200 hover:shadow-lg hover:ring-brand-red/50">
+  <div class="flex items-center gap-x-4">
+    <div class="flex h-12 w-12 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-brand-red">
+      <!-- Placeholder Icon -->
+      <svg class="h-6 w-6 text-gray-600 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z" />
+      </svg>
+    </div>
+    <div>
+      <h3 class="text-base font-semibold leading-7 text-brand-ink">{{ category_name|default:'Kategori Adı' }}</h3>
+      <p class="text-sm leading-6 text-brand-mute">Ürünleri gör</p>
+    </div>
+  </div>
+</a>

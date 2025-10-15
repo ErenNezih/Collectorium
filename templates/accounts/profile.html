@@ -1,0 +1,226 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Profilim{% endblock %}
+
+{% block content %}
+<div class="bg-gray-50 py-12">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="font-orbitron text-3xl font-bold tracking-tight text-brand-ink">Profilim</h1>
+      <p class="mt-2 text-lg text-brand-mute">Hesap bilgilerinizi yönetin</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Sol Panel - Profil Bilgileri -->
+      <div class="lg:col-span-1">
+        <div class="bg-white rounded-2xl shadow-card p-6">
+          <!-- Avatar ve Temel Bilgiler -->
+          <div class="text-center">
+            {% if user.avatar %}
+              <img class="mx-auto h-24 w-24 rounded-full object-cover" src="{{ user.avatar.url }}" alt="{{ user.username }}">
+            {% else %}
+              <div class="mx-auto h-24 w-24 rounded-full bg-brand-red flex items-center justify-center">
+                <span class="text-2xl font-medium text-white">{{ user.username|first|upper }}</span>
+              </div>
+            {% endif %}
+            <h2 class="mt-4 text-xl font-semibold text-brand-ink">{{ user.get_full_name|default:user.username }}</h2>
+            <p class="text-brand-mute">@{{ user.username }}</p>
+            
+            <!-- Role Badge -->
+            <div class="mt-2">
+              {% if user.role == 'seller' %}
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                  <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  Satıcı
+                </span>
+              {% elif user.role == 'admin' %}
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                  <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                  </svg>
+                  Admin
+                </span>
+              {% else %}
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
+                  <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                    <path fill-rule="evenodd" d="M4 5a2 2 0 012-2h8a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 2a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+                  </svg>
+                  Alıcı
+                </span>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- Mağaza Bilgileri -->
+          {% if store %}
+          <div class="mt-6 pt-6 border-t border-gray-200">
+            <h3 class="text-lg font-medium text-brand-ink">Mağaza Bilgileri</h3>
+            <div class="mt-3">
+              {% if store.logo %}
+                <img class="h-12 w-12 rounded-full object-cover" src="{{ store.logo.url }}" alt="{{ store.name }}">
+              {% else %}
+                <div class="h-12 w-12 rounded-full bg-brand-red flex items-center justify-center">
+                  <span class="text-sm font-medium text-white">{{ store.name|first|upper }}</span>
+                </div>
+              {% endif %}
+              <p class="mt-2 text-sm font-medium text-brand-ink">{{ store.name }}</p>
+              {% if store.bio %}
+                <p class="text-sm text-brand-mute">{{ store.bio|truncatechars:80 }}</p>
+              {% endif %}
+              <div class="mt-2 flex items-center">
+                {% if store.is_verified %}
+                  <svg class="w-4 h-4 text-blue-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="text-xs text-blue-600 font-medium">Doğrulanmış</span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          <!-- Hızlı Aksiyonlar -->
+          <div class="mt-6 space-y-3">
+            <a href="{% url 'profile_edit' %}" class="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-brand-ink bg-white hover:bg-gray-50 transition-colors duration-200">
+              <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+              </svg>
+              Profili Düzenle
+            </a>
+            <a href="{% url 'change_password' %}" class="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-brand-ink bg-white hover:bg-gray-50 transition-colors duration-200">
+              <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+              </svg>
+              Şifre Değiştir
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sağ Panel - İstatistikler ve Son Aktiviteler -->
+      <div class="lg:col-span-2 space-y-6">
+        <!-- İstatistikler -->
+        <div class="bg-white rounded-2xl shadow-card p-6">
+          <h3 class="text-lg font-semibold text-brand-ink mb-4">İstatistikler</h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="text-center">
+              <div class="text-2xl font-bold text-brand-navy">{{ orders|length }}</div>
+              <div class="text-sm text-brand-mute">Sipariş</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold text-brand-navy">{{ reviews|length }}</div>
+              <div class="text-sm text-brand-mute">Yorum</div>
+            </div>
+            {% if store %}
+            <div class="text-center">
+              <div class="text-2xl font-bold text-brand-navy">{{ store.listings.count }}</div>
+              <div class="text-sm text-brand-mute">İlan</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold text-brand-navy">4.8</div>
+              <div class="text-sm text-brand-mute">Puan</div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Son Siparişler -->
+        <div class="bg-white rounded-2xl shadow-card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold text-brand-ink">Son Siparişler</h3>
+            <a href="{% url 'my_orders' %}" class="text-sm text-brand-red hover:text-brand-red/80 transition-colors duration-200">
+              Tümünü Gör
+            </a>
+          </div>
+          {% if orders %}
+            <div class="space-y-3">
+              {% for order in orders %}
+              <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div>
+                  <p class="text-sm font-medium text-brand-ink">Sipariş #{{ order.id }}</p>
+                  <p class="text-xs text-brand-mute">{{ order.created_at|date:"d.m.Y" }}</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-sm font-medium text-brand-navy">{{ order.total }} {{ order.currency }}</p>
+                  <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium
+                    {% if order.status == 'pending' %}bg-yellow-100 text-yellow-800
+                    {% elif order.status == 'paid' %}bg-blue-100 text-blue-800
+                    {% elif order.status == 'shipped' %}bg-purple-100 text-purple-800
+                    {% elif order.status == 'delivered' %}bg-green-100 text-green-800
+                    {% elif order.status == 'cancelled' %}bg-red-100 text-red-800
+                    {% else %}bg-gray-100 text-gray-800{% endif %}">
+                    {{ order.get_status_display }}
+                  </span>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="text-center py-8">
+              <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+              </svg>
+              <h3 class="mt-2 text-sm font-medium text-brand-ink">Henüz sipariş yok</h3>
+              <p class="mt-1 text-sm text-brand-mute">İlk siparişinizi vermek için marketplace'i keşfedin.</p>
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Son Yorumlar -->
+        <div class="bg-white rounded-2xl shadow-card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold text-brand-ink">Son Yorumlar</h3>
+            <a href="{% url 'my_reviews' %}" class="text-sm text-brand-red hover:text-brand-red/80 transition-colors duration-200">
+              Tümünü Gör
+            </a>
+          </div>
+          {% if reviews %}
+            <div class="space-y-3">
+              {% for review in reviews %}
+              <div class="p-3 bg-gray-50 rounded-lg">
+                <div class="flex items-center justify-between mb-2">
+                  <p class="text-sm font-medium text-brand-ink">{{ review.listing.title|truncatechars:40 }}</p>
+                  <div class="flex items-center">
+                    {% for i in "12345" %}
+                      {% if forloop.counter <= review.rating %}
+                        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                      {% else %}
+                        <svg class="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+                <p class="text-sm text-brand-mute">{{ review.comment|truncatechars:80 }}</p>
+                <p class="text-xs text-brand-mute mt-1">{{ review.created_at|date:"d.m.Y" }}</p>
+              </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="text-center py-8">
+              <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+              </svg>
+              <h3 class="mt-2 text-sm font-medium text-brand-ink">Henüz yorum yok</h3>
+              <p class="mt-1 text-sm text-brand-mute">Satın aldığınız ürünler hakkında yorum yazabilirsiniz.</p>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+
+
+

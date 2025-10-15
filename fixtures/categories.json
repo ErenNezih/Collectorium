@@ -1,0 +1,69 @@
+[
+{
+  "model": "catalog.category",
+  "pk": 1,
+  "fields": {
+    "name": "Trading Card Games",
+    "slug": "tcg",
+    "parent": null,
+    "description": "Pokemon, Yu-Gi-Oh, Magic ve diğer TCG kartları",
+    "image": ""
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 2,
+  "fields": {
+    "name": "Figürler",
+    "slug": "figurler",
+    "parent": null,
+    "description": "Aksiyon figürleri, koleksiyon figürleri",
+    "image": ""
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 3,
+  "fields": {
+    "name": "Comicler",
+    "slug": "comicler",
+    "parent": null,
+    "description": "Amerikan ve Türk çizgi romanları",
+    "image": ""
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 1,
+  "fields": {
+    "name": "Blue-Eyes White Dragon",
+    "slug": "blue-eyes-white-dragon",
+    "category": 1,
+    "brand": "Konami",
+    "description": "Efsanevi Yu-Gi-Oh kartı"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 2,
+  "fields": {
+    "name": "Pikachu VMAX",
+    "slug": "pikachu-vmax",
+    "category": 1,
+    "brand": "Pokemon",
+    "description": "Pokemon TCG Pikachu VMAX kartı"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 3,
+  "fields": {
+    "name": "Kratos Figure",
+    "slug": "kratos-figure",
+    "category": 2,
+    "brand": "NECA",
+    "description": "God of War Kratos aksiyon figürü"
+  }
+}
+]
+

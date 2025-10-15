@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_title }} - Collectorium{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-12">
+    <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+        <h1 class="text-3xl font-bold text-brand-navy mb-6 border-b pb-4">{{ page_title }}</h1>
+        
+        <div class="mb-6">
+            <p class="text-lg text-brand-mute">Aşağıdaki ilanı silmek üzeresiniz:</p>
+            <div class="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <h3 class="text-xl font-semibold text-brand-ink">{{ listing.title }}</h3>
+                <p class="text-sm text-brand-mute mt-2">Fiyat: {{ listing.price }} {{ listing.currency }}</p>
+                <p class="text-sm text-brand-mute">Durum: {{ listing.get_condition_display }}</p>
+            </div>
+        </div>
+
+        <div class="bg-red-50 border-l-4 border-red-400 p-4 mb-6">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-red-700">
+                        <strong>Uyarı:</strong> Bu işlem geri alınamaz. İlan kalıcı olarak silinecektir.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="flex space-x-4">
+                <button type="submit" class="flex-1 bg-red-600 text-white font-bold py-3 px-4 rounded-md hover:bg-red-700 transition duration-300">
+                    Evet, Sil
+                </button>
+                <a href="{% url 'my_listings' %}" class="flex-1 bg-gray-300 text-brand-ink font-bold py-3 px-4 rounded-md hover:bg-gray-400 transition duration-300 text-center">
+                    İptal
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

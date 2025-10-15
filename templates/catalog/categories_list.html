@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Kategoriler - Collectorium{% endblock %}
+
+{% block content %}
+<div class="bg-white py-12">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-brand-navy mb-4">Tüm Kategoriler</h1>
+            <p class="text-lg text-brand-mute">Koleksiyon dünyasını keşfet</p>
+        </div>
+
+        {% if categories %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {% for category in categories %}
+            <a href="{% url 'marketplace' %}?category={{ category.slug }}" 
+               class="category-card group flex flex-col rounded-2xl bg-white shadow-card ring-1 ring-brand-line hover:shadow-xl hover:ring-brand-red/20">
+                {% if category.image %}
+                <div class="h-48 overflow-hidden rounded-t-2xl">
+                    <img src="{{ category.image.url }}" alt="{{ category.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                </div>
+                {% endif %}
+                <div class="p-8">
+                    <h3 class="text-xl font-semibold text-brand-ink group-hover:text-brand-red transition-colors">{{ category.name }}</h3>
+                    <p class="mt-2 text-base text-brand-mute">{{ category.description|default:"Bu kategorideki binlerce ürünü incele." }}</p>
+                    <p class="mt-3 text-sm text-brand-red font-medium">{{ category.listing_count }} ilan mevcut</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-20">
+            <svg class="mx-auto h-24 w-24 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+            </svg>
+            <h3 class="mt-4 text-xl font-semibold text-brand-ink">Henüz kategori yok</h3>
+            <p class="mt-2 text-brand-mute">Kategoriler yakında eklenecek</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

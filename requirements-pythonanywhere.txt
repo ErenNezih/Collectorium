@@ -1,0 +1,30 @@
+# ============================================================================
+# COLLECTORIUM - PYTHONANYWHERE REQUIREMENTS
+# ============================================================================
+# PythonAnywhere MySQL için özel bağımlılıklar
+# ============================================================================
+
+# Core Django
+Django==5.2.*
+django-allauth==65.*
+django-htmx==1.26.*
+whitenoise==6.*
+Pillow==11.*
+
+# Database
+mysqlclient==2.2.*  # PythonAnywhere MySQL connector
+dj-database-url==3.*
+
+# Utilities
+python-dotenv==1.0.*
+requests>=2,<3
+requests-oauthlib==2.*
+PyJWT[crypto]>=2.8
+google-auth==2.*
+
+# Production server (PythonAnywhere uses its own, but good to have)
+gunicorn>=22.0.0
+
+# Development (optional, can be removed for production)
+# django-debug-toolbar==6.*
+

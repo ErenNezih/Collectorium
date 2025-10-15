@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}Mağazalar - Collectorium{% endblock %}
+
+{% block content %}
+<div class="bg-gray-50 min-h-screen py-12">
+    <div class="container mx-auto px-4">
+        <!-- Başlık -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-brand-navy mb-4">Doğrulanmış Mağazalar</h1>
+            <p class="text-lg text-brand-mute">Güvenilir satıcılardan koleksiyon parçaları keşfet</p>
+        </div>
+
+        <!-- Arama -->
+        <div class="max-w-2xl mx-auto mb-8">
+            <form method="get" class="relative">
+                <input type="text" name="search" value="{{ search_query|default:'' }}" 
+                       placeholder="Mağaza ara..." 
+                       class="w-full px-6 py-4 rounded-xl border-2 border-gray-200 focus:border-brand-red focus:outline-none transition-colors">
+                <button type="submit" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-brand-red hover:text-red-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+
+        <!-- Mağazalar Grid -->
+        {% if stores %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {% for store in stores %}
+            <a href="{% url 'stores:store_detail' store.slug %}" 
+               class="store-card bg-white rounded-xl p-6 shadow-card hover:shadow-xl transition-all text-center border border-gray-100">
+                {% if store.logo %}
+                <img src="{{ store.logo.url }}" alt="{{ store.name }}" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover">
+                {% else %}
+                <div class="w-20 h-20 rounded-full mx-auto mb-4 bg-brand-red flex items-center justify-center">
+                    <span class="text-2xl font-bold text-white">{{ store.name|first|upper }}</span>
+                </div>
+                {% endif %}
+                
+                <h3 class="text-lg font-semibold text-brand-ink mb-2">{{ store.name }}</h3>
+                {% if store.bio %}
+                <p class="text-sm text-brand-mute mb-4 line-clamp-2">{{ store.bio|truncatechars:80 }}</p>
+                {% endif %}
+                
+                <div class="flex items-center justify-center space-x-2 text-blue-600">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="text-sm font-medium">Doğrulanmış</span>
+                </div>
+                
+                <p class="text-sm text-brand-mute mt-3">{{ store.listing_count }} aktif ilan</p>
+            </a>
+            {% endfor %}
+        </div>
+
+        <!-- Sayfalama -->
+        {% if page_obj.has_other_pages %}
+        <div class="mt-12 flex justify-center">
+            <nav class="flex space-x-2">
+                {% if page_obj.has_previous %}
+                <a href="?page=1{% if search_query %}&search={{ search_query }}{% endif %}" class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100">İlk</a>
+                <a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}" class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100">Önceki</a>
+                {% endif %}
+                
+                <span class="px-4 py-2 rounded-lg bg-brand-red text-white">{{ page_obj.number }}</span>
+                
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}" class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100">Sonraki</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}{% if search_query %}&search={{ search_query }}{% endif %}" class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100">Son</a>
+                {% endif %}
+            </nav>
+        </div>
+        {% endif %}
+
+        {% else %}
+        <div class="text-center py-20">
+            <svg class="mx-auto h-24 w-24 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+            </svg>
+            <h3 class="mt-4 text-xl font-semibold text-brand-ink">Henüz mağaza yok</h3>
+            <p class="mt-2 text-brand-mute">İlk satıcı sen ol!</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

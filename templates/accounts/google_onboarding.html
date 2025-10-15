@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Hesap Tamamla - Collectorium{% endblock %}
+
+{% block content %}
+<div class="auth-container flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-2xl">
+        <div class="auth-card rounded-2xl px-8 py-10">
+            <!-- Logo & Title -->
+            <div class="text-center mb-8">
+                <div class="flex items-center justify-center mb-4">
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <h1 class="font-orbitron text-3xl font-bold text-brand-navy mb-2">Hoş Geldiniz!</h1>
+                <p class="text-brand-mute">Google hesabınız doğrulandı: <strong class="text-brand-navy">{{ google_email }}</strong></p>
+                <p class="text-sm text-gray-500 mt-2">Son adım: Hesabınızı tamamlayın</p>
+            </div>
+
+            <!-- Onboarding Form -->
+            <form method="post" id="onboardingForm" class="space-y-6" x-data="onboardingManager()">
+                {% csrf_token %}
+                
+                {% if form.non_field_errors %}
+                <div class="bg-red-50 border-l-4 border-red-400 p-4 rounded">
+                    <p class="text-sm text-red-700">{{ form.non_field_errors.0 }}</p>
+                </div>
+                {% endif %}
+
+                <!-- Kullanıcı Adı -->
+                <div>
+                    <label for="id_username" class="block text-sm font-semibold text-gray-700 mb-2">
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-brand-red" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"/>
+                            </svg>
+                            Kullanıcı Adı *
+                        </span>
+                    </label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                    <p class="mt-1 text-xs text-red-600">{{ form.username.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Telefon Numarası + Onay Simülasyonu -->
+                <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-6">
+                    <label for="id_phone" class="block text-sm font-semibold text-gray-700 mb-2">
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-2 text-brand-red" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                            </svg>
+                            Telefon Numarası *
+                        </span>
+                    </label>
+                    
+                    <div class="flex space-x-3">
+                        {{ form.phone }}
+                        <button type="button" 
+                                @click="sendVerificationCode()"
+                                :disabled="codeSent || phoneVerified"
+                                :class="codeSent || phoneVerified ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'"
+                                class="px-4 py-3 rounded-xl text-white font-semibold transition-all whitespace-nowrap">
+                            <span x-show="!codeSent && !phoneVerified">Kod Gönder</span>
+                            <span x-show="codeSent && !phoneVerified">✓ Gönderildi</span>
+                            <span x-show="phoneVerified">✓ Onaylandı</span>
+                        </button>
+                    </div>
+                    {% if form.phone.errors %}
+                    <p class="mt-1 text-xs text-red-600">{{ form.phone.errors.0 }}</p>
+                    {% endif %}
+                    
+                    <!-- Onay Kodu Alanı (Dinamik) -->
+                    <div x-show="codeSent && !phoneVerified" 
+                         x-transition
+                         class="mt-4 space-y-3">
+                        <label for="verification_code" class="block text-sm font-medium text-gray-700">
+                            Onay Kodu (Simülasyon - herhangi bir kod girin)
+                        </label>
+                        <div class="flex space-x-3">
+                            <input type="text" 
+                                   id="verification_code"
+                                   x-model="verificationCode"
+                                   class="auth-input flex-1 px-4 py-3 rounded-xl"
+                                   placeholder="XXXX">
+                            <button type="button"
+                                    @click="verifyCode()"
+                                    class="px-6 py-3 rounded-xl bg-green-600 hover:bg-green-700 text-white font-semibold transition-all">
+                                Doğrula
+                            </button>
+                        </div>
+                        <p class="text-xs text-blue-600">
+                            💡 Bu bir simülasyondur. Herhangi bir kod girin ve "Doğrula"ya basın.
+                        </p>
+                    </div>
+                    
+                    <!-- Onay Başarılı Mesajı -->
+                    <div x-show="phoneVerified" 
+                         x-transition
+                         class="mt-4 bg-green-100 border border-green-400 rounded-lg p-3 flex items-center">
+                        <svg class="w-5 h-5 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-sm font-medium text-green-800">Telefon numaranız başarıyla doğrulandı!</span>
+                    </div>
+                    
+                    <!-- Hidden field for form submission -->
+                    <input type="hidden" name="phone_verified" :value="phoneVerified ? 'true' : 'false'">
+                </div>
+
+                <!-- Adres Bilgileri -->
+                <div class="border-t pt-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-brand-red" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                        </svg>
+                        Adres Bilgileri
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="id_address_title" class="block text-sm font-medium text-gray-700 mb-2">Adres Başlığı *</label>
+                            {{ form.address_title }}
+                            {% if form.address_title.errors %}
+                            <p class="mt-1 text-xs text-red-600">{{ form.address_title.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+                        
+                        <div>
+                            <label for="id_city" class="block text-sm font-medium text-gray-700 mb-2">Şehir *</label>
+                            {{ form.city }}
+                            {% if form.city.errors %}
+                            <p class="mt-1 text-xs text-red-600">{{ form.city.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+                        
+                        <div>
+                            <label for="id_district" class="block text-sm font-medium text-gray-700 mb-2">İlçe *</label>
+                            {{ form.district }}
+                            {% if form.district.errors %}
+                            <p class="mt-1 text-xs text-red-600">{{ form.district.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+                        
+                        <div>
+                            <label for="id_postal_code" class="block text-sm font-medium text-gray-700 mb-2">Posta Kodu</label>
+                            {{ form.postal_code }}
+                            {% if form.postal_code.errors %}
+                            <p class="mt-1 text-xs text-red-600">{{ form.postal_code.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <label for="id_full_address" class="block text-sm font-medium text-gray-700 mb-2">Açık Adres *</label>
+                        {{ form.full_address }}
+                        {% if form.full_address.errors %}
+                        <p class="mt-1 text-xs text-red-600">{{ form.full_address.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Hesap Türü -->
+                <div class="border-t pt-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Hesap Türü *</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <label class="relative flex flex-col items-center p-6 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-brand-red transition-colors">
+                            <input type="radio" name="role" value="buyer" checked class="sr-only peer">
+                            <svg class="w-12 h-12 text-gray-400 peer-checked:text-brand-red mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                            </svg>
+                            <span class="text-base font-semibold text-gray-700 peer-checked:text-brand-red">Alıcı</span>
+                            <span class="text-xs text-gray-500 mt-1">Koleksiyon satın alacağım</span>
+                            <div class="absolute inset-0 border-2 border-brand-red rounded-xl hidden peer-checked:block"></div>
+                        </label>
+                        
+                        <label class="relative flex flex-col items-center p-6 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-brand-red transition-colors">
+                            <input type="radio" name="role" value="seller" class="sr-only peer">
+                            <svg class="w-12 h-12 text-gray-400 peer-checked:text-brand-red mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            </svg>
+                            <span class="text-base font-semibold text-gray-700 peer-checked:text-brand-red">Satıcı</span>
+                            <span class="text-xs text-gray-500 mt-1">Koleksiyon satacağım</span>
+                            <div class="absolute inset-0 border-2 border-brand-red rounded-xl hidden peer-checked:block"></div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" 
+                        :disabled="!phoneVerified"
+                        :class="phoneVerified ? 'bg-brand-red hover:bg-red-700 cursor-pointer' : 'bg-gray-400 cursor-not-allowed'"
+                        class="w-full text-white font-semibold py-4 px-4 rounded-xl transition-all transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl">
+                    <span x-show="phoneVerified">✓ Kaydı Tamamla ve Platformumuza Katıl</span>
+                    <span x-show="!phoneVerified">⚠ Telefon Numaranızı Onaylayın</span>
+                </button>
+            </form>
+        </div>
+
+        <p class="text-center mt-6 text-sm text-white">
+            <a href="{% url 'home' %}" class="hover:text-gray-200">← Ana Sayfaya Dön</a>
+        </p>
+    </div>
+</div>
+
+<!-- Alpine.js Component for Phone Verification -->
+<script>
+function onboardingManager() {
+    return {
+        codeSent: false,
+        phoneVerified: false,
+        verificationCode: '',
+        
+        sendVerificationCode() {
+            // Simülasyon - Kod gönderildi mesajı
+            this.codeSent = true;
+            
+            // 3 saniye sonra onay alanını göster
+            setTimeout(() => {
+                document.getElementById('verification_code').focus();
+            }, 100);
+        },
+        
+        verifyCode() {
+            // Simülasyon - Herhangi bir kod kabul edilir
+            if (this.verificationCode && this.verificationCode.length >= 4) {
+                this.phoneVerified = true;
+                
+                // Başarı bildirimi
+                setTimeout(() => {
+                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                }, 300);
+            } else {
+                alert('Lütfen en az 4 karakterlik bir kod girin.');
+            }
+        }
+    }
+}
+</script>
+{% endblock %}
+

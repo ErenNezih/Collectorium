@@ -1,0 +1,30 @@
+{# 
+  Kullanım Örneği:
+  {% include 'includes/product-card.html' with product_title="Charizard VMAX" product_price="2500.00" product_image_url="https://.../charizard.png" is_featured=True %}
+#}
+<div class="group relative flex flex-col overflow-hidden rounded-lg border border-brand-line bg-white">
+  <div class="aspect-h-4 aspect-w-3 bg-gray-200 sm:aspect-none group-hover:opacity-75 sm:h-72">
+    <img src="{{ product_image_url|default:'https://via.placeholder.com/400x500.png/EEF2F7/64748B?text=Collectorium' }}" alt="{{ product_title }}" class="h-full w-full object-cover object-center sm:h-full sm:w-full">
+  </div>
+  <div class="flex flex-1 flex-col space-y-2 p-4">
+    <h3 class="text-sm font-medium text-brand-ink">
+      <a href="{{ product_url|default:'#' }}">
+        <span aria-hidden="true" class="absolute inset-0"></span>
+        {{ product_title|default:'Ürün Başlığı' }}
+      </a>
+    </h3>
+    <p class="text-sm text-brand-mute">{{ product_category|default:'Kategori' }}</p>
+    <div class="flex flex-1 flex-col justify-end">
+      <p class="text-base font-semibold text-brand-ink">{{ product_price|default:'0.00' }} TL</p>
+    </div>
+  </div>
+  {% if is_featured %}
+    <span class="absolute top-2 left-2 inline-flex items-center rounded-full bg-brand-red px-2 py-1 text-xs font-medium text-white">Öne Çıkan</span>
+  {% endif %}
+  <button type="button" class="absolute top-2 right-2 rounded-full bg-white/60 p-1.5 text-brand-mute backdrop-blur-sm hover:text-brand-red focus:outline-none focus:ring-2 focus:ring-brand-red">
+    <span class="sr-only">Favorilere ekle</span>
+    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+    </svg>
+  </button>
+</div>
