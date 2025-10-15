@@ -1,0 +1,59 @@
+# Railway Ignore File
+# Files and directories to exclude from deployment
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# Django
+*.log
+db.sqlite3
+db.sqlite3-journal
+/media
+*.pot
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Git
+.git/
+.gitignore
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# Deployment
+deployment/
+docs/
+tests/
+
+# Misc
+*.bak
+*.tmp
+.cache/
+
