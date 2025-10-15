@@ -7,7 +7,7 @@ services:
     plan: free
     branch: main
     buildCommand: "./build.sh"
-    startCommand: "gunicorn collectorium.wsgi:application"
+    startCommand: "./start.sh"
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
@@ -16,8 +16,15 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: DEBUG
-        value: False
+        value: "False"
+      - key: DJANGO_SUPERUSER_USERNAME
+        value: admin
+      - key: DJANGO_SUPERUSER_EMAIL
+        value: admin@collectorium.com
+      - key: DJANGO_SUPERUSER_PASSWORD
+        generateValue: true
     autoDeploy: true
+    healthCheckPath: /healthz/
 
 databases:
   # PostgreSQL Database
@@ -26,4 +33,3 @@ databases:
     plan: free
     databaseName: collectorium
     user: collectorium
-
