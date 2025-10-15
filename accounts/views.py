@@ -259,8 +259,8 @@ def google_onboarding_complete(request):
                     }
                 )
                 
-                # 4. EĞER SATICI İSE, MAĞAZA OLUŞTUR
-                if role == 'seller':
+                # 4. EĞER SATICI İSE, MAĞAZA OLUŞTUR (sinyal duplication'ını önlemek için kontrol et)
+                if role == 'seller' and not Store.objects.filter(owner=user).exists():
                     Store.objects.create(
                         owner=user,
                         name=f"{username}'s Store",

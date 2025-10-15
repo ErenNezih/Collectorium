@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.db import connection
 from django.conf import settings
 import django
+import os
 
 
 def healthz(request):
@@ -29,10 +30,14 @@ def healthz(request):
     is_healthy = db_status == "ok"
     status_code = 200 if is_healthy else 503
     
+    # Commit hash: Render sets RENDER_GIT_COMMIT or GIT_COMMIT
+    commit_hash = os.environ.get("RENDER_GIT_COMMIT") or os.environ.get("GIT_COMMIT") or "unknown"
+
     return JsonResponse({
         "status": "healthy" if is_healthy else "unhealthy",
         "database": db_status,
-        "version": django_version,
+        "django": django_version,
+        "commit": commit_hash[:7],
         "debug": settings.DEBUG,
     }, status=status_code)
 

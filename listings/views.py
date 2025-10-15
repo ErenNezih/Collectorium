@@ -28,7 +28,8 @@ class ListingCreateView(LoginRequiredMixin, SellerRequiredMixin, CreateView):
 
     def form_valid(self, form):
         # Formdan gelen ilanı veritabanına kaydetmeden önce mağaza bilgisini ata
-        form.instance.store = self.request.user.store
+        # Not: User modelinde doğrudan 'store' alanı yok; owned_stores ilişkisi var
+        form.instance.store = self.request.user.owned_stores.first()
         
         image_form = ImageUploadForm(self.request.POST, self.request.FILES)
         
