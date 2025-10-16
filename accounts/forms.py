@@ -7,6 +7,10 @@ from django import forms
 from .models import Address, VerifiedSeller, VerifiedSellerDocument
 
 
+class MultipleFileInput(forms.ClearableFileInput):
+    # Enable multi-file selection support for Django's ClearableFileInput
+    allow_multiple_selected = True
+
 class GoogleOnboardingForm(forms.Form):
     """
     Google ile giriş yapan yeni kullanıcılar için onboarding formu.
@@ -149,7 +153,11 @@ class GoogleOnboardingForm(forms.Form):
 
 
 class VerifiedSellerApplicationForm(forms.ModelForm):
-    documents = forms.FileField(widget=forms.ClearableFileInput(attrs={"multiple": True}), required=True, help_text="Kimlik/şirket belgeleri")
+    documents = forms.FileField(
+        widget=MultipleFileInput(attrs={"multiple": True}),
+        required=True,
+        help_text="Kimlik/şirket belgeleri",
+    )
 
     class Meta:
         model = VerifiedSeller
