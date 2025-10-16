@@ -8,6 +8,7 @@ from django.db import connection
 from django.conf import settings
 import django
 import os
+from . import DEFAULT_FEATURE_FLAGS
 
 
 def healthz(request):
@@ -39,6 +40,7 @@ def healthz(request):
         "django": django_version,
         "commit": commit_hash[:7],
         "debug": settings.DEBUG,
+        "features": {**DEFAULT_FEATURE_FLAGS, **{k: os.environ.get(k, str(v)).lower() in ("1","true","yes") for k,v in DEFAULT_FEATURE_FLAGS.items()}},
     }, status=status_code)
 
 

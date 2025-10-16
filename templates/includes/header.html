@@ -9,6 +9,15 @@
         </a>
         <nav class="hidden lg:ml-10 lg:flex lg:items-baseline lg:space-x-8">
           <a href="{% url 'marketplace' %}" class="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200">Marketplace</a>
+          {% if ff.FEATURE_SEARCH_V1 %}
+          <a href="{% url 'search:results' %}" class="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200">Arama</a>
+          {% endif %}
+          {% if ff.FEATURE_MAP_SEARCH %}
+          <a href="{% url 'search:map' %}" class="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200">Harita</a>
+          {% endif %}
+          {% if ff.FEATURE_MESSAGING_V1 and user.is_authenticated %}
+          <a href="{% url 'messaging:thread_list' %}" class="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200">Mesajlar</a>
+          {% endif %}
           <a href="{% url 'stores:stores_list' %}" class="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200">Mağazalar</a>
           <a href="{% url 'catalog:categories_list' %}" class="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200">Kategoriler</a>
         </nav>
@@ -24,10 +33,12 @@
                 <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
               </svg>
             </div>
-            <input id="search" name="search" 
+            <form action="{% if ff.FEATURE_SEARCH_V1 %}{% url 'search:results' %}{% else %}{% url 'marketplace' %}{% endif %}" method="get">
+            <input id="search" name="q" 
                    class="block w-full rounded-lg border-0 bg-white/10 backdrop-blur-sm py-2.5 pl-10 pr-3 text-white placeholder:text-gray-400 focus:ring-2 focus:ring-brand-red focus:ring-offset-2 focus:ring-offset-brand-navy focus:bg-white/20 transition-all duration-300 sm:text-sm sm:leading-6" 
                    placeholder="Koleksiyonunda ara..." 
                    type="search">
+            </form>
           </div>
         </div>
       </div>
@@ -161,6 +172,15 @@
        id="mobile-menu">
     <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
       <a href="{% url 'marketplace' %}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white">Marketplace</a>
+      {% if ff.FEATURE_SEARCH_V1 %}
+      <a href="{% url 'search:results' %}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white">Arama</a>
+      {% endif %}
+      {% if ff.FEATURE_MAP_SEARCH %}
+      <a href="{% url 'search:map' %}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white">Harita</a>
+      {% endif %}
+      {% if ff.FEATURE_MESSAGING_V1 and user.is_authenticated %}
+      <a href="{% url 'messaging:thread_list' %}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white">Mesajlar</a>
+      {% endif %}
       <a href="{% url 'stores:stores_list' %}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white">Mağazalar</a>
       <a href="{% url 'catalog:categories_list' %}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/10 hover:text-white">Kategoriler</a>
     </div>

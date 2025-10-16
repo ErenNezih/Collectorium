@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Fiyat Trendleri{% endblock %}
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold mb-4">{{ category.name }} Fiyat Trendleri</h1>
+  <div class="mb-4 space-x-2">
+    <a href="?w=30d" class="px-3 py-1 border rounded {% if window == '30d' %}bg-brand-red text-white{% endif %}">30g</a>
+    <a href="?w=90d" class="px-3 py-1 border rounded {% if window == '90d' %}bg-brand-red text-white{% endif %}">90g</a>
+    <a href="?w=1y" class="px-3 py-1 border rounded {% if window == '1y' %}bg-brand-red text-white{% endif %}">1y</a>
+  </div>
+  {% if stats.median %}
+  <table class="min-w-full divide-y divide-gray-200 max-w-md">
+    <tbody class="bg-white divide-y divide-gray-200">
+      <tr><td class="px-4 py-2 font-medium">Median</td><td class="px-4 py-2">{{ stats.median|floatformat:2 }}</td></tr>
+      <tr><td class="px-4 py-2 font-medium">Min</td><td class="px-4 py-2">{{ stats.min|floatformat:2 }}</td></tr>
+      <tr><td class="px-4 py-2 font-medium">Max</td><td class="px-4 py-2">{{ stats.max|floatformat:2 }}</td></tr>
+      <tr><td class="px-4 py-2 font-medium">P90</td><td class="px-4 py-2">{{ stats.p90|floatformat:2 }}</td></tr>
+    </tbody>
+  </table>
+  {% else %}
+  <div class="text-gray-500">İstatistik oluşturmak için yeterli veri yok.</div>
+  {% endif %}
+</div>
+{% endblock %}
+
+
+

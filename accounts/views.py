@@ -11,9 +11,12 @@ from listings.models import Listing
 from orders.models import Order
 from reviews.models import Review
 from .mixins import SellerRequiredMixin
-from .forms import GoogleOnboardingForm
+from .forms import GoogleOnboardingForm, VerifiedSellerApplicationForm
 from allauth.socialaccount.models import SocialAccount
 from stores.models import Store
+from django.conf import settings
+from core import DEFAULT_FEATURE_FLAGS
+import os
 
 
 @login_required
@@ -137,6 +140,47 @@ def my_favorites(request):
     page_obj = paginator.get_page(page_number)
     
     return render(request, 'accounts/my_favorites.html', {'page_obj': page_obj})
+
+
+def _feature_enabled(name: str):
+    default = DEFAULT_FEATURE_FLAGS.get(name, False)
+    raw = os.environ.get(name)
+    return default if raw is None else raw.lower() in ("1","true","yes")
+
+def _kyc_enabled():
+    # backward compatibility: allow either old or new flag
+    return _feature_enabled('FEATURE_VERIFIED_SELLER_KYC') or _feature_enabled('FEATURE_VERIFIED_SELLER')
+
+
+@login_required
+def verified_seller_apply(request):
+    if not _feature_enabled("P0_FEATURES_ENABLED") or not _kyc_enabled():
+        messages.error(request, 'Bu özellik henüz kapalıdır.')
+        return redirect('profile')
+
+    if request.method == 'POST':
+        # Prevent duplicate pending/approved application
+        existing = getattr(request.user, 'verified_profile', None)
+        if existing and existing.status in ('pending','approved'):
+            messages.error(request, 'Mevcut bir başvurunuz bulunmaktadır.')
+            return redirect('verified_seller_status')
+        form = VerifiedSellerApplicationForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save(user=request.user)
+            messages.success(request, 'Başvurunuz alınmıştır. İnceleme devam ediyor.')
+            return redirect('verified_seller_status')
+    else:
+        form = VerifiedSellerApplicationForm()
+    return render(request, 'accounts/verified_seller_apply.html', {"form": form})
+
+
+@login_required
+def verified_seller_status(request):
+    if not _feature_enabled("P0_FEATURES_ENABLED") or not _kyc_enabled():
+        messages.error(request, 'Bu özellik henüz kapalıdır.')
+        return redirect('profile')
+    verified = getattr(request.user, 'verified_profile', None)
+    return render(request, 'accounts/verified_seller_status.html', {"verified": verified})
 
 
 class UserDetailView(DetailView):

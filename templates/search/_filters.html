@@ -1,0 +1,46 @@
+<div class="flex flex-col lg:flex-row gap-2">
+  <input type="text" name="q" value="{{ q }}" placeholder="Ara"
+         class="w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-navy focus:ring-brand-navy sm:text-sm">
+  <select name="category" class="rounded-lg border-gray-300 shadow-sm">
+    <option value="">Kategori</option>
+    {% for c in categories %}
+      <option value="{{ c.slug }}" {% if category_slug == c.slug %}selected{% endif %}>{{ c.name }}</option>
+    {% endfor %}
+  </select>
+  <select name="brand" class="rounded-lg border-gray-300 shadow-sm">
+    <option value="">Marka</option>
+    {% for b in brand_options %}
+      <option value="{{ b }}" {% if brand == b %}selected{% endif %}>{{ b }}</option>
+    {% endfor %}
+  </select>
+  <select name="condition" class="rounded-lg border-gray-300 shadow-sm">
+    <option value="">Durum</option>
+    <option value="new" {% if condition == 'new' %}selected{% endif %}>Yeni</option>
+    <option value="like_new" {% if condition == 'like_new' %}selected{% endif %}>Sıfıra Yakın</option>
+    <option value="good" {% if condition == 'good' %}selected{% endif %}>İyi</option>
+    <option value="fair" {% if condition == 'fair' %}selected{% endif %}>Orta</option>
+    <option value="poor" {% if condition == 'poor' %}selected{% endif %}>Kötü</option>
+  </select>
+  <input type="number" name="price_min" value="{{ price_min }}" placeholder="Min" class="w-24 rounded-lg border-gray-300 shadow-sm text-sm">
+  <input type="number" name="price_max" value="{{ price_max }}" placeholder="Max" class="w-24 rounded-lg border-gray-300 shadow-sm text-sm">
+  <select name="seller_rating_min" class="rounded-lg border-gray-300 shadow-sm">
+    <option value="">Puan</option>
+    <option value="4.0" {% if seller_rating_min == '4.0' %}selected{% endif %}>4.0+</option>
+    <option value="4.5" {% if seller_rating_min == '4.5' %}selected{% endif %}>4.5+</option>
+  </select>
+  <select name="sort" class="rounded-lg border-gray-300 shadow-sm">
+    <option value="relevance" {% if sort == 'relevance' %}selected{% endif %}>Alaka</option>
+    <option value="newest" {% if sort == 'newest' %}selected{% endif %}>En Yeni</option>
+    <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Fiyat (Düşük)</option>
+    <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Fiyat (Yüksek)</option>
+    <option value="rating" {% if sort == 'rating' %}selected{% endif %}>Puan</option>
+    <option value="popular" {% if sort == 'popular' %}selected{% endif %}>Popüler</option>
+  </select>
+  <button type="submit" class="px-4 py-2 bg-brand-red text-white rounded-lg">Ara</button>
+  {% if q or category_slug or brand or condition or price_min or price_max or seller_rating_min %}
+  <a href="{% url 'search:results' %}" class="px-3 py-2 text-sm text-brand-red border border-brand-red/30 rounded-lg">Sıfırla</a>
+  {% endif %}
+</div>
+
+
+

@@ -1,6 +1,6 @@
 ﻿from django.urls import path
 from . import views, health
-from .views import AboutView, PrivacyPolicyView, TermsOfServiceView, ContactView, SellerGuideView
+from .views import AboutView, PrivacyPolicyView, TermsOfServiceView, ContactView, SellerGuideView, TrustCenterView
 
 urlpatterns = [
     path("", views.home, name="home"),
@@ -18,4 +18,6 @@ urlpatterns = [
     path('kullanim-kosullari/', TermsOfServiceView.as_view(), name='terms_of_service'),
     path('iletisim/', ContactView.as_view(), name='contact'),
     path('satici-rehberi/', SellerGuideView.as_view(), name='seller_guide'),
+    # Güven Merkezi (flag kontrolü template tarafında yapılır)
+    path('trust/', TrustCenterView.as_view(), name='trust_center'),
 ]

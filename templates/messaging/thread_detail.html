@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Mesajlar{% endblock %}
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold mb-4">{{ thread.listing.title }}</h1>
+  <div class="bg-white rounded-xl shadow p-4 mb-4 h-96 overflow-y-auto">
+    {% for m in messages %}
+      <div class="mb-2">
+        <div class="text-xs text-gray-500">{{ m.sender.username }} · {{ m.created_at|date:"Y-m-d H:i" }}</div>
+        <div class="p-2 rounded bg-gray-50">
+          {{ m.redacted_text|default:m.raw_text }}
+          {% if m.was_rate_limited %}<span class="text-xs text-yellow-600 ml-2">(Rate limit)</span>{% endif %}
+          {% if m.has_contact_violation %}<span class="text-xs text-red-600 ml-2">(Redakte)</span>{% endif %}
+          {% if ff.FEATURE_REPORTING_P0 %}
+          <a href="{% url 'moderation:report' 'message' m.id %}" class="text-xs text-brand-red ml-3">Şikayet Et</a>
+          {% endif %}
+        </div>
+      </div>
+    {% empty %}
+      <div class="text-gray-500">Henüz mesaj yok.</div>
+    {% endfor %}
+  </div>
+  <form method="post" action="{% url 'messaging:send_message' thread.id %}" class="flex gap-2 items-start">
+    {% csrf_token %}
+    <label class="sr-only" for="msg">Mesaj</label>
+    <textarea id="msg" name="message" rows="2" class="flex-1 rounded border px-3 py-2" placeholder="Mesaj yazın (Ctrl+Enter)"></textarea>
+    <button class="px-4 py-2 bg-brand-red text-white rounded">Gönder</button>
+  </form>
+  <div class="text-xs text-gray-500 mt-2">Kişisel iletişim paylaşımı yasaktır; tespit edilirse gizlenir ve engellenebilir.</div>
+</div>
+{% endblock %}
+
+

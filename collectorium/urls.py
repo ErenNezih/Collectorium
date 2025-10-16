@@ -13,6 +13,10 @@ urlpatterns = [
     path('orders/', include('orders.urls', namespace='orders')),
     path('stores/', include('stores.urls', namespace='stores')),
     path('categories/', include('catalog.urls', namespace='catalog')),
+    path('search/', include('search.urls', namespace='search')),
+    path('m/', include('messaging.urls', namespace='messaging')),
+    path('payments/', include('payments.urls', namespace='payments')),
+    path('mod/', include('moderation.urls', namespace='moderation')),
 ]
 
 if settings.DEBUG:

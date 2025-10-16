@@ -1,3 +1,57 @@
+# 🏗️ Collectorium Architecture
+
+Bu doküman, uygulamanın mimarisini, ana modülleri ve veri akışını özetler.
+
+## Uygulama Modülleri
+
+- accounts: Kimlik, profil, adres, Google OAuth
+- stores: Mağaza modeli ve sayfaları
+- listings: İlan modeli, görseller, CRUD
+- catalog: Kategori ve ürün
+- cart: Session tabanlı sepet
+- orders: Sipariş ve sipariş kalemi
+- reviews: İlan yorumları
+- core: Ana sayfa, marketplace, health endpoints
+
+## URL Haritası (özet)
+
+- / → core.views.home
+- /marketplace/ → core.views.marketplace
+- /listing/<id>/ → core.views.listing_detail
+- /accounts/ → allauth + accounts.urls
+- /cart/, /orders/, /stores/, /categories/
+- /healthz, /health/readiness, /health/liveness
+
+## Veri Modeli (seçmeler)
+
+- accounts.User(role, avatar, phone, ...)
+- accounts.Address(user, full_address, is_default)
+- stores.Store(owner, slug, is_verified)
+- catalog.Category(parent self-FK), Product(category, name, brand)
+- listings.Listing(store, product, price, condition, is_active)
+- listings.ListingImage(listing, image, is_primary)
+- reviews.Review(user, listing, rating, comment)
+- orders.Order(buyer, total, status, shipping_address)
+- orders.OrderItem(order, listing, quantity, price_snapshot)
+
+## Google OAuth Akışı
+
+1. Kullanıcı allauth ile Google’a gider
+2. `CustomSocialAccountAdapter.pre_social_login` yeni kullanıcıyı tespit eder
+3. Google verileri session’a yazılır ve onboarding’e yönlendirilir
+4. `google_onboarding_complete` → User + Address + SocialAccount (+Store) oluşturur
+
+## Performans Notları
+
+- Query optimizasyonu: select_related/prefetch_related
+- Statikler: WhiteNoise ile servis
+- Template caching: Render için aktif (APP_DIRS=False + cached loader)
+
+## Güvenlik
+
+- Prod: HSTS, SSL redirect, secure cookies
+- CSRF trusted origins ve ALLOWED_HOSTS zorunlu
+
 # 🏗️ COLLECTORIUM - MİMARİ DOKÜMANTASYONU
 
 ## Proje Yapısı

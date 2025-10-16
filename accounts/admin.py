@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
-from .models import Address
+from django.utils.html import format_html
+from .models import Address, VerifiedSeller, VerifiedSellerDocument
 
 # Import allauth models to ensure they're registered in admin
 # This is critical for AEGIS Operation - CEO needs to manage Google OAuth
@@ -48,3 +49,40 @@ class AddressAdmin(admin.ModelAdmin):
     list_filter = ("is_default","city","created_at")
     readonly_fields = ("created_at","updated_at")
     raw_id_fields = ("user",)
+
+
+@admin.register(VerifiedSeller)
+class VerifiedSellerAdmin(admin.ModelAdmin):
+    list_display = ("user", "company_name", "tax_no", "status", "verified_at", "created_at")
+    list_filter = ("status", "verified_at", "created_at")
+    search_fields = ("user__username", "company_name", "tax_no")
+    readonly_fields = ("created_at", "updated_at", "verified_at")
+
+    actions = ["approve_selected", "reject_selected"]
+
+    def approve_selected(self, request, queryset):
+        for obj in queryset:
+            obj.approve()
+        self.message_user(request, f"{queryset.count()} başvuru onaylandı.")
+
+    def reject_selected(self, request, queryset):
+        for obj in queryset:
+            obj.reject("Admin action")
+        self.message_user(request, f"{queryset.count()} başvuru reddedildi.")
+
+    approve_selected.short_description = "Seçili başvuruları onayla"
+    reject_selected.short_description = "Seçili başvuruları reddet"
+
+
+@admin.register(VerifiedSellerDocument)
+class VerifiedSellerDocumentAdmin(admin.ModelAdmin):
+    list_display = ("verified_seller", "file_link", "uploaded_at")
+    search_fields = ("verified_seller__user__username",)
+
+    def file_link(self, obj):
+        try:
+            url = obj.file.url
+            return format_html('<a href="{}" target="_blank">Belge</a>', url)
+        except Exception:
+            return "-"
+    file_link.short_description = "Belge"

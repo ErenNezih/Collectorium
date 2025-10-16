@@ -1,6 +1,6 @@
 # 🚀 COLLECTORIUM DEPLOYMENT LOG
 
-**Deploy Date:** 2025-01-15  
+**Deploy Date:** 2025-10-16  
 **Platform:** Render.com  
 **Environment:** Production (Staging)  
 **Region:** Frankfurt (EU)
@@ -12,7 +12,7 @@
 ### Service Information
 - **Service Name:** collectorium
 - **Service Type:** Web Service
-- **URL:** https://collectorium.onrender.com
+- **URL:** https://collectorium-1.onrender.com
 - **Database:** PostgreSQL 15 (collectorium-db)
 - **Plan:** Free Tier
 
@@ -31,8 +31,8 @@ DJANGO_SUPERUSER_PASSWORD=[AUTO-GENERATED]
 
 ## 🛠️ TECHNICAL STACK
 
-- **Python:** 3.11.0
-- **Django:** 5.1.0
+- **Python:** 3.12.3
+- **Django:** 5.2.1
 - **Web Server:** Gunicorn 22.0.0 (4 workers, 2 threads)
 - **Database:** PostgreSQL 15
 - **Static Files:** WhiteNoise 6.5.0
@@ -80,15 +80,7 @@ DJANGO_SUPERUSER_PASSWORD=[AUTO-GENERATED]
 
 **Endpoint:** `/healthz/`
 
-**Expected Response:**
-```json
-{
-  "status": "healthy",
-  "database": "ok",
-  "version": "5.1.0",
-  "debug": false
-}
-```
+Örnek Yanıt: `{ "status": "healthy", "database": "ok", "django": "5.2.1", "commit": "<hash>", "debug": false }`
 
 ---
 
@@ -201,6 +193,6 @@ See `RUNBOOK.md` for detailed rollback instructions.
 
 ---
 
-**Last Updated:** 2025-01-15  
+**Last Updated:** 2025-10-16  
 **Deploy Status:** ✅ SUCCESSFUL
 

@@ -19,12 +19,20 @@
                 <div class="flex-1 text-center md:text-left">
                     <div class="flex items-center justify-center md:justify-start space-x-3 mb-2">
                         <h1 class="text-3xl font-bold text-brand-navy">{{ store.name }}</h1>
+                        {% if ff.P0_FEATURES_ENABLED and ff.FEATURE_VERIFIED_SELLER and store.is_verified %}
                         <svg class="w-7 h-7 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                         </svg>
+                        {% endif %}
+                        {% if ff.FEATURE_REPORTING_P0 %}
+                        <a href="{% url 'moderation:report' 'user' store.owner.id %}" class="text-xs text-brand-red">Kullanıcıyı Şikayet Et</a>
+                        {% endif %}
                     </div>
                     {% if store.bio %}
                     <p class="text-brand-mute max-w-2xl">{{ store.bio }}</p>
+                    {% endif %}
+                    {% if ff.FEATURE_STORE_REVIEWS and store.rating_avg %}
+                    <p class="mt-1 text-sm text-brand-ink">Puan: {{ store.rating_avg|floatformat:2 }} ({{ store.rating_count }})</p>
                     {% endif %}
                     <p class="text-sm text-brand-mute mt-2">Üyelik: {{ store.created_at|date:"F Y" }}</p>
                 </div>
@@ -70,6 +78,31 @@
         </div>
         {% endif %}
     </div>
+    {% if ff.FEATURE_STORE_POLICIES and policy %}
+    <div class="container mx-auto px-4 pb-12">
+        <h2 class="text-2xl font-bold text-brand-navy mb-6">Mağaza Politikaları</h2>
+        <div class="bg-white rounded-xl shadow p-6 space-y-4">
+            {% if policy.return_policy_text %}
+            <div>
+                <h3 class="font-semibold">İade Politikası</h3>
+                <p class="text-brand-mute whitespace-pre-wrap">{{ policy.return_policy_text }}</p>
+            </div>
+            {% endif %}
+            {% if policy.shipping_policy_text %}
+            <div>
+                <h3 class="font-semibold">Kargo Politikası</h3>
+                <p class="text-brand-mute whitespace-pre-wrap">{{ policy.shipping_policy_text }}</p>
+            </div>
+            {% endif %}
+            {% if policy.contact_hours %}
+            <div>
+                <h3 class="font-semibold">İletişim Saatleri</h3>
+                <p class="text-brand-mute">{{ policy.contact_hours }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}
 

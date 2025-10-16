@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Mağaza Politikaları{% endblock %}
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold mb-4">Mağaza Politikaları</h1>
+  <form method="post" class="bg-white p-6 rounded-xl shadow max-w-2xl">
+    {% csrf_token %}
+    <div class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium" for="id_return_policy_text">İade Politikası</label>
+        {{ form.return_policy_text }}
+        {% if form.return_policy_text.errors %}<p class="text-sm text-red-600">{{ form.return_policy_text.errors|first }}</p>{% endif %}
+      </div>
+      <div>
+        <label class="block text-sm font-medium" for="id_shipping_policy_text">Kargo Politikası</label>
+        {{ form.shipping_policy_text }}
+        {% if form.shipping_policy_text.errors %}<p class="text-sm text-red-600">{{ form.shipping_policy_text.errors|first }}</p>{% endif %}
+      </div>
+      <div>
+        <label class="block text-sm font-medium" for="id_contact_hours">İletişim Saatleri</label>
+        {{ form.contact_hours }}
+      </div>
+      <div>
+        <label class="block text-sm font-medium" for="id_handling_time_days">Hazırlık Süresi (gün)</label>
+        {{ form.handling_time_days }}
+      </div>
+      <div>
+        <label class="block text-sm font-medium" for="id_extra_notes">Ek Notlar</label>
+        {{ form.extra_notes }}
+        {% if form.extra_notes.errors %}<p class="text-sm text-red-600">{{ form.extra_notes.errors|first }}</p>{% endif %}
+      </div>
+      <div class="flex gap-2">
+        <button class="px-4 py-2 bg-brand-red text-white rounded">Kaydet</button>
+        <a href="{% url 'stores:seller_dashboard' %}" class="px-4 py-2 border rounded">Vazgeç</a>
+      </div>
+    </div>
+  </form>
+  <p class="text-xs text-gray-500 mt-3">Kişisel iletişim paylaşımı yasaktır; tespit edilirse metin redakte edilir.</p>
+</div>
+{% endblock %}
+
+

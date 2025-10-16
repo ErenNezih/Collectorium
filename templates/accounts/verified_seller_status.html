@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Doğrulama Durumu{% endblock %}
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold mb-4">Doğrulama Durumu</h1>
+  {% if verified %}
+    <div class="bg-white p-6 rounded-xl shadow">
+      <p><strong>Durum:</strong> {{ verified.status }}</p>
+      <p><strong>Şirket:</strong> {{ verified.company_name }}</p>
+      <p><strong>Vergi No:</strong> {{ verified.tax_no }}</p>
+      {% if verified.verified_at %}
+      <p><strong>Onay Tarihi:</strong> {{ verified.verified_at }}</p>
+      {% endif %}
+      {% if verified.reason %}
+      <p class="mt-2 text-sm text-gray-600"><strong>Not:</strong> {{ verified.reason }}</p>
+      {% endif %}
+    </div>
+  {% else %}
+    <div class="bg-yellow-50 border border-yellow-200 text-yellow-800 p-4 rounded">Başvuru bulunamadı. Lütfen başvuru yapınız.</div>
+  {% endif %}
+</div>
+{% endblock %}
+
+
+

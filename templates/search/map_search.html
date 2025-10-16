@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Harita Arama{% endblock %}
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold mb-4">Harita Arama (Basit)</h1>
+  <form method="get" class="mb-4 flex gap-2">
+    <input type="text" name="city" value="{{ city }}" placeholder="Şehir" class="rounded border px-3 py-2">
+    <input type="text" name="district" value="{{ district }}" placeholder="İlçe" class="rounded border px-3 py-2">
+    <button class="px-4 py-2 bg-brand-red text-white rounded">Ara</button>
+  </form>
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {% for li in page_obj %}
+    <div class="border rounded bg-white p-4">
+      <a href="{% url 'listing_detail' li.id %}" class="text-brand-navy hover:text-brand-red font-medium">{{ li.title }}</a>
+      <div class="text-sm text-brand-mute">{{ li.city }} {{ li.district }}</div>
+      <div class="mt-1 text-brand-ink">{{ li.price }} {{ li.currency }}</div>
+    </div>
+    {% empty %}
+    <div class="text-gray-500">Sonuç bulunamadı.</div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+
+

@@ -1,3 +1,17 @@
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.DS_Store
+.env
+db.sqlite3
+node_modules/
+staticfiles/
+media/
+.idea/
+.vscode/
+.pytest_cache/
+
 # Python
 __pycache__/
 *.py[cod]

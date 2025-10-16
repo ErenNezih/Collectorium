@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from django.http import HttpResponseForbidden
+import os
+from . import DEFAULT_FEATURE_FLAGS
 from django.db.models import Count, Avg, Q
 from listings.models import Listing
 from reviews.models import Review
-from catalog.models import Category
+from catalog.models import Category, Product
 from stores.models import Store
 
 def home(request):
@@ -81,6 +84,28 @@ def marketplace(request):
     if max_price:
         listings = listings.filter(price__lte=max_price)
 
+    # Ek filtreler (Search V1 - flag ile)
+    import os
+    from core import DEFAULT_FEATURE_FLAGS
+
+    def _ff(name: str) -> bool:
+        default = DEFAULT_FEATURE_FLAGS.get(name, False)
+        raw = os.environ.get(name)
+        return default if raw is None else raw.lower() in ("1", "true", "yes")
+
+    brand = request.GET.get('brand')
+    rating_min = request.GET.get('rating_min')
+
+    if _ff('FEATURE_SEARCH_V1'):
+        if brand:
+            listings = listings.filter(product__brand__icontains=brand)
+        if rating_min:
+            try:
+                rating_threshold = float(rating_min)
+                listings = listings.annotate(avg_rating=Avg('reviews__rating')).filter(avg_rating__gte=rating_threshold)
+            except ValueError:
+                pass
+
     # Sıralama
     sort_by = request.GET.get('sort', 'newest')
     if sort_by == 'price_low':
@@ -93,6 +118,8 @@ def marketplace(request):
         listings = listings.annotate(
             review_count=Count('reviews')
         ).order_by('-review_count', '-created_at')
+    elif sort_by == 'rating_high' and _ff('FEATURE_SEARCH_V1'):
+        listings = listings.annotate(avg_rating=Avg('reviews__rating')).order_by('-avg_rating', '-created_at')
     else:  # newest
         listings = listings.order_by('-created_at')
 
@@ -121,6 +148,31 @@ def marketplace(request):
         'min_price': min_price,
         'max_price': max_price,
     }
+
+    # Brand facet seçenekleri (kategoriye göre) - Search V1
+    if _ff('FEATURE_SEARCH_V1'):
+        brand_options = []
+        try:
+            if current_category:
+                brand_options = list(
+                    Product.objects.filter(category=current_category)
+                    .exclude(brand__isnull=True)
+                    .exclude(brand__exact='')
+                    .values_list('brand', flat=True)
+                    .distinct()[:50]
+                )
+            else:
+                brand_options = list(
+                    Product.objects.exclude(brand__isnull=True)
+                    .exclude(brand__exact='')
+                    .values_list('brand', flat=True)
+                    .distinct()[:50]
+                )
+        except Exception:
+            brand_options = []
+        context['brand_options'] = brand_options
+        context['brand'] = brand
+        context['rating_min'] = rating_min
     return render(request, "marketplace.html", context)
 
 def listing_detail(request, listing_id):
@@ -158,6 +210,18 @@ class ContactView(TemplateView):
 
 class SellerGuideView(TemplateView):
     template_name = "pages/seller_guide.html"
+
+
+class TrustCenterView(TemplateView):
+    template_name = "pages/trust_center.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        default = DEFAULT_FEATURE_FLAGS.get('FEATURE_TRUST_CENTER_P1', False)
+        raw = os.environ.get('FEATURE_TRUST_CENTER_P1')
+        enabled = default if raw is None else raw.lower() in ("1","true","yes")
+        if not enabled:
+            return HttpResponseForbidden()
+        return super().dispatch(request, *args, **kwargs)
 
 # --- Hata Handler View'ları ---
 

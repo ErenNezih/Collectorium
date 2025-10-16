@@ -13,6 +13,10 @@ urlpatterns = [
     
     # KEYSTONE OPERASYONU - Google Onboarding
     path('google/signup/complete/', views.google_onboarding_complete, name='google_onboarding_complete'),
+
+    # Verified Seller / KYC (feature-flagged)
+    path('seller/verify/apply/', views.verified_seller_apply, name='verified_seller_apply'),
+    path('seller/verify/status/', views.verified_seller_status, name='verified_seller_status'),
 ]
 
 

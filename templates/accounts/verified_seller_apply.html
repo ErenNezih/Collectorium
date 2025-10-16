@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Doğrulanmış Satıcı Başvurusu{% endblock %}
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold mb-4">Doğrulanmış Satıcı Başvurusu</h1>
+  <form method="post" enctype="multipart/form-data" class="bg-white p-6 rounded-xl shadow">
+    {% csrf_token %}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium">Şirket Adı</label>
+        {{ form.company_name }}
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Vergi No</label>
+        {{ form.tax_no }}
+      </div>
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium">Belgeler (çoklu yükleme)</label>
+        {{ form.documents }}
+        <p class="text-xs text-gray-500 mt-1">Kimlik/şirket evraklarını yükleyiniz.</p>
+      </div>
+    </div>
+    <button class="mt-6 bg-brand-red text-white px-6 py-3 rounded-lg">Başvuruyu Gönder</button>
+  </form>
+</div>
+{% endblock %}
+
+
+

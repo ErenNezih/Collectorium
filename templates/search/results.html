@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block title %}Arama{% endblock %}
+{% block content %}
+<div class="bg-white border-b border-gray-200">
+  <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <form method="get" class="space-y-4">
+      <div class="flex flex-col lg:flex-row gap-2">
+        <input type="text" name="q" value="{{ q }}" placeholder="Ara"
+               class="w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-navy focus:ring-brand-navy sm:text-sm">
+        <select name="category" class="rounded-lg border-gray-300 shadow-sm">
+          <option value="">Kategori</option>
+          {% for c in categories %}
+            <option value="{{ c.slug }}" {% if category_slug == c.slug %}selected{% endif %}>{{ c.name }}</option>
+          {% endfor %}
+        </select>
+        <select name="brand" class="rounded-lg border-gray-300 shadow-sm">
+          <option value="">Marka</option>
+          {% for b in brand_options %}
+            <option value="{{ b }}" {% if brand == b %}selected{% endif %}>{{ b }}</option>
+          {% endfor %}
+        </select>
+        <select name="condition" class="rounded-lg border-gray-300 shadow-sm">
+          <option value="">Durum</option>
+          <option value="new" {% if condition == 'new' %}selected{% endif %}>Yeni</option>
+          <option value="like_new" {% if condition == 'like_new' %}selected{% endif %}>Sıfıra Yakın</option>
+          <option value="good" {% if condition == 'good' %}selected{% endif %}>İyi</option>
+          <option value="fair" {% if condition == 'fair' %}selected{% endif %}>Orta</option>
+          <option value="poor" {% if condition == 'poor' %}selected{% endif %}>Kötü</option>
+        </select>
+        <input type="number" name="price_min" value="{{ price_min }}" placeholder="Min" class="w-24 rounded-lg border-gray-300 shadow-sm text-sm">
+        <input type="number" name="price_max" value="{{ price_max }}" placeholder="Max" class="w-24 rounded-lg border-gray-300 shadow-sm text-sm">
+        <select name="seller_rating_min" class="rounded-lg border-gray-300 shadow-sm">
+          <option value="">Puan</option>
+          <option value="4.0" {% if seller_rating_min == '4.0' %}selected{% endif %}>4.0+</option>
+          <option value="4.5" {% if seller_rating_min == '4.5' %}selected{% endif %}>4.5+</option>
+        </select>
+        <select name="sort" class="rounded-lg border-gray-300 shadow-sm">
+          <option value="relevance" {% if sort == 'relevance' %}selected{% endif %}>Alaka</option>
+          <option value="newest" {% if sort == 'newest' %}selected{% endif %}>En Yeni</option>
+          <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Fiyat (Düşük)</option>
+          <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Fiyat (Yüksek)</option>
+          <option value="rating" {% if sort == 'rating' %}selected{% endif %}>Puan</option>
+          <option value="popular" {% if sort == 'popular' %}selected{% endif %}>Popüler</option>
+        </select>
+        <button type="submit" class="px-4 py-2 bg-brand-red text-white rounded-lg">Ara</button>
+        {% if q or category_slug or brand or condition or price_min or price_max or seller_rating_min %}
+        <a href="{% url 'search:results' %}" class="px-3 py-2 text-sm text-brand-red border border-brand-red/30 rounded-lg">Sıfırla</a>
+        {% endif %}
+        {% include 'search/_save_button.html' %}
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="bg-gray-50 py-12">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    {% if listings %}
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {% for listing in listings %}
+        <div class="group relative bg-white rounded-lg shadow-card border hover:shadow-xl transition-all duration-300">
+          <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-lg bg-gray-200 relative">
+            {% if listing.images.first %}
+            <img src="{{ listing.images.first.image.url }}" class="h-full w-full object-cover" alt="{{ listing.title }}">
+            {% else %}
+            <div class="h-full w-full flex items-center justify-center bg-gray-100">Görsel yok</div>
+            {% endif %}
+          </div>
+          <div class="p-4">
+            <h3 class="text-sm font-medium text-brand-ink line-clamp-2">
+              <a href="{% url 'listing_detail' listing.id %}">{{ listing.title }}</a>
+            </h3>
+            <p class="mt-1 text-xs text-brand-mute">{{ listing.product.name }} · {{ listing.store.name }}</p>
+            <div class="mt-2 flex items-center justify-between">
+              <span class="text-lg font-bold text-brand-navy">{{ listing.price }} {{ listing.currency }}</span>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% if page_obj.has_other_pages %}
+      <div class="mt-8 flex justify-center">
+        <nav class="flex items-center space-x-2">
+          {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}&q={{ q }}&category={{ category_slug }}&brand={{ brand }}&condition={{ condition }}&price_min={{ price_min }}&price_max={{ price_max }}&seller_rating_min={{ seller_rating_min }}&sort={{ sort }}" class="px-3 py-2 text-sm">Önceki</a>
+          {% endif %}
+          {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}&q={{ q }}&category={{ category_slug }}&brand={{ brand }}&condition={{ condition }}&price_min={{ price_min }}&price_max={{ price_max }}&seller_rating_min={{ seller_rating_min }}&sort={{ sort }}" class="px-3 py-2 text-sm">Sonraki</a>
+          {% endif %}
+        </nav>
+      </div>
+      {% endif %}
+    {% else %}
+      <div class="text-center py-12">
+        <p class="text-brand-mute">Sonuç bulunamadı. Filtreleri daraltmayı deneyin.</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+

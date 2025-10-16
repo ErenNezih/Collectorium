@@ -1,10 +1,10 @@
 # 🎯 Collectorium
 
-> **Türkiye'nin ilk niş koleksiyon pazar yeri**  
-> TCG kartları, figürler ve comicler için güvenli alışveriş platformu
+Türkiye'nin ilk niş koleksiyon pazar yeri (Django 5.2, Render.com üzerinde canlı).
 
-[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![Django 5.2](https://img.shields.io/badge/django-5.2-green.svg)](https://www.djangoproject.com/)
+[![Render](https://img.shields.io/badge/host-Render.com-purple.svg)](https://render.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
@@ -50,31 +50,24 @@
 
 ---
 
-## 🚀 Kurulum
+## 🚀 Hızlı Başlangıç (Local)
 
-### Gereksinimler
-
-- Python 3.11+
-- pip (Python paket yöneticisi)
-- (Opsiyonel) PostgreSQL (production için)
-
-### Hızlı Başlangıç
+Gereksinimler: Python 3.12.3, pip, (opsiyonel) PostgreSQL.
 
 ```bash
 # 1. Depoyu klonlayın
-git clone https://github.com/yourusername/collectorium.git
+git clone https://github.com/ErenNezih/Collectorium.git
 cd collectorium
 
 # 2. Virtual environment oluşturun
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+venv\Scripts\activate  # macOS/Linux: source venv/bin/activate
 
 # 3. Bağımlılıkları yükleyin
-pip install -e ".[dev,test,lint]"
+pip install -r requirements.txt
 
 # 4. Environment variables ayarlayın
-cp .env.example .env
-# .env dosyasını düzenleyin
+copy env.example .env   # macOS/Linux: cp env.example .env
 
 # 5. Database migration
 python manage.py migrate
@@ -89,7 +82,9 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Tarayıcınızda `http://127.0.0.1:8000` adresine gidin.
+Tarayıcı:
+- Uygulama: http://127.0.0.1:8000
+- Sağlık: http://127.0.0.1:8000/healthz/
 
 ---
 
@@ -187,51 +182,26 @@ curl http://127.0.0.1:8000/health/liveness/
 
 ---
 
-## 🌐 Deployment
+## 🌐 Dağıtım (Render)
 
-### Heroku
+Render üzerinde otomatik dağıtım etkindir. Temel kurallar:
+- Build Command: `bash ./build.sh`
+- Start Command: `bash ./start.sh`
+- Gerekli env’ler: `DJANGO_SETTINGS_MODULE=collectorium.settings.render`, `DATABASE_URL` (Render Postgres), `ALLOWED_HOSTS=<servis>.onrender.com`, `SECRET_KEY`, `DEBUG=False`.
 
-```bash
-# Heroku CLI ile login
-heroku login
-
-# Yeni app oluştur
-heroku create collectorium-prod
-
-# PostgreSQL ekle
-heroku addons:create heroku-postgresql:mini
-
-# Environment variables ayarla
-heroku config:set DJANGO_ENV=prod
-heroku config:set SECRET_KEY=your-secret-key
-heroku config:set ALLOWED_HOSTS=your-app.herokuapp.com
-
-# Deploy
-git push heroku main
-
-# Migrate
-heroku run python manage.py migrate
-
-# Superuser oluştur
-heroku run python manage.py createsuperuser
-```
-
-### Docker (Coming Soon)
-
-```bash
-docker-compose up -d
-```
+Ayrıntılar: `docs/DEPLOYMENT_RENDER.md`
 
 ---
 
-## 📚 Dokümantasyon
+## 📚 Belgeler
 
 Detaylı dokümantasyon için:
 
-- **[ARCHITECTURE.md](docs/ARCHITECTURE.md)**: Proje mimarisi
-- **[RUNBOOK.md](docs/RUNBOOK.md)**: Operations rehberi
-- **[COLLECTORIUM_MASTER_DOCUMENTATION.md](COLLECTORIUM_MASTER_DOCUMENTATION.md)**: Ana dokümantasyon
-- **[GOOGLE_OAUTH_SETUP.md](GOOGLE_OAUTH_SETUP.md)**: Google OAuth kurulum
+- `docs/ARCHITECTURE.md` — Mimari ve akışlar
+- `docs/DEVELOPMENT.md` — Lokal geliştirme, test ve kalite
+- `docs/DEPLOYMENT_RENDER.md` — Render dağıtımı ve sorun giderme
+- `RUNBOOK.md` — Operasyon rehberi (sağlık, log, rollback)
+- `DEPLOY_LOG.md` — Son dağıtımların özeti
 
 ---
 
@@ -278,12 +248,9 @@ Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICE
 
 ---
 
-## 👨‍💻 Geliştirici
+## 👨‍💻 İletişim
 
-**Collectorium Team**
-
-- Website: https://collectorium.com
-- Email: info@collectorium.com
+info@collectorium.com
 
 ---
 
@@ -298,6 +265,4 @@ Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICE
 
 ---
 
-**Geliştirme Durumu:** 🟢 Beta v1.0
-
-**Son Güncelleme:** 2025-10-15
+Son Güncelleme: 2025-10-16

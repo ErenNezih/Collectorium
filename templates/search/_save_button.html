@@ -1,0 +1,14 @@
+{% if ff.FEATURE_SAVED_SEARCHES %}
+<form method="post" action="{% url 'search:saved_create' %}" class="inline-flex items-center gap-2">
+  {% csrf_token %}
+  <input type="hidden" name="querystring" value="{{ request.GET.urlencode }}">
+  <button class="px-3 py-2 text-sm border rounded" aria-label="Aramayı Kaydet">Aramayı Kaydet</button>
+  <label class="sr-only" for="saved-search-name">Kayıtlı arama adı</label>
+  <input id="saved-search-name" type="text" name="name" placeholder="İsim" class="px-2 py-1 text-sm border rounded" aria-describedby="saved-search-help">
+  <span id="saved-search-help" class="text-xs text-gray-500">(Kaydetmek için basın)</span>
+  <input type="hidden" name="frequency" value="daily">
+  </form>
+{% endif %}
+
+
+

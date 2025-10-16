@@ -2,7 +2,7 @@
 
 **Version:** 1.0  
 **Platform:** Render.com  
-**Last Updated:** 2025-01-15
+**Last Updated:** 2025-10-16
 
 ---
 
@@ -28,11 +28,9 @@ This runbook contains operational procedures for managing Collectorium on Render
    - Sign up with GitHub
 
 3. **Deploy using Blueprint:**
-   - Dashboard → New → Blueprint
-   - Select `Collectorium` repository
-   - Render will auto-detect `render.yaml`
-   - Click "Apply"
-   - Wait 5-7 minutes for deployment
+   - Dashboard → New → Blueprint → Select repo
+   - `render.yaml` otomatik algılanır
+   - Apply → 3-5 dk bekleyin
 
 ### Redeployment
 
@@ -186,7 +184,9 @@ python manage.py migrate
 | `DATABASE_URL` | PostgreSQL connection | Auto-provided |
 | `DEBUG` | Debug mode | `False` |
 | `DJANGO_SUPERUSER_USERNAME` | Admin username | `admin` |
-| `DJANGO_SUPERUSER_PASSWORD` | Admin password | Auto-generated |
+| `DJANGO_SUPERUSER_PASSWORD` | Admin password | Generated |
+| `ALLOWED_HOSTS` | Hostnames | `<service>.onrender.com` |
+| `PYTHON_VERSION` | Runtime | `3.12.3` |
 
 ---
 
@@ -237,14 +237,8 @@ curl https://collectorium.onrender.com/healthz/
 ```
 
 **Expected Response:**
-```json
-{
-  "status": "healthy",
-  "database": "ok",
-  "version": "5.1.0",
-  "debug": false
-}
-```
+Örnek yanıt:
+`{"status":"healthy","database":"ok","django":"5.2.1","commit":"<hash>","debug":false}`
 
 ### Automated Health Checks
 
@@ -296,7 +290,7 @@ python manage.py migrate
    python manage.py collectstatic --noinput
    ```
 
-2. Verify WhiteNoise in MIDDLEWARE (settings.py)
+2. Verify WhiteNoise in MIDDLEWARE (settings/base.py)
 
 3. Check STATIC_ROOT and STATIC_URL
 
@@ -425,7 +419,7 @@ python manage.py loaddata data.json
 
 | Date | Change | Author |
 |------|--------|--------|
-| 2025-01-15 | Initial deployment | Cursor AI |
+| 2025-10-16 | Render hardening, healthz commit, build/start split | Assistant |
 | - | - | - |
 
 ---

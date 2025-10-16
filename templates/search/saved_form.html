@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Kayıtlı Arama{% endblock %}
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold mb-4">Kayıtlı Arama</h1>
+  <form method="post" class="bg-white p-6 rounded-xl shadow max-w-lg">
+    {% csrf_token %}
+    <div class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium">Ad</label>
+        <input type="text" name="name" value="{{ item.name }}" class="w-full rounded border px-3 py-2">
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Sıklık</label>
+        <select name="frequency" class="w-full rounded border px-3 py-2">
+          <option value="daily" {% if item.frequency == 'daily' %}selected{% endif %}>Günlük</option>
+          <option value="weekly" {% if item.frequency == 'weekly' %}selected{% endif %}>Haftalık</option>
+        </select>
+      </div>
+      <div class="flex items-center space-x-2">
+        <input type="checkbox" name="active" {% if item.active %}checked{% endif %}>
+        <span>Aktif</span>
+      </div>
+      {% if delete_confirm %}
+      <div class="text-red-700">Bu kaydı silmek istediğinize emin misiniz?</div>
+      {% endif %}
+      <div class="flex space-x-2">
+        <button class="px-4 py-2 bg-brand-red text-white rounded">Kaydet</button>
+        <a href="{% url 'search:saved_list' %}" class="px-4 py-2 border rounded">Vazgeç</a>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+
+

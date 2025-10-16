@@ -50,50 +50,52 @@ SECURE_HSTS_PRELOAD = True
 # DATABASE - PostgreSQL
 # ============================================================================
 
+"""
+Database configuration: honor full DATABASE_URL including query params
+and require SSL by default on Render (sslmode=require).
+"""
+
 # Render provides DATABASE_URL automatically via Blueprint
 DATABASE_URL = os.environ.get('DATABASE_URL', '')
 
-if DATABASE_URL:
-    # Clean URL (remove any query parameters for dj-database-url)
-    clean_url = DATABASE_URL.split('?')[0] if '?' in DATABASE_URL else DATABASE_URL
-    
-    try:
-        # Primary method: use dj-database-url
-        DATABASES = {
-            'default': dj_database_url.parse(
-                clean_url,
-                conn_max_age=600,
-                conn_health_checks=True,
-                ssl_require=False,
-            )
-        }
-    except Exception as parse_error:
-        # Fallback: manual PostgreSQL parsing
-        # Format: postgresql://user:pass@host:port/dbname
-        match = re.match(
-            r'postgres(?:ql)?://([^:]+):([^@]+)@([^:/]+)(?::(\d+))?/(.+)',
-            clean_url
+if not DATABASE_URL:
+    raise ValueError('DATABASE_URL environment variable is required for production!')
+
+try:
+    # Use full URL (do not strip query parameters like sslmode=require)
+    DATABASES = {
+        'default': dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=True,
         )
-        if match:
-            user, password, host, port, dbname = match.groups()
-            DATABASES = {
-                'default': {
-                    'ENGINE': 'django.db.backends.postgresql',
-                    'NAME': dbname,
-                    'USER': user,
-                    'PASSWORD': password,
-                    'HOST': host,
-                    'PORT': port or '5432',
-                    'CONN_MAX_AGE': 600,
-                    'OPTIONS': {
-                        'connect_timeout': 10,
-                    }
+    }
+except Exception as parse_error:
+    # Fallback: manual parsing (enforce SSL)
+    match = re.match(
+        r'postgres(?:ql)?://([^:]+):([^@]+)@([^:/]+)(?::(\d+))?/(.+)',
+        DATABASE_URL
+    )
+    if match:
+        user, password, host, port, dbname = match.groups()
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': dbname,
+                'USER': user,
+                'PASSWORD': password,
+                'HOST': host,
+                'PORT': port or '5432',
+                'CONN_MAX_AGE': 600,
+                'OPTIONS': {
+                    'connect_timeout': 10,
+                    'sslmode': 'require',
                 }
             }
-        else:
-            raise ValueError(f'Cannot parse DATABASE_URL. Format should be postgresql://user:pass@host:port/dbname. Error: {parse_error}')
-else:
-    raise ValueError('DATABASE_URL environment variable is required for production!')
+        }
+    else:
+        raise ValueError(f'Cannot parse DATABASE_URL. Error: {parse_error}')
 
 # ============================================================================
 # STATIC & MEDIA FILES

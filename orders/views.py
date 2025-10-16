@@ -5,6 +5,10 @@ from .models import Order, OrderItem
 from .forms import AddressForm, AddressSelectionForm
 from cart.cart import Cart
 from accounts.models import Address
+from moderation.models import Ban, RiskSignal
+from django.conf import settings
+from core import DEFAULT_FEATURE_FLAGS
+import os
 
 @login_required
 def order_create(request):
@@ -16,6 +20,17 @@ def order_create(request):
     addresses = Address.objects.filter(user=request.user)
     
     if request.method == 'POST':
+        # sitewide/purchase ban guard
+        from core import DEFAULT_FEATURE_FLAGS
+        import os
+        def _ff(name: str) -> bool:
+            default = DEFAULT_FEATURE_FLAGS.get(name, False)
+            raw = os.environ.get(name)
+            return default if raw is None else raw.lower() in ("1", "true", "yes")
+        if _ff('FEATURE_BLOCKLIST_P1'):
+            if Ban.objects.filter(user=request.user, active=True, scope__in=['purchase','sitewide']).exclude(expires_at__lt=timezone.now()).exists():
+                messages.error(request, 'Hesabınız şu anda satın alma için kısıtlı.')
+                return redirect('cart:cart_detail')
         # Formdan gelen veriye göre adres seçimi mi yeni adres mi kontrol et
         selected_address_id = request.POST.get('selected_address')
         
@@ -46,7 +61,7 @@ def order_create(request):
             buyer=request.user,
             shipping_address=f"{shipping_address_obj.full_address}, {shipping_address_obj.district}, {shipping_address_obj.city}",
             total=cart.get_total_price(),
-            status='paid' # Ödemenin başarılı olduğunu varsayıyoruz
+            status='paid' # varsayılan; payments flag açıkken aşağıda pending'e alınır
         )
         
         order_items_to_create = []
@@ -62,12 +77,38 @@ def order_create(request):
         # Sepeti temizle
         cart.clear()
 
+        # Payments sandbox flag açıksa sipariş durumunu pending yap ve ödeme akışına dallan
+        from core import DEFAULT_FEATURE_FLAGS
+        import os
+        def _ff(name: str) -> bool:
+            default = DEFAULT_FEATURE_FLAGS.get(name, False)
+            raw = os.environ.get(name)
+            return default if raw is None else raw.lower() in ("1", "true", "yes")
+
+        if _ff("P0_FEATURES_ENABLED") and _ff("FEATURE_PAYMENTS_SANDBOX"):
+            order.status = 'pending'
+            order.save(update_fields=['status'])
+
         # Oluşturulan siparişin ID'sini session'a kaydet
         request.session['order_id'] = order.id
-        
+
+        # Payments sandbox flag açıksa ödeme akışına dallan
+        def _ff(name: str) -> bool:
+            default = DEFAULT_FEATURE_FLAGS.get(name, False)
+            raw = os.environ.get(name)
+            return default if raw is None else raw.lower() in ("1", "true", "yes")
+
+        if _ff("P0_FEATURES_ENABLED") and _ff("FEATURE_PAYMENTS_SANDBOX"):
+            return redirect('payments:start', order_id=order.id)
+        # risk: first_order/high_amount
+        if _ff('FEATURE_RISK_SIGNALS_P2'):
+            total = float(order.total)
+            if Order.objects.filter(buyer=request.user).exclude(id=order.id).count() == 0:
+                RiskSignal.objects.create(entity_type='user', entity_id=request.user.id, type='first_order', severity='low', meta={'order_id': order.id})
+            if total >= 10000:
+                RiskSignal.objects.create(entity_type='order', entity_id=order.id, type='high_amount', severity='high', meta={'total': total})
+
         messages.success(request, f'Siparişiniz başarıyla oluşturuldu! Sipariş numaranız: #{order.id}')
-        
-        # Teşekkür sayfasına yönlendir
         return redirect('orders:order_created')
 
     else:

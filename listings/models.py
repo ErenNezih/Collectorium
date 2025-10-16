@@ -26,6 +26,11 @@ class Listing(models.Model):
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    # Esnek kategori alanları için (Search V1/P1): JSONB
+    attributes = models.JSONField(default=dict, blank=True)
+    # Lokasyon alanları (P2 Map Search)
+    city = models.CharField(max_length=100, blank=True, null=True)
+    district = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         ordering = ['-created_at']

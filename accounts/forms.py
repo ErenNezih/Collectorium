@@ -4,7 +4,7 @@ Collectorium Forms
 """
 
 from django import forms
-from .models import Address
+from .models import Address, VerifiedSeller, VerifiedSellerDocument
 
 
 class GoogleOnboardingForm(forms.Form):
@@ -146,3 +146,27 @@ class GoogleOnboardingForm(forms.Form):
             )
         
         return cleaned_data
+
+
+class VerifiedSellerApplicationForm(forms.ModelForm):
+    documents = forms.FileField(widget=forms.ClearableFileInput(attrs={"multiple": True}), required=True, help_text="Kimlik/şirket belgeleri")
+
+    class Meta:
+        model = VerifiedSeller
+        fields = ["company_name", "tax_no"]
+
+    def save(self, user, commit=True):
+        verified, _ = VerifiedSeller.objects.get_or_create(user=user, defaults={
+            "company_name": self.cleaned_data.get("company_name", ""),
+            "tax_no": self.cleaned_data.get("tax_no", ""),
+            "status": "pending",
+        })
+        # update details in case of resubmission
+        verified.company_name = self.cleaned_data.get("company_name", "")
+        verified.tax_no = self.cleaned_data.get("tax_no", "")
+        if commit:
+            verified.save()
+        files = self.files.getlist('documents')
+        for f in files:
+            VerifiedSellerDocument.objects.create(verified_seller=verified, file=f)
+        return verified

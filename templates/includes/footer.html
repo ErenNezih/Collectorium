@@ -48,6 +48,9 @@
         <h3 class="text-sm font-semibold leading-6 text-white">Keşfet</h3>
         <ul role="list" class="mt-6 space-y-4">
           <li><a href="{% url 'marketplace' %}" class="text-sm leading-6 text-gray-300 hover:text-brand-red transition-colors duration-200">Marketplace</a></li>
+          {% if ff.FEATURE_TRUST_CENTER_P1 %}
+          <li><a href="{% url 'trust_center' %}" class="text-sm leading-6 text-gray-300 hover:text-brand-red transition-colors duration-200">Güven Merkezi</a></li>
+          {% endif %}
           <li><a href="{% url 'stores:stores_list' %}" class="text-sm leading-6 text-gray-300 hover:text-brand-red transition-colors duration-200">Mağazalar</a></li>
           <li><a href="{% url 'catalog:categories_list' %}" class="text-sm leading-6 text-gray-300 hover:text-brand-red transition-colors duration-200">Kategoriler</a></li>
           <li><a href="{% url 'marketplace' %}?sort=popular" class="text-sm leading-6 text-gray-300 hover:text-brand-red transition-colors duration-200">Öne Çıkanlar</a></li>
