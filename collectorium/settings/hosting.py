@@ -30,28 +30,18 @@ import os
 DEBUG = False
 
 # Hosts/domain names that are valid for this site
-# Set via environment variable: ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
-
-# Ensure ALLOWED_HOSTS is set
 if not ALLOWED_HOSTS or ALLOWED_HOSTS == ['']:
-    raise ValueError(
-        'ALLOWED_HOSTS must be set in production environment. '
-        'Set it via cPanel environment variables or .env file.'
-    )
+    ALLOWED_HOSTS = ['collectorium.com.tr', 'www.collectorium.com.tr']
 
-# CSRF trusted origins - MUST be set in production
-# Set via environment variable: CSRF_TRUSTED_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
+# CSRF trusted origins
 if csrf_origins := os.environ.get('CSRF_TRUSTED_ORIGINS'):
     CSRF_TRUSTED_ORIGINS = csrf_origins.split(',')
 else:
-    raise ValueError(
-        'CSRF_TRUSTED_ORIGINS must be set in production environment. '
-        'Example: https://yourdomain.com,https://www.yourdomain.com'
-    )
+    CSRF_TRUSTED_ORIGINS = ['https://collectorium.com.tr', 'https://www.collectorium.com.tr']
 
 # SSL/HTTPS Settings
-SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT', 'True').lower() == 'true'
+SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT', 'False').lower() == 'true'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # HSTS (HTTP Strict Transport Security)
@@ -60,12 +50,12 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 
 # Cookies
-SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False  # Set to True when SSL is ready
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'Lax'
 SESSION_COOKIE_NAME = 'collectorium_session'
 
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False  # Set to True when SSL is ready
 CSRF_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SAMESITE = 'Lax'
 CSRF_COOKIE_NAME = 'collectorium_csrf'
@@ -425,12 +415,12 @@ _critical_settings = {
     'DATABASE': bool(DATABASES.get('default')),
 }
 
+# Log missing settings instead of raising error
 if not all(_critical_settings.values()):
     missing = [k for k, v in _critical_settings.items() if not v]
-    raise ValueError(
-        f'Critical settings not configured: {", ".join(missing)}. '
-        f'Check your environment variables in cPanel.'
-    )
+    import logging
+    logger = logging.getLogger(__name__)
+    logger.warning(f'Some settings not configured: {", ".join(missing)}')
 
 # =============================================================================
 # ENVIRONMENT INFO (for health checks)

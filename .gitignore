@@ -227,3 +227,32 @@ public_ftp/
 # Deployment
 .env.production
 .env.staging
+
+# User specific files (Windows)
+AppData/
+Desktop/
+Documents/
+Downloads/
+Music/
+Pictures/
+Videos/
+
+# CapCut files
+AppData/Local/CapCut/
+
+# Docker files
+AppData/Local/Docker/
+
+# Connected Devices Platform
+AppData/Local/ConnectedDevicesPlatform/
+
+# All AppData
+AppData/
+
+# All user directories
+Desktop/
+Documents/
+Downloads/
+Music/
+Pictures/
+Videos/
