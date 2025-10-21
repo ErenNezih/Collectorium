@@ -1,10 +1,9 @@
 # 🎯 Collectorium
 
-Türkiye'nin ilk niş koleksiyon pazar yeri (Django 5.2, Render.com üzerinde canlı).
+Türkiye'nin ilk niş koleksiyon pazar yeri (Django 5.2, production-ready).
 
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![Django 5.2](https://img.shields.io/badge/django-5.2-green.svg)](https://www.djangoproject.com/)
-[![Render](https://img.shields.io/badge/host-Render.com-purple.svg)](https://render.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
@@ -182,14 +181,14 @@ curl http://127.0.0.1:8000/health/liveness/
 
 ---
 
-## 🌐 Dağıtım (Render)
+## 🌐 Dağıtım (cPanel/Passenger)
 
-Render üzerinde otomatik dağıtım etkindir. Temel kurallar:
-- Build Command: `bash ./build.sh`
-- Start Command: `bash ./start.sh`
-- Gerekli env’ler: `DJANGO_SETTINGS_MODULE=collectorium.settings.render`, `DATABASE_URL` (Render Postgres), `ALLOWED_HOSTS=<servis>.onrender.com`, `SECRET_KEY`, `DEBUG=False`.
+cPanel/Passenger WSGI üzerinde çalışmak üzere yapılandırılmıştır. Temel kurallar:
+- WSGI Entry Point: `passenger_wsgi.py`
+- Settings Module: `DJANGO_SETTINGS_MODULE=collectorium.settings.hosting`
+- Gerekli env'ler: `DATABASE_URL` (PostgreSQL veya MySQL), `SECRET_KEY`, `DEBUG=False`, `ALLOWED_HOSTS`, `CSRF_TRUSTED_ORIGINS`
 
-Ayrıntılar: `docs/DEPLOYMENT_RENDER.md`
+Ayrıntılar: `docs/MIGRATION_TO_CPANEL.md`
 
 ---
 
@@ -199,9 +198,9 @@ Detaylı dokümantasyon için:
 
 - `docs/ARCHITECTURE.md` — Mimari ve akışlar
 - `docs/DEVELOPMENT.md` — Lokal geliştirme, test ve kalite
-- `docs/DEPLOYMENT_RENDER.md` — Render dağıtımı ve sorun giderme
-- `RUNBOOK.md` — Operasyon rehberi (sağlık, log, rollback)
-- `DEPLOY_LOG.md` — Son dağıtımların özeti
+- `docs/MIGRATION_TO_CPANEL.md` — cPanel dağıtımı ve sorun giderme
+- `RUNBOOK_CPANEL.md` — Operasyon rehberi (sağlık, log, rollback)
+- `docs/archive/DEPLOYMENT_RENDER.md` — Render dağıtım geçmişi (arşiv)
 
 ---
 

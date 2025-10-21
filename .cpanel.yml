@@ -1,0 +1,45 @@
+---
+# cPanel Git Version Control Deployment Configuration
+# This file defines the deployment tasks when using cPanel's Git interface
+# NOTE: cPanel automatically activates the virtual environment set in Python App
+
+deployment:
+  tasks:
+    # Set deployment path (cPanel provides this automatically)
+    - export APP_ROOT=${DEPLOYPATH:-/home/USERNAME/collectorium}
+    
+    # Navigate to application directory
+    - cd $APP_ROOT
+    
+    # Upgrade pip first
+    - python -m pip install --upgrade pip
+    
+    # Install/update dependencies
+    - if [ -f "$APP_ROOT/requirements.txt" ]; then pip install -r $APP_ROOT/requirements.txt; fi
+    
+    # Set Django settings module
+    - export DJANGO_SETTINGS_MODULE=collectorium.settings.hosting
+    
+    # Run Django migrations
+    - python $APP_ROOT/manage.py migrate --noinput
+    
+    # Collect static files
+    - python $APP_ROOT/manage.py collectstatic --noinput --clear
+    
+    # Create logs directory if not exists
+    - mkdir -p $APP_ROOT/logs
+    
+    # Restart Passenger application
+    - mkdir -p $APP_ROOT/tmp
+    - touch $APP_ROOT/tmp/restart.txt
+    
+    # Log deployment success
+    - echo "Deployment completed at $(date)" >> $APP_ROOT/logs/deploy.log
+
+# IMPORTANT NOTES:
+# 1. Replace USERNAME in APP_ROOT with your actual cPanel username
+# 2. cPanel Python App automatically activates the virtual environment
+# 3. DEPLOYPATH is provided by cPanel during Git deployment
+# 4. All paths use $APP_ROOT for safety
+# 5. Environment variables must be set in cPanel Python App interface
+

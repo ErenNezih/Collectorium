@@ -3,8 +3,9 @@ django-allauth==65.0.0
 django-htmx==1.26.0
 whitenoise==6.5.0
 Pillow==11.0.0
-gunicorn==22.0.0
 psycopg2-binary==2.9.9
+mysqlclient==2.2.0
+PyMySQL>=1.1.0
 python-dotenv==1.0.0
 dj-database-url==3.0.0
 django-environ==0.11.2
@@ -13,3 +14,4 @@ requests-oauthlib==2.0.0
 PyJWT==2.8.0
 google-auth==2.28.0
 cryptography>=42.0.0
+sentry-sdk==2.14.0
