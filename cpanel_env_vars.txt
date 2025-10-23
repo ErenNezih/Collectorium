@@ -1,0 +1,49 @@
+# ============================================================================
+# CPANEL ENVIRONMENT VARIABLES
+# ============================================================================
+# Bu dosyadaki değişkenleri cPanel → Python App → Environment variables'a ekleyin
+# ============================================================================
+
+# Django Core
+DJANGO_SETTINGS_MODULE=collectorium.settings.hosting
+SECRET_KEY=8%jf93#asd!J0we0
+DEBUG=False
+
+# Hosts & Security
+ALLOWED_HOSTS=collectorium.com.tr,www.collectorium.com.tr
+CSRF_TRUSTED_ORIGINS=https://collectorium.com.tr,https://www.collectorium.com.tr
+
+# Database (MySQL)
+DB_ENGINE=django.db.backends.mysql
+DB_HOST=localhost
+DB_NAME=collecto_collectorium
+DB_USER=collecto_collecto_app
+DB_PASSWORD=8%jf93#asd!J0we0
+DB_PORT=3306
+
+# Security Settings
+SECURE_SSL_REDIRECT=True
+SECURE_HSTS_SECONDS=31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS=True
+SECURE_HSTS_PRELOAD=True
+SESSION_COOKIE_SECURE=True
+CSRF_COOKIE_SECURE=True
+
+# Email (cPanel SMTP)
+EMAIL_HOST=localhost
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=
+EMAIL_HOST_PASSWORD=
+DEFAULT_FROM_EMAIL=noreply@collectorium.com.tr
+
+# Logging
+APP_LOG_FILE=/home/collecto/collectorium/migrate_logs/app.log
+LOG_LEVEL=INFO
+
+# Optional: Google OAuth
+# GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
+# GOOGLE_CLIENT_SECRET=your-google-client-secret
+
+# Optional: Sentry Error Tracking
+# SENTRY_DSN=https://your-sentry-dsn@sentry.io/project-id
