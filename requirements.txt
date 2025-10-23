@@ -1,23 +1,37 @@
 # ============================================================================
-# COLLECTORIUM - CPANEL REQUIREMENTS (SADELEŞTİRİLMİŞ)
+# COLLECTORIUM - CPANEL REQUIREMENTS (TAM LİSTE)
 # ============================================================================
-# cPanel için minimum gerekli paketler
+# Django settings'deki tüm paketler
 # ============================================================================
 
 # Core Django
 Django==5.2.1
 django-htmx==1.26.0
+django-allauth==65.0.0
 whitenoise==6.5.0
+
+# Image Processing
+Pillow==11.0.0
 
 # Database (SQLite için gerekli değil)
 # PyMySQL>=1.1.0
 
-# Environment
+# Environment & Configuration
 python-dotenv==1.0.0
+dj-database-url==3.0.0
+django-environ==0.11.2
 
-# HTTP
+# HTTP & API
 requests==2.31.0
+requests-oauthlib==2.0.0
 
-# Security
+# Security & Auth
 PyJWT==2.8.0
+google-auth==2.28.0
 cryptography>=42.0.0
+
+# Error Tracking
+sentry-sdk==2.14.0
+
+# Development tools (cPanel'de gerekli)
+django-debug-toolbar==4.2.0
