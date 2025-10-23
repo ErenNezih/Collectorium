@@ -6,6 +6,7 @@
 
 # Core Django
 Django==5.2.1
+django-htmx==1.26.0
 whitenoise==6.5.0
 
 # Database (SQLite için gerekli değil)
