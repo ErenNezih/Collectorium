@@ -33,5 +33,5 @@ cryptography>=42.0.0
 # Error Tracking
 sentry-sdk==2.14.0
 
-# Development tools (NOT for production)
-# django-debug-toolbar==4.2.0  # Commented out for cPanel
+# Development tools (cPanel'de gerekli)
+django-debug-toolbar==4.2.0
