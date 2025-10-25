@@ -124,7 +124,7 @@ elif all([
     os.environ.get('DB_PASSWORD'),
 ]):
     # Manual database configuration
-    db_engine = db_engine or 'django.db.backends.sqlite3'
+    db_engine = db_engine or 'django.db.backends.mysql'
     
     DATABASES = {
         'default': {

@@ -50,9 +50,11 @@ try:
 except Exception as e:
     # If Django fails to load, create a simple error application
     # This helps with debugging deployment issues
+    import traceback
     def application(environ, start_response):
         status = '500 Internal Server Error'
-        output = f'Error loading Django application: {str(e)}'.encode('utf-8')
+        error_details = f'Error loading Django application: {str(e)}\n\nTraceback:\n{traceback.format_exc()}'
+        output = error_details.encode('utf-8')
         response_headers = [
             ('Content-type', 'text/plain'),
             ('Content-Length', str(len(output)))
@@ -69,4 +71,8 @@ except Exception as e:
 # print("Python path:", sys.path, file=sys.stderr)
 # print("Current directory:", CURRENT_DIR, file=sys.stderr)
 # print("DJANGO_SETTINGS_MODULE:", os.environ.get('DJANGO_SETTINGS_MODULE'), file=sys.stderr)
+# print("DB_ENGINE:", os.environ.get('DB_ENGINE'), file=sys.stderr)
+# print("DB_NAME:", os.environ.get('DB_NAME'), file=sys.stderr)
+# print("DB_USER:", os.environ.get('DB_USER'), file=sys.stderr)
+# print("DB_HOST:", os.environ.get('DB_HOST'), file=sys.stderr)
 
