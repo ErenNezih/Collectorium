@@ -4,12 +4,7 @@
 <!-- Hero Section -->
 <section class="relative min-h-screen overflow-hidden hero-section">
   <!-- Arka Plan -->
-  <div class="absolute inset-0 hero-background" style="background-image: url('{% static 'images/hero/background.png' %}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-    <!-- Arka plan görseli -->
-    <div class="absolute inset-0 bg-gradient-to-br from-brand-navy via-gray-900 to-black">
-      {% load static %}
-    </div>
-    
+  <div class="absolute inset-0 hero-background" style="background-image: url('{% static 'images/hero/background.png' %}'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
     <!-- Hafif karartma overlay -->
     <div class="absolute inset-0 bg-gradient-to-b from-brand-navy/50 via-brand-navy/20 to-brand-navy/60"></div>
   </div>
