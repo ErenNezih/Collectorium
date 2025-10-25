@@ -83,8 +83,6 @@
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    filter: blur(2px);
-    -webkit-filter: blur(2px);
 }
 
 /* Hero Background Overlay */
