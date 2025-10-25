@@ -154,13 +154,34 @@ elif all([
         }
 
 else:
-    # Fallback to SQLite for development/testing
+    # DIRECT DATABASE CONFIGURATION - 503 ERROR ÇÖZÜMÜ
+    # Hardcoded MySQL database configuration for cPanel
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'collecto_collectorium_db',
+            'USER': 'collecto_eren_collectorium_db',
+            'PASSWORD': '1e2r3e4n5555',
+            'HOST': 'localhost',
+            'PORT': '3306',
+            'CONN_MAX_AGE': 600,
+            'OPTIONS': {
+                'charset': 'utf8mb4',
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+                'connect_timeout': 10,
+            }
         }
     }
+    
+    # Debug: Direct database configuration'ı logla
+    with open('/home/collecto/collectorium/direct_db_config.log', 'w') as f:
+        f.write("=== DIRECT DATABASE CONFIGURATION ===\n")
+        f.write(f"ENGINE: {DATABASES['default']['ENGINE']}\n")
+        f.write(f"NAME: {DATABASES['default']['NAME']}\n")
+        f.write(f"USER: {DATABASES['default']['USER']}\n")
+        f.write(f"HOST: {DATABASES['default']['HOST']}\n")
+        f.write(f"PORT: {DATABASES['default']['PORT']}\n")
+        f.write("Direct database configuration kullaniliyor.\n")
 
 # =============================================================================
 # STATIC FILES - WhiteNoise
