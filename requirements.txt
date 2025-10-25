@@ -13,8 +13,9 @@ whitenoise==6.5.0
 # Image Processing
 Pillow==11.0.0
 
-# Database (SQLite için gerekli değil)
-# PyMySQL>=1.1.0
+# Database Support
+mysqlclient==2.2.4
+PyMySQL>=1.1.0
 
 # Environment & Configuration
 python-dotenv==1.0.0

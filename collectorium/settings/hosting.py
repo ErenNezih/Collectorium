@@ -67,22 +67,34 @@ X_FRAME_OPTIONS = 'DENY'
 SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
 
 # =============================================================================
-# DATABASE CONFIGURATION - PostgreSQL OR MySQL
+# DATABASE CONFIGURATION - SQLite, PostgreSQL OR MySQL
 # =============================================================================
 
 """
-cPanel supports both PostgreSQL (external) and MySQL (native).
-Configuration is done via DATABASE_URL environment variable.
+Database configuration supports multiple engines:
 
-For PostgreSQL (recommended):
-    DATABASE_URL=postgresql://user:pass@host:port/dbname
+For SQLite (development):
+    No environment variables needed (default)
 
 For MySQL (cPanel native):
-    DATABASE_URL=mysql://user:pass@localhost:3306/dbname
-
-The DB_ENGINE can also be explicitly set:
-    DB_ENGINE=django.db.backends.postgresql
     DB_ENGINE=django.db.backends.mysql
+    DB_NAME=collectorium_db
+    DB_USER=dbuser
+    DB_PASSWORD=strong-password
+    DB_HOST=localhost
+    DB_PORT=3306
+
+For PostgreSQL (external):
+    DB_ENGINE=django.db.backends.postgresql
+    DB_NAME=collectorium_db
+    DB_USER=dbuser
+    DB_PASSWORD=strong-password
+    DB_HOST=external-host.com
+    DB_PORT=5432
+
+Or use DATABASE_URL:
+    DATABASE_URL=mysql://user:pass@localhost:3306/dbname
+    DATABASE_URL=postgresql://user:pass@host:port/dbname
 """
 
 # Get database configuration from environment
@@ -112,7 +124,7 @@ elif all([
     os.environ.get('DB_PASSWORD'),
 ]):
     # Manual database configuration
-    db_engine = db_engine or 'django.db.backends.postgresql'
+    db_engine = db_engine or 'django.db.backends.sqlite3'
     
     DATABASES = {
         'default': {
@@ -121,7 +133,7 @@ elif all([
             'USER': os.environ.get('DB_USER'),
             'PASSWORD': os.environ.get('DB_PASSWORD'),
             'HOST': os.environ.get('DB_HOST', 'localhost'),
-            'PORT': os.environ.get('DB_PORT', '5432' if 'postgresql' in db_engine else '3306'),
+            'PORT': os.environ.get('DB_PORT', '3306' if 'mysql' in db_engine else '5432'),
             'CONN_MAX_AGE': 600,
         }
     }
