@@ -1,0 +1,580 @@
+# 🚨 COLLECTORIUM DEPLOYMENT SORUN GİDERME REHBERİ
+# ============================================================================
+# Tarih: 23 Ekim 2025
+# Proje: Collectorium cPanel Deployment
+# Durum: DNS Propagation Bekleniyor
+# ============================================================================
+
+## 📊 MEVCUT DURUM ÖZETİ
+
+### ✅ BAŞARILI KONFIGÜRASYONLAR
+- **Django Application**: ✅ Çalışıyor
+- **Database**: ✅ SQLite bağlantısı başarılı
+- **Dependencies**: ✅ Tüm paketler yüklendi
+- **Static Files**: ✅ WhiteNoise konfigürasyonu
+- **Security**: ✅ Production settings aktif
+- **Environment Variables**: ✅ Doğru ayarlandı
+
+### ⚠️ MEVCUT SORUN: DNS PROPAGATION
+**Sorun**: Domain hala eski IP adresine çözümleniyor
+- **Mevcut IP**: 93.89.230.125 (eski)
+- **Hedef IP**: 45.151.250.159 (cPanel)
+- **Durum**: DNS propagation bekleniyor (1-12 saat)
+
+## 🔍 SORUN TESPİT VE ÇÖZÜM REHBERİ
+
+### 1. DNS PROPAGATION SORUNLARI
+
+#### Sorun: Domain eski IP'ye çözümleniyor
+**Belirtiler:**
+- `whatsmydns.net` sonuçları eski IP gösteriyor
+- Site erişilemiyor
+- SSL sertifikası oluşturulamıyor
+
+**Çözüm Adımları:**
+1. **DNS Kayıtlarını Kontrol Et**
+   ```bash
+   # cPanel → Zone Editor
+   A Record: collectorium.com.tr → 45.151.250.159
+   CNAME: www.collectorium.com.tr → collectorium.com.tr
+   TTL: 300 (5 dakika)
+   ```
+
+2. **DNS Propagation Bekle**
+   - **Beklenen süre**: 1-12 saat
+   - **Kontrol**: whatsmydns.net ile periyodik kontrol
+   - **Tüm DNS sunucularında yayıldığını doğrula**
+
+3. **SSL Sertifikası Oluştur**
+   ```bash
+   # DNS yayıldıktan sonra
+   cPanel → SSL/TLS → "Run AutoSSL"
+   "Force HTTPS Redirect" aktif et
+   ```
+
+#### Sorun: DNS propagation çok uzun sürüyor
+**Çözüm:**
+1. **TTL Değerini Düşür**
+   ```bash
+   # Zone Editor'de TTL'i 300'e düşür
+   # 48 saat bekle (eski TTL'in expire olması için)
+   ```
+
+2. **DNS Cache Temizle**
+   ```bash
+   # cPanel'de
+   Zone Editor → "Clear Cache" → "Reload"
+   ```
+
+3. **Nameserver Kontrol Et**
+   ```bash
+   # Domain sağlayıcınızda
+   ns1.veridyen.com
+   ns2.veridyen.com
+   ```
+
+### 2. DJANGO APPLICATION SORUNLARI
+
+#### Sorun: Application başlamıyor
+**Belirtiler:**
+- 503 Service Unavailable
+- "Application failed to start"
+- Passenger error logs
+
+**Çözüm Adımları:**
+1. **Passenger Error Logs Kontrol Et**
+   ```bash
+   # cPanel → Python App → Logs
+   # Hata mesajlarını incele
+   ```
+
+2. **Dependencies Kontrol Et**
+   ```bash
+   cd ~/collectorium
+   source ~/virtualenv/collectorium/bin/activate
+   pip install -r requirements.txt --force-reinstall
+   ```
+
+3. **Environment Variables Kontrol Et**
+   ```bash
+   # cPanel → Python App → Environment
+   DJANGO_SETTINGS_MODULE=collectorium.settings.hosting
+   SECRET_KEY=your-secret-key
+   DEBUG=False
+   ALLOWED_HOSTS=collectorium.com.tr,www.collectorium.com.tr
+   ```
+
+4. **Django Settings Test Et**
+   ```bash
+   python manage.py check
+   python manage.py check --deploy
+   ```
+
+5. **Application Restart**
+   ```bash
+   touch tmp/restart.txt
+   ```
+
+#### Sorun: Database connection failed
+**Belirtiler:**
+- 500 Internal Server Error
+- "database connection failed"
+- Database error logs
+
+**Çözüm Adımları:**
+1. **Database Connection Test**
+   ```bash
+   python scripts/test_db_connection.py
+   ```
+
+2. **Environment Variables Kontrol Et**
+   ```bash
+   # SQLite için (şu anki durum)
+   # PostgreSQL için
+   DATABASE_URL=postgresql://user:pass@host:port/dbname
+   # MySQL için
+   DATABASE_URL=mysql://user:pass@localhost:3306/dbname
+   ```
+
+3. **Database Service Kontrol Et**
+   ```bash
+   # PostgreSQL (external)
+   psql -h hostname -U username -d database_name -c "SELECT 1"
+   
+   # MySQL (cPanel)
+   mysql -h localhost -u username -p -e "SELECT 1"
+   ```
+
+4. **Firewall Kontrol Et**
+   ```bash
+   # External PostgreSQL için
+   # cPanel server IP'sinin database host'a erişimi
+   ```
+
+#### Sorun: Static files yüklenmiyor
+**Belirtiler:**
+- CSS/JS dosyaları 404
+- Görsel dosyalar yüklenmiyor
+- Admin panel stilleri bozuk
+
+**Çözüm Adımları:**
+1. **Static Files Collect**
+   ```bash
+   python manage.py collectstatic --noinput --clear
+   ```
+
+2. **Permissions Kontrol Et**
+   ```bash
+   chmod -R 755 ~/public/static
+   chmod -R 755 ~/public/media
+   ```
+
+3. **WhiteNoise Kontrol Et**
+   ```bash
+   # settings.py'de
+   STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+   ```
+
+4. **Static Files Test Et**
+   ```bash
+   curl -I https://yourdomain.com/static/admin/css/base.css
+   # 200 OK dönmeli
+   ```
+
+### 3. SSL/HTTPS SORUNLARI
+
+#### Sorun: SSL sertifikası oluşturulamıyor
+**Belirtiler:**
+- "AutoSSL is not currently active"
+- "SSL certificate is not valid"
+- HTTPS redirect çalışmıyor
+
+**Çözüm Adımları:**
+1. **DNS Propagation Bekle**
+   ```bash
+   # whatsmydns.net ile kontrol et
+   # Tüm DNS sunucularında yayıldığını doğrula
+   ```
+
+2. **AutoSSL Aktif Et**
+   ```bash
+   cPanel → SSL/TLS → "Run AutoSSL"
+   ```
+
+3. **SSL Certificate Kontrol Et**
+   ```bash
+   cPanel → SSL/TLS → "Manage SSL Sites"
+   # Certificate status: Active
+   ```
+
+4. **HTTPS Redirect Aktif Et**
+   ```bash
+   cPanel → SSL/TLS → "Force HTTPS Redirect"
+   ```
+
+#### Sorun: Mixed content warnings
+**Belirtiler:**
+- HTTPS sayfada HTTP resources
+- Browser security warnings
+- Mixed content errors
+
+**Çözüm Adımları:**
+1. **Settings Kontrol Et**
+   ```python
+   SECURE_SSL_REDIRECT = True
+   SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+   ```
+
+2. **Template Kontrol Et**
+   ```html
+   <!-- HTTP yerine HTTPS kullan -->
+   <link rel="stylesheet" href="https://cdn.example.com/style.css">
+   ```
+
+### 4. EMAIL SORUNLARI
+
+#### Sorun: Email gönderilmiyor
+**Belirtiler:**
+- Password reset emails gelmiyor
+- Contact form emails gönderilmiyor
+- SMTP connection errors
+
+**Çözüm Adımları:**
+1. **Email Configuration Test**
+   ```bash
+   python scripts/test_email.py your-email@example.com
+   ```
+
+2. **SMTP Settings Kontrol Et**
+   ```bash
+   EMAIL_HOST=smtp.gmail.com
+   EMAIL_PORT=587
+   EMAIL_USE_TLS=True
+   EMAIL_HOST_USER=your-email@gmail.com
+   EMAIL_HOST_PASSWORD=your-app-password
+   ```
+
+3. **Gmail App Password Kullan**
+   ```bash
+   # Gmail → Security → 2-Step Verification → App passwords
+   # Normal password değil, app password kullan
+   ```
+
+4. **cPanel Email Kullan**
+   ```bash
+   EMAIL_HOST=localhost
+   EMAIL_PORT=587
+   EMAIL_HOST_USER=your-cpanel-email@yourdomain.com
+   EMAIL_HOST_PASSWORD=your-cpanel-password
+   ```
+
+### 5. GOOGLE OAUTH SORUNLARI
+
+#### Sorun: Google OAuth çalışmıyor
+**Belirtiler:**
+- "Sign in with Google" butonu çalışmıyor
+- redirect_uri_mismatch hatası
+- OAuth callback errors
+
+**Çözüm Adımları:**
+1. **Google Cloud Console Kontrol Et**
+   ```bash
+   # Authorized redirect URIs
+   https://collectorium.com.tr/accounts/google/login/callback/
+   https://www.collectorium.com.tr/accounts/google/login/callback/
+   ```
+
+2. **Django Admin Kontrol Et**
+   ```bash
+   # /admin/ → Sites → collectorium.com.tr
+   # /admin/ → Social Applications → Google
+   # Client ID ve Secret doğru mu?
+   ```
+
+3. **Environment Variables Kontrol Et**
+   ```bash
+   GOOGLE_OAUTH_CLIENT_ID=your-client-id
+   GOOGLE_OAUTH_CLIENT_SECRET=your-client-secret
+   ```
+
+4. **OAuth Flow Test Et**
+   ```bash
+   # /accounts/login/ → "Sign in with Google"
+   # Complete authentication
+   # Verify successful login
+   ```
+
+### 6. PERFORMANCE SORUNLARI
+
+#### Sorun: Site yavaş yükleniyor
+**Belirtiler:**
+- Sayfa yükleme süresi > 3 saniye
+- Database query timeout
+- Memory usage yüksek
+
+**Çözüm Adımları:**
+1. **Database Query Optimization**
+   ```python
+   # select_related() ve prefetch_related() kullan
+   listings = Listing.objects.select_related('store', 'product').prefetch_related('images')
+   ```
+
+2. **Cache Configuration**
+   ```python
+   # Redis cache aktif et (eğer mevcut)
+   REDIS_URL=redis://localhost:6379/0
+   ```
+
+3. **Static Files Optimization**
+   ```bash
+   # WhiteNoise compression zaten aktif
+   # CDN kullanımı düşün
+   ```
+
+4. **Database Connection Pooling**
+   ```python
+   CONN_MAX_AGE = 600  # 10 minutes
+   ```
+
+#### Sorun: Memory usage yüksek
+**Belirtiler:**
+- Application slow
+- 503 errors
+- "out of memory" errors
+
+**Çözüm Adımları:**
+1. **Application Restart**
+   ```bash
+   touch tmp/restart.txt
+   ```
+
+2. **Log Level Kontrol Et**
+   ```python
+   # LOG_LEVEL=INFO (DEBUG değil)
+   ```
+
+3. **Memory Leaks Kontrol Et**
+   ```bash
+   # Custom code'da memory leak var mı?
+   # Database connection'lar kapatılıyor mu?
+   ```
+
+### 7. LOGGING VE MONİTORİNG SORUNLARI
+
+#### Sorun: Logs görünmüyor
+**Belirtiler:**
+- Error logs boş
+- Application logs yok
+- Debugging zor
+
+**Çözüm Adımları:**
+1. **Log Directory Kontrol Et**
+   ```bash
+   ls -la ~/logs/
+   # django.log ve error.log var mı?
+   ```
+
+2. **Log Permissions Kontrol Et**
+   ```bash
+   chmod 644 ~/logs/*.log
+   ```
+
+3. **Log Rotation Kontrol Et**
+   ```bash
+   # Log files çok büyük mü?
+   # Rotation çalışıyor mu?
+   ```
+
+4. **Real-time Log Monitoring**
+   ```bash
+   tail -f ~/logs/django.log
+   tail -f ~/logs/error.log
+   ```
+
+#### Sorun: Health check çalışmıyor
+**Belirtiler:**
+- /healthz/ endpoint 404
+- Monitoring systems çalışmıyor
+- Uptime monitoring failed
+
+**Çözüm Adımları:**
+1. **Health Check Test Et**
+   ```bash
+   curl -s https://yourdomain.com/healthz/ | jq
+   # {"status": "healthy"} dönmeli
+   ```
+
+2. **URL Configuration Kontrol Et**
+   ```python
+   # core/urls.py
+   path('healthz/', health_check, name='health_check'),
+   ```
+
+3. **Health Check View Kontrol Et**
+   ```python
+   # core/health.py
+   def health_check(request):
+       return JsonResponse({'status': 'healthy'})
+   ```
+
+### 8. BACKUP VE RECOVERY SORUNLARI
+
+#### Sorun: Backup çalışmıyor
+**Belirtiler:**
+- Cron job çalışmıyor
+- Backup files oluşmuyor
+- Database backup failed
+
+**Çözüm Adımları:**
+1. **Cron Job Kontrol Et**
+   ```bash
+   # cPanel → Cron Jobs
+   0 2 * * * cd ~/collectorium && source ~/virtualenv/collectorium/bin/activate && python scripts/backup_database.py
+   ```
+
+2. **Backup Script Test Et**
+   ```bash
+   python scripts/backup_database.py
+   # Manual test
+   ```
+
+3. **Backup Directory Kontrol Et**
+   ```bash
+   ls -la ~/backups/
+   # Backup files var mı?
+   ```
+
+4. **Permissions Kontrol Et**
+   ```bash
+   chmod +x scripts/backup_database.py
+   ```
+
+#### Sorun: Restore çalışmıyor
+**Belirtiler:**
+- Database restore failed
+- Data corruption
+- Restore process errors
+
+**Çözüm Adımları:**
+1. **Backup File Kontrol Et**
+   ```bash
+   # Backup file exists and readable?
+   ls -la ~/backups/collectorium_*.sql.gz
+   ```
+
+2. **Database Connection Kontrol Et**
+   ```bash
+   # Restore sırasında database accessible?
+   ```
+
+3. **Restore Process Test Et**
+   ```bash
+   # Manual restore test
+   gunzip ~/backups/collectorium_YYYYMMDD.sql.gz
+   psql -h hostname -U username -d database_name < ~/backups/collectorium_YYYYMMDD.sql
+   ```
+
+## 🚨 ACİL DURUM PROSEDÜRLERİ
+
+### 1. SİTE TAMAMEN DOWN
+**Hızlı Çözüm:**
+1. **Application Restart**
+   ```bash
+   touch tmp/restart.txt
+   ```
+
+2. **Health Check**
+   ```bash
+   curl -I https://yourdomain.com/healthz/
+   ```
+
+3. **Logs Kontrol Et**
+   ```bash
+   tail -50 ~/logs/error.log
+   ```
+
+4. **Rollback (gerekirse)**
+   ```bash
+   # DNS'i eski IP'ye geri çevir
+   # Render environment'a geri dön
+   ```
+
+### 2. DATABASE CORRUPTION
+**Hızlı Çözüm:**
+1. **Database Connection Test**
+   ```bash
+   python scripts/test_db_connection.py
+   ```
+
+2. **Latest Backup Restore**
+   ```bash
+   # En son backup'ı restore et
+   ```
+
+3. **Data Integrity Check**
+   ```bash
+   # Database integrity kontrol et
+   ```
+
+### 3. SECURITY BREACH
+**Hızlı Çözüm:**
+1. **Application Stop**
+   ```bash
+   # Emergency stop
+   ```
+
+2. **Security Audit**
+   ```bash
+   # Logs kontrol et
+   # Suspicious activity var mı?
+   ```
+
+3. **Password Reset**
+   ```bash
+   # Tüm admin passwords reset
+   ```
+
+## 📞 DESTEK KAYNAKLARI
+
+### 🔧 Teknik Destek
+- **cPanel Support**: Veridyen teknik destek
+- **DNS Provider**: Domain registrar
+- **Database Provider**: (eğer external)
+- **Development Team**: Proje ekibi
+
+### 📚 Dokümantasyon
+- **Migration Guide**: `docs/MIGRATION_TO_CPANEL.md`
+- **Operations Runbook**: `RUNBOOK_CPANEL.md`
+- **Deployment Checklist**: `migrate_logs/MIGRATION_COMPLETE.md`
+- **Environment Template**: `env.hosting.example`
+
+### 🧪 Test Scripts
+- **Database Test**: `scripts/test_db_connection.py`
+- **Email Test**: `scripts/test_email.py`
+- **Backup Script**: `scripts/backup_database.py`
+- **Smoke Test**: `scripts/smoke_test.py`
+
+### 📊 Monitoring Tools
+- **whatsmydns.net**: DNS propagation kontrol
+- **dnschecker.org**: DNS propagation kontrol
+- **UptimeRobot**: Uptime monitoring
+- **Sentry**: Error tracking
+
+## 🎯 SONUÇ
+
+**Collectorium projesi teknik olarak hazır durumda. Mevcut sorun sadece DNS propagation bekleniyor. Tüm çözüm adımları yukarıda detaylandırılmış.**
+
+**Öncelik sırası:**
+1. ⏰ DNS propagation bekle (1-12 saat)
+2. 🔒 SSL sertifikası oluştur
+3. 🌐 Site erişimini test et
+4. 📊 Monitoring kurulumu
+5. 💾 Backup stratejisi
+
+**Proje canlıya alınmaya hazır! 🚀**
+
+---
+**Rehber Tarihi**: 23 Ekim 2025
+**Durum**: ✅ HAZIR - DNS BEKLENİYOR
+**Sonraki Adım**: DNS propagation tamamlandığında SSL kurulumu
+**Tahmini Canlıya Alma**: 1-12 saat içinde
