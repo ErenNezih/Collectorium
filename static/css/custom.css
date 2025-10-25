@@ -78,7 +78,7 @@
 
 /* Hero Background with Image */
 .hero-background {
-    background-image: url('images/hero/background.png');
+    background-image: url('/static/images/hero/background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

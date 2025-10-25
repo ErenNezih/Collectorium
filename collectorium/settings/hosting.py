@@ -27,7 +27,7 @@ import os
 # =============================================================================
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # Hosts/domain names that are valid for this site
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
