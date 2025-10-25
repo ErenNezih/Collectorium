@@ -13,8 +13,7 @@ whitenoise==6.5.0
 # Image Processing
 Pillow==11.0.0
 
-# Database Support
-mysqlclient==2.2.4
+# Database Support (PyMySQL - Pure Python MySQL client)
 PyMySQL>=1.1.0
 
 # Environment & Configuration
