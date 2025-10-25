@@ -1,21 +1,43 @@
 """
 Passenger WSGI Entry Point for Collectorium
 cPanel/CloudLinux + Passenger WSGI Configuration
+Production-Ready Version with .env Support
 """
 
 import os
 import sys
+from dotenv import load_dotenv
+
+# =============================================================================
+# ENVIRONMENT CONFIGURATION - .env DOSYASI DESTEĞİ
+# =============================================================================
+
+# Proje dizininin yolunu belirle
+project_directory = os.path.dirname(os.path.abspath(__file__))
+
+# .env dosyasını bul ve içindeki değişkenleri yükle
+env_path = os.path.join(project_directory, '.env')
+if os.path.exists(env_path):
+    load_dotenv(env_path)
+    # Debug: .env dosyasının yüklendiğini logla
+    with open('/home/collecto/collectorium/env_loaded.log', 'w') as f:
+        f.write(f".env dosyasi yuklendi: {env_path}\n")
+        f.write(f"DB_ENGINE: {os.environ.get('DB_ENGINE', 'NOT_SET')}\n")
+        f.write(f"DB_NAME: {os.environ.get('DB_NAME', 'NOT_SET')}\n")
+        f.write(f"SECRET_KEY: {os.environ.get('SECRET_KEY', 'NOT_SET')[:10]}...\n")
+else:
+    # .env dosyası yoksa, cPanel environment variables'ları kullan
+    with open('/home/collecto/collectorium/env_loaded.log', 'w') as f:
+        f.write(f".env dosyasi bulunamadi: {env_path}\n")
+        f.write("cPanel environment variables kullaniliyor.\n")
 
 # =============================================================================
 # PATH CONFIGURATION
 # =============================================================================
 
-# Get the absolute path to the project directory
-CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-
 # Add project directory to Python path
-if CURRENT_DIR not in sys.path:
-    sys.path.insert(0, CURRENT_DIR)
+if project_directory not in sys.path:
+    sys.path.insert(0, project_directory)
 
 # =============================================================================
 # MYSQL BOOTSTRAP (PyMySQL fallback)
@@ -28,17 +50,11 @@ except ImportError:
     pass  # Bootstrap not critical, will use mysqlclient if available
 
 # =============================================================================
-# ENVIRONMENT CONFIGURATION
+# DJANGO SETTINGS MODULE
 # =============================================================================
 
-# Set Django settings module
-# This should match your hosting settings file
+# Set Django settings module (from .env or default)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'collectorium.settings.hosting')
-
-# Optional: Load environment variables from .env file
-# Uncomment if you're using python-dotenv
-# from dotenv import load_dotenv
-# load_dotenv(os.path.join(CURRENT_DIR, '.env'))
 
 # =============================================================================
 # WSGI APPLICATION
@@ -49,7 +65,6 @@ try:
     application = get_wsgi_application()
 except Exception as e:
     # If Django fails to load, create a simple error application
-    # This helps with debugging deployment issues
     import traceback
     def application(environ, start_response):
         status = '500 Internal Server Error'
@@ -61,18 +76,4 @@ except Exception as e:
         ]
         start_response(status, response_headers)
         return [output]
-
-# =============================================================================
-# DEBUGGING (Development/Staging Only)
-# =============================================================================
-
-# Uncomment for debugging path issues in cPanel
-# print("Python version:", sys.version, file=sys.stderr)
-# print("Python path:", sys.path, file=sys.stderr)
-# print("Current directory:", CURRENT_DIR, file=sys.stderr)
-# print("DJANGO_SETTINGS_MODULE:", os.environ.get('DJANGO_SETTINGS_MODULE'), file=sys.stderr)
-# print("DB_ENGINE:", os.environ.get('DB_ENGINE'), file=sys.stderr)
-# print("DB_NAME:", os.environ.get('DB_NAME'), file=sys.stderr)
-# print("DB_USER:", os.environ.get('DB_USER'), file=sys.stderr)
-# print("DB_HOST:", os.environ.get('DB_HOST'), file=sys.stderr)
 
