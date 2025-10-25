@@ -154,8 +154,7 @@ elif all([
         }
 
 else:
-    # DIRECT DATABASE CONFIGURATION - 503 ERROR ÇÖZÜMÜ
-    # Hardcoded MySQL database configuration for cPanel
+    # FALLBACK DATABASE CONFIGURATION - MySQL for cPanel
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -172,16 +171,6 @@ else:
             }
         }
     }
-    
-    # Debug: Direct database configuration'ı logla
-    with open('/home/collecto/collectorium/direct_db_config.log', 'w') as f:
-        f.write("=== DIRECT DATABASE CONFIGURATION ===\n")
-        f.write(f"ENGINE: {DATABASES['default']['ENGINE']}\n")
-        f.write(f"NAME: {DATABASES['default']['NAME']}\n")
-        f.write(f"USER: {DATABASES['default']['USER']}\n")
-        f.write(f"HOST: {DATABASES['default']['HOST']}\n")
-        f.write(f"PORT: {DATABASES['default']['PORT']}\n")
-        f.write("Direct database configuration kullaniliyor.\n")
 
 # =============================================================================
 # STATIC FILES - WhiteNoise
