@@ -229,6 +229,9 @@ class DeliveryAndReturnsView(TemplateView):
 class DistanceSalesContractView(TemplateView):
     template_name = "pages/distance_sales_contract.html"
 
+class CookiePolicyView(TemplateView):
+    template_name = "pages/cookie_policy.html"
+
 # --- Hata Handler View'ları ---
 
 def handler404(request, exception):

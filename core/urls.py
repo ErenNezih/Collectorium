@@ -1,6 +1,6 @@
 ﻿from django.urls import path
 from . import views, health
-from .views import AboutView, PrivacyPolicyView, TermsOfServiceView, ContactView, SellerGuideView, TrustCenterView, DeliveryAndReturnsView, DistanceSalesContractView
+from .views import AboutView, PrivacyPolicyView, TermsOfServiceView, ContactView, SellerGuideView, TrustCenterView, DeliveryAndReturnsView, DistanceSalesContractView, CookiePolicyView
 
 urlpatterns = [
     path("", views.home, name="home"),
@@ -15,7 +15,9 @@ urlpatterns = [
     # Statik Sayfalar
     path('hakkimizda/', AboutView.as_view(), name='about'),
     path('gizlilik-politikasi/', PrivacyPolicyView.as_view(), name='privacy_policy'),
+    path('cerez-politikasi/', CookiePolicyView.as_view(), name='cookie_policy'),
     path('kullanim-kosullari/', TermsOfServiceView.as_view(), name='terms_of_service'),
+    path('kullanici-sozlesmesi/', TermsOfServiceView.as_view(), name='user_agreement'),  # Kullanıcı Sözleşmesi (Kullanım Koşulları ile aynı)
     path('iletisim/', ContactView.as_view(), name='contact'),
     path('satici-rehberi/', SellerGuideView.as_view(), name='seller_guide'),
     # Yeni Yasal Sayfalar
