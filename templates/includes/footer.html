@@ -92,12 +92,10 @@
         <p class="text-sm font-semibold text-gray-300 text-center">Güvenli Ödeme Yöntemleri</p>
         <div class="flex items-center justify-center">
           <!-- Ödeme Logoları Bandı -->
-          <!-- Önce URL encoded @ karakteri ile dene, sonra normal path -->
-          <img src="/static/images/hero/logo_band_colored%401X.png" 
+          <img src="{% static 'images/hero/logo_band_colored.svg' %}" 
                alt="Ödeme Yöntemleri: iyzico, Mastercard, Visa, Troy" 
                class="h-16 object-contain opacity-90 hover:opacity-100 transition-opacity duration-200"
-               style="max-width: 400px; width: 100%;"
-               onerror="this.onerror=null; this.src='{% static 'images/hero/logo_band_colored@1X.png' %}';">
+               style="max-width: 400px; width: 100%;">
         </div>
       </div>
     </div>
