@@ -8,7 +8,73 @@
         <div class="max-w-3xl mx-auto">
             <h1 class="text-4xl font-bold text-brand-navy mb-6 border-b pb-4">Mesafeli Satış Sözleşmesi</h1>
             <div class="prose prose-lg max-w-none text-brand-mute">
-                <p>Bu sayfa yapım aşamasındadır.</p>
+                <p class="text-sm text-brand-mute mb-6">
+                    <strong>Son Güncelleme:</strong> {{ "now"|date:"d F Y" }}
+                </p>
+                
+                <p>
+                    Bu Mesafeli Satış Sözleşmesi ("Sözleşme"), 6502 sayılı Tüketicinin Korunması Hakkında Kanun ve ilgili mevzuat hükümleri uyarınca, Collectorium platformu üzerinden gerçekleştirilen mesafeli satış işlemlerine ilişkindir.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">1. TARAFLAR</h2>
+                <p>
+                    <strong>SATICI:</strong> Collectorium platformu üzerinde hesap açarak ürün satışında bulunan gerçek veya tüzel kişi satıcılar.<br>
+                    <strong>ALICI:</strong> Collectorium platformu üzerinden ürün satın alan gerçek veya tüzel kişi tüketiciler.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">2. KONU</h2>
+                <p>
+                    Bu Sözleşme'nin konusu, Alıcının platform üzerinden satın aldığı koleksiyon ürünlerinin satışı ve teslimatına ilişkin hak ve yükümlülüklerin belirlenmesidir.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">3. SAKİNLEŞME HAKKI</h2>
+                <p>
+                    Tüketiciler, 6502 sayılı Kanun'un 15. maddesi gereğince, sipariş verdikleri ürünü teslim aldıkları tarihten itibaren 14 (on dört) gün içinde, herhangi bir gerekçe göstermeksizin ve cezai şart ödemeksizin, ürünü iade ederek satış sözleşmesinden cayma hakkına sahiptir.
+                </p>
+                <p>
+                    Cayma hakkının kullanılabilmesi için ürünün, ambalajının ve varsa aksesuarlarının hasar görmemiş, kullanılmamış ve orijinal durumunda olması gerekmektedir.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">4. İADE KOŞULLARI</h2>
+                <p>
+                    İade işlemi için aşağıdaki koşullar geçerlidir:
+                </p>
+                <ul class="list-disc list-inside mt-4 space-y-2">
+                    <li>İade talebi, teslimat tarihinden itibaren 14 gün içinde iletilmelidir</li>
+                    <li>Ürün, orijinal ambalajında, hasarsız ve kullanılmamış durumda olmalıdır</li>
+                    <li>İade kargo ücreti, ürün hatası veya yanlış ürün gönderimi durumunda satıcıya, diğer durumlarda alıcıya aittir</li>
+                    <li>İade edilen ürünler kontrol edildikten sonra ödeme iade edilir</li>
+                </ul>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">5. TESLİMAT</h2>
+                <p>
+                    Ürünler, sipariş sırasında belirtilen adrese, seçilen kargo firması aracılığıyla teslim edilir. Teslimat süreleri, seçilen kargo yöntemine ve teslimat adresine göre değişiklik gösterebilir. Satıcı, belirlenen süre içinde ürünü teslim etmekle yükümlüdür.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">6. ÖDEME</h2>
+                <p>
+                    Platform üzerinden güvenli ödeme sistemleri kullanılarak ödeme yapılır. Ödeme onaylandıktan sonra sipariş işleme alınır. Ödeme işlemleri, belirtilen komisyon oranları düşüldükten sonra satıcıya aktarılır.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">7. AYIPLI MAL</h2>
+                <p>
+                    Teslim edilen ürün, sipariş sırasında belirtilen özelliklere sahip değilse, eksikse, kusurluysa veya ayıplıysa, tüketici satıcıdan ücretsiz olarak tamir, bedelsiz değiştirme veya ödemede indirim talep edebilir. Ayıplı mal nedeniyle kullanılmayan veya kullanılamayan süre için garanti süresi uzatılır.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">8. SORUMLULUK</h2>
+                <p>
+                    Satıcı, satılan ürünün kalitesinden, durumundan ve yasal uygunluğundan sorumludur. Collectorium platform olarak, kullanıcılar arasındaki işlemlerde aracılık yapar ve satılan ürünlerin kalitesinden veya durumundan sorumlu değildir.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">9. UYUŞMAZLIKLARIN ÇÖZÜMÜ</h2>
+                <p>
+                    Bu Sözleşme'den kaynaklanan uyuşmazlıkların çözümünde öncelikle Türkiye Cumhuriyeti Tüketici Hakem Heyetleri ve Tüketici Mahkemeleri yetkilidir. Taraflar, ayrıca Tüketici Hakem Heyetleri ve Tüketici Mahkemeleri önünde anlaşmazlıkların çözümünde bulunmayı kabul eder.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">10. İLETİŞİM</h2>
+                <p>
+                    Mesafeli satış sözleşmesi ile ilgili sorularınız için lütfen <a href="{% url 'contact' %}" class="text-brand-red hover:underline">İletişim</a> sayfamızı ziyaret edin veya platform üzerinden satıcı ile iletişime geçin.
+                </p>
             </div>
         </div>
     </div>

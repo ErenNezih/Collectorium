@@ -1,27 +1,81 @@
 {% extends 'base.html' %}
 
-{% block title %}Kullanım Koşulları - Collectorium{% endblock %}
+{% block title %}Kullanıcı Sözleşmesi - Collectorium{% endblock %}
 
 {% block content %}
 <div class="bg-white">
     <div class="container mx-auto px-4 py-16">
         <div class="max-w-3xl mx-auto">
-            <h1 class="text-4xl font-bold text-brand-navy mb-6 border-b pb-4">Kullanım Koşulları</h1>
+            <h1 class="text-4xl font-bold text-brand-navy mb-6 border-b pb-4">Kullanıcı Sözleşmesi</h1>
             <div class="prose prose-lg max-w-none text-brand-mute">
-                <p>
-                    Collectorium platformunu kullanarak aşağıdaki koşulları kabul etmiş sayılırsınız.
+                <p class="text-sm text-brand-mute mb-6">
+                    <strong>Son Güncelleme:</strong> {{ "now"|date:"d F Y" }}
                 </p>
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">Genel Koşullar</h2>
                 <p>
-                    Platformumuz, koleksiyon ürünlerinin alım-satımını kolaylaştıran bir aracı hizmettir. Kullanıcılar, yayınladıkları içeriklerden ve gerçekleştirdikleri işlemlerden sorumludur.
+                    Bu Kullanıcı Sözleşmesi ("Sözleşme"), Collectorium platformunu ("Platform", "Site" veya "Servis") kullanarak sizinle Collectorium arasındaki yasal anlaşmayı oluşturur. Platformu kullanarak, bu Sözleşme'nin tüm şartlarını kabul etmiş sayılırsınız. Eğer bu şartları kabul etmiyorsanız, lütfen Platformu kullanmayın.
                 </p>
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">Kullanıcı Sorumlulukları</h2>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">1. Genel Koşullar</h2>
                 <p>
-                    Kullanıcılar, doğru ve güncel bilgiler sağlamakla, yanıltıcı veya yasadışı içerik paylaşmamakla yükümlüdür. İhlal durumlarında hesaplar askıya alınabilir veya kapatılabilir.
+                    Collectorium, Türkiye'de faaliyet gösteren, koleksiyon ürünlerinin alım-satımını kolaylaştıran bir çevrimiçi pazar yeridir. Platform, alıcı ve satıcılar arasında aracılık yapar. Collectorium, kullanıcılar arasındaki işlemlerde taraf değildir ve satılan ürünlerin kalitesi, durumu veya yasal uygunluğu konusunda sorumluluk kabul etmez.
                 </p>
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">Fikri Mülkiyet</h2>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">2. Hesap Oluşturma ve Kullanım</h2>
                 <p>
-                    Platformdaki tüm tasarım, logo ve içerik Collectorium'a aittir. İzinsiz kullanım yasaktır.
+                    Platformu kullanmak için hesap oluşturmanız gerekmektedir. Hesap oluştururken sağladığınız bilgilerin doğru, güncel ve eksiksiz olması gerekmektedir. Hesabınızın güvenliğinden siz sorumlusunuz. Hesap bilgilerinizin başkaları tarafından kullanılmasından Collectorium sorumlu değildir.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">3. Kullanıcı Yükümlülükleri</h2>
+                <p>
+                    Platformu kullanırken aşağıdaki kurallara uymanız gerekmektedir:
+                </p>
+                <ul class="list-disc list-inside mt-4 space-y-2">
+                    <li>Yanıltıcı, yanlış veya yanlış yönlendirici bilgi paylaşmayacaksınız</li>
+                    <li>Yasadışı, zararlı veya başkalarının haklarını ihlal eden içerik yayınlamayacaksınız</li>
+                    <li>Telif hakkı veya fikri mülkiyet haklarını ihlal etmeyeceksiniz</li>
+                    <li>Diğer kullanıcıları dolandırma, aldatma veya manipüle etmeye çalışmayacaksınız</li>
+                    <li>Platformun güvenliğini tehdit edecek faaliyetlerde bulunmayacaksınız</li>
+                    <li>Spam, istenmeyen mesaj veya reklam göndermeyeceksiniz</li>
+                </ul>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">4. İlan Yayınlama ve Satış</h2>
+                <p>
+                    Satıcılar, ürünlerini Platform üzerinde yayınlayarak, ürün bilgilerinin doğru, eksiksiz ve güncel olduğunu beyan eder. Ürün görselleri ve açıklamaları, satılan ürünü gerçekçi bir şekilde yansıtmalıdır. Satıcılar, platform üzerinden yapılan satışlardan kaynaklanan tüm sorumlulukları kabul eder.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">5. Ödeme ve Komisyon</h2>
+                <p>
+                    Platform üzerinden gerçekleştirilen işlemlerde, belirlenen komisyon oranları geçerlidir. Komisyonlar, satış fiyatı üzerinden hesaplanır ve platform tarafından kesilir. Ödeme işlemleri güvenli ödeme sistemleri üzerinden gerçekleştirilir.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">6. Hesap Askıya Alma ve Fesih</h2>
+                <p>
+                    Bu Sözleşme'nin herhangi bir maddesinin ihlali durumunda, Collectorium hesabınızı askıya alma veya sonlandırma hakkını saklı tutar. Bu durumda size önceden bildirimde bulunulur veya acil durumlarda bildirim yapılmaksızın hesap kapatılabilir.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">7. Fikri Mülkiyet Hakları</h2>
+                <p>
+                    Platformun tüm içeriği, tasarımı, logosu ve yazılımı Collectorium'a aittir ve Türkiye Cumhuriyeti yasaları ve uluslararası fikri mülkiyet yasaları ile korunmaktadır. Platform içeriğinin izinsiz kullanımı, kopyalanması veya dağıtılması yasaktır.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">8. Sorumluluk Sınırlaması</h2>
+                <p>
+                    Collectorium, kullanıcılar arasındaki işlemlerden, satılan ürünlerin kalitesinden veya durumundan sorumlu değildir. Platform, bir aracı hizmet sağlayıcı olarak, kullanıcı içeriğini kontrol etmekle yükümlü değildir. Ancak, yasadışı içerik tespit edildiğinde müdahale etme hakkını saklı tutar.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">9. Değişiklikler</h2>
+                <p>
+                    Collectorium, bu Sözleşme'yi istediği zaman değiştirme hakkını saklı tutar. Değişiklikler Platform üzerinde yayınlandığında yürürlüğe girer. Önemli değişiklikler için kullanıcılara e-posta ile bildirim yapılabilir.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">10. Uygulanacak Hukuk ve Yetki</h2>
+                <p>
+                    Bu Sözleşme, Türkiye Cumhuriyeti yasalarına tabidir. Bu Sözleşme'den kaynaklanan uyuşmazlıkların çözümünde İstanbul Mahkemeleri ve İcra Daireleri yetkilidir.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">11. İletişim</h2>
+                <p>
+                    Bu Sözleşme hakkında sorularınız için lütfen <a href="{% url 'contact' %}" class="text-brand-red hover:underline">İletişim</a> sayfamızı ziyaret edin.
                 </p>
             </div>
         </div>

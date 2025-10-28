@@ -11,13 +11,88 @@
                 <p>
                     Bu gizlilik politikası, Collectorium platformu ("Site") tarafından toplanan, kullanılan ve paylaşılan kişisel bilgilerinizin nasıl yönetildiğini açıklamaktadır. Siteyi kullanarak bu politikayı kabul etmiş sayılırsınız.
                 </p>
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">Topladığımız Bilgiler</h2>
-                <p>
-                    Kayıt sırasında verdiğiniz isim, e-posta adresi gibi kişisel bilgileriniz; ilan oluştururken veya sipariş verirken sağladığınız adres ve iletişim bilgileri sistemimizde güvenli bir şekilde saklanmaktadır.
+                <p class="text-sm text-brand-mute mb-6">
+                    <strong>Son Güncelleme:</strong> {{ "now"|date:"d F Y" }}
                 </p>
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">Bilgilerinizin Kullanımı</h2>
                 <p>
-                    Toplanan bilgiler, sipariş süreçlerini yönetmek, kullanıcı deneyimini iyileştirmek, destek sağlamak ve yasal yükümlülükleri yerine getirmek amacıyla kullanılır. Bilgileriniz, onayınız olmadan üçüncü partilerle pazarlama amacıyla paylaşılmaz.
+                    Bu Gizlilik Politikası, Collectorium platformunun ("Platform", "Site", "Servis", "Biz") kişisel verilerinizi nasıl topladığını, kullandığını, koruduğunu ve paylaştığını açıklamaktadır. 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") uyarınca hazırlanmıştır.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">1. TOPLANAN KİŞİSEL VERİLER</h2>
+                <p>
+                    Platformu kullanırken aşağıdaki kişisel verileriniz toplanabilir:
+                </p>
+                <ul class="list-disc list-inside mt-4 space-y-2">
+                    <li><strong>Kimlik Bilgileri:</strong> Ad, soyad, e-posta adresi, telefon numarası</li>
+                    <li><strong>Adres Bilgileri:</strong> Teslimat adresi, fatura adresi</li>
+                    <li><strong>Hesap Bilgileri:</strong> Kullanıcı adı, şifre (şifrelerleştirilmiş), profil bilgileri</li>
+                    <li><strong>Ödeme Bilgileri:</strong> Ödeme yöntemi bilgileri (doğrudan saklanmaz, güvenli ödeme sistemleri tarafından işlenir)</li>
+                    <li><strong>İşlem Bilgileri:</strong> Satın alma geçmişi, ilanlar, mesajlaşma kayıtları</li>
+                    <li><strong>Teknik Bilgiler:</strong> IP adresi, tarayıcı bilgileri, cihaz bilgileri, çerezler</li>
+                </ul>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">2. KİŞİSEL VERİLERİNİZİN KULLANIM AMAÇLARI</h2>
+                <p>
+                    Toplanan kişisel verileriniz aşağıdaki amaçlarla kullanılmaktadır:
+                </p>
+                <ul class="list-disc list-inside mt-4 space-y-2">
+                    <li>Sipariş ve ödeme işlemlerinin yönetilmesi</li>
+                    <li>Hesap yönetimi ve müşteri desteği sağlanması</li>
+                    <li>Platform hizmetlerinin iyileştirilmesi ve kişiselleştirilmesi</li>
+                    <li>Yasal yükümlülüklerin yerine getirilmesi</li>
+                    <li>Güvenlik önlemlerinin alınması ve dolandırıcılığın önlenmesi</li>
+                    <li>Pazarlama faaliyetleri (onayınız dahilinde)</li>
+                </ul>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">3. KİŞİSEL VERİLERİNİZİN PAYLAŞILMASI</h2>
+                <p>
+                    Kişisel verileriniz, yasal zorunluluklar ve aşağıdaki durumlar haricinde üçüncü kişilerle paylaşılmaz:
+                </p>
+                <ul class="list-disc list-inside mt-4 space-y-2">
+                    <li><strong>Hizmet Sağlayıcılar:</strong> Ödeme işlemcisi, kargo firmaları, bulut sunucu hizmetleri gibi hizmet sağlayıcılar</li>
+                    <li><strong>Yasal Zorunluluklar:</strong> Yasa, mahkeme kararı veya resmi makam talebi durumunda</li>
+                    <li><strong>İş Ortakları:</strong> Güvenlik, analiz ve pazarlama hizmetleri sağlayan iş ortakları (yalnızca gerekli veriler, gizlilik sözleşmeleri ile)</li>
+                </ul>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">4. VERİ GÜVENLİĞİ</h2>
+                <p>
+                    Kişisel verilerinizin güvenliği için teknik ve idari güvenlik önlemleri alınmaktadır. SSL şifreleme, güvenli ödeme sistemleri ve düzenli güvenlik güncellemeleri kullanılmaktadır. Ancak, hiçbir veri aktarımı %100 güvenli olmadığından, mutlak güvenlik garanti edilemez.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">5. ÇEREZLER (COOKIES)</h2>
+                <p>
+                    Platform, hizmet kalitesini artırmak ve kullanıcı deneyimini iyileştirmek amacıyla çerezler kullanmaktadır. Detaylı bilgi için lütfen <a href="{% url 'cookie_policy' %}" class="text-brand-red hover:underline">Çerez Politikası</a> sayfamızı ziyaret edin.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">6. KVKK HAKLARINIZ</h2>
+                <p>
+                    6698 sayılı Kanun gereğince, aşağıdaki haklara sahipsiniz:
+                </p>
+                <ul class="list-disc list-inside mt-4 space-y-2">
+                    <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
+                    <li>Kişisel verileriniz işlenmişse buna ilişkin bilgi talep etme</li>
+                    <li>Kişisel verilerinizin işlenme amacını öğrenme</li>
+                    <li>Kişisel verilerinizin yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme</li>
+                    <li>Kişisel verilerinizin eksik veya yanlış işlenmiş olması halinde bunların düzeltilmesini isteme</li>
+                    <li>Kişisel verilerinizin silinmesini veya yok edilmesini isteme</li>
+                    <li>Düzeltme, silme ve yok etme işlemlerinin aktarıldığı üçüncü kişilere bildirilmesini isteme</li>
+                    <li>İşlenen verilerin münhasıran otomatik sistemler ile analiz edilmesi suretiyle kişinin kendisi aleyhine bir sonucun ortaya çıkmasına itiraz etme</li>
+                    <li>Kişisel verilerin kanuna aykırı olarak işlenmesi sebebiyle zarara uğraması halinde zararın giderilmesini talep etme</li>
+                </ul>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">7. VERİ SAKLAMA SÜRESİ</h2>
+                <p>
+                    Kişisel verileriniz, toplama amaçları ve yasal saklama süreleri gereğince gerekli süre boyunca saklanır. Hesabınızı silmeniz durumunda, yasal saklama süreleri saklı kalmak kaydıyla verileriniz silinir.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">8. POLİTİKA DEĞİŞİKLİKLERİ</h2>
+                <p>
+                    Bu Gizlilik Politikası zaman zaman güncellenebilir. Önemli değişiklikler için kullanıcılara e-posta ile bildirim yapılabilir. Güncel politika metni Platform üzerinde yayınlandığı tarihten itibaren geçerlidir.
+                </p>
+                
+                <h2 class="text-2xl font-bold text-brand-navy mt-8">9. İLETİŞİM</h2>
+                <p>
+                    Kişisel verilerinizle ilgili sorularınız, talepleriniz veya şikayetleriniz için lütfen <a href="{% url 'contact' %}" class="text-brand-red hover:underline">İletişim</a> sayfamızı ziyaret edin. KVKK kapsamındaki başvurularınızı <strong>Veri Sorumlusu</strong> olarak Collectorium'a iletebilirsiniz.
                 </p>
             </div>
         </div>
