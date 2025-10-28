@@ -1,3 +1,4 @@
+{% load static %}
 <footer class="bg-brand-navy border-t border-brand-red/20" aria-labelledby="footer-heading">
   <h2 id="footer-heading" class="sr-only">Footer</h2>
   <div class="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
@@ -76,6 +77,9 @@
         <ul role="list" class="mt-6 space-y-4">
           <li><a href="{% url 'contact' %}" class="text-sm leading-6 text-gray-300 hover:text-brand-red transition-colors duration-200">Yardım Merkezi</a></li>
           <li><a href="{% url 'contact' %}" class="text-sm leading-6 text-gray-300 hover:text-brand-red transition-colors duration-200">İletişim</a></li>
+          <li><a href="{% url 'about' %}" class="text-sm leading-6 text-gray-300 hover:text-brand-red transition-colors duration-200">Hakkımızda</a></li>
+          <li><a href="{% url 'delivery_and_returns' %}" class="text-sm leading-6 text-gray-300 hover:text-brand-red transition-colors duration-200">Teslimat ve İade Şartları</a></li>
+          <li><a href="{% url 'distance_sales_contract' %}" class="text-sm leading-6 text-gray-300 hover:text-brand-red transition-colors duration-200">Mesafeli Satış Sözleşmesi</a></li>
           <li><a href="{% url 'terms_of_service' %}" class="text-sm leading-6 text-gray-300 hover:text-brand-red transition-colors duration-200">Kullanıcı Sözleşmesi</a></li>
           <li><a href="{% url 'privacy_policy' %}" class="text-sm leading-6 text-gray-300 hover:text-brand-red transition-colors duration-200">Gizlilik Politikası</a></li>
           <li><a href="{% url 'privacy_policy' %}" class="text-sm leading-6 text-gray-300 hover:text-brand-red transition-colors duration-200">Çerez Politikası</a></li>
@@ -83,8 +87,28 @@
       </div>
     </div>
 
+    <!-- Ödeme ve Güvenlik Logoları -->
+    <div class="mt-16 border-t border-brand-red/20 pt-8">
+      <div class="flex flex-col items-center justify-center space-y-4">
+        <p class="text-sm text-gray-300 text-center">Güvenli Ödeme Yöntemleri</p>
+        <div class="flex flex-wrap items-center justify-center gap-6">
+          <!-- Ödeme Logoları Bandı -->
+          <img src="{% static 'images/hero/logo_band_colored@1X.png' %}" 
+               alt="Ödeme Yöntemleri: iyzico, Mastercard, Visa, Troy" 
+               class="h-12 object-contain opacity-90 hover:opacity-100 transition-opacity duration-200">
+          <!-- SSL Güvenlik Sertifikası -->
+          <div class="flex items-center space-x-2 px-4 py-2 bg-green-900/30 rounded-lg border border-green-500/30">
+            <svg class="h-6 w-6 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-sm text-green-300 font-medium">Güvenli Ödeme</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Alt Footer -->
-    <div class="mt-16 border-t border-brand-red/20 pt-8 sm:mt-20 lg:mt-24">
+    <div class="mt-8 border-t border-brand-red/20 pt-8 sm:mt-12 lg:mt-16">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <p class="text-xs leading-5 text-gray-400">
           &copy; 2025 Collectorium. Tüm hakları saklıdır.

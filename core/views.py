@@ -223,6 +223,12 @@ class TrustCenterView(TemplateView):
             return HttpResponseForbidden()
         return super().dispatch(request, *args, **kwargs)
 
+class DeliveryAndReturnsView(TemplateView):
+    template_name = "pages/delivery_and_returns.html"
+
+class DistanceSalesContractView(TemplateView):
+    template_name = "pages/distance_sales_contract.html"
+
 # --- Hata Handler View'ları ---
 
 def handler404(request, exception):
