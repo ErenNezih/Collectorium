@@ -11,31 +11,30 @@ def create_categories(apps, schema_editor):
     Category = apps.get_model('catalog', 'Category')
     db_alias = schema_editor.connection.alias
     
-    # Fix collation for slug field if needed (MariaDB/MySQL specific)
-    # This ensures slug comparisons work regardless of table collation
+    # CRITICAL: Fix collation for name and slug fields (MariaDB/MySQL specific)
+    # Both fields need utf8mb4 to support Turkish characters (ı, ğ, ü, ş, ç, ö)
     with schema_editor.connection.cursor() as cursor:
         try:
-            # Check current collation
+            # Fix name column collation to utf8mb4 (required for Turkish characters)
             cursor.execute("""
-                SELECT COLLATION_NAME 
-                FROM information_schema.COLUMNS 
-                WHERE TABLE_SCHEMA = DATABASE() 
-                AND TABLE_NAME = 'catalog_category' 
-                AND COLUMN_NAME = 'slug'
+                ALTER TABLE catalog_category 
+                MODIFY COLUMN name VARCHAR(100) 
+                CHARACTER SET utf8mb4 
+                COLLATE utf8mb4_general_ci
             """)
-            result = cursor.fetchone()
-            if result and result[0] and 'latin1' in result[0].lower():
-                # Fix slug column collation to utf8mb4
-                cursor.execute("""
-                    ALTER TABLE catalog_category 
-                    MODIFY COLUMN slug VARCHAR(100) 
-                    CHARACTER SET utf8mb4 
-                    COLLATE utf8mb4_general_ci
-                """)
-        except Exception:
-            # If we can't fix collation, continue anyway
-            # The raw SQL approach below will handle it
-            pass
+            
+            # Fix slug column collation to utf8mb4
+            cursor.execute("""
+                ALTER TABLE catalog_category 
+                MODIFY COLUMN slug VARCHAR(100) 
+                CHARACTER SET utf8mb4 
+                COLLATE utf8mb4_general_ci
+            """)
+        except Exception as e:
+            # If we can't fix collation, log but continue
+            # The raw SQL approach below will handle queries
+            import sys
+            print(f"Warning: Could not fix collation: {e}", file=sys.stderr)
     
     # Main categories data structure
     categories_data = {
