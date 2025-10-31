@@ -27,7 +27,8 @@ import os
 # =============================================================================
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG can be controlled via environment variable for flexibility during SSL setup
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
 # Hosts/domain names that are valid for this site
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
@@ -41,21 +42,26 @@ else:
     CSRF_TRUSTED_ORIGINS = ['https://collectorium.com.tr', 'https://www.collectorium.com.tr']
 
 # SSL/HTTPS Settings
+# SSL aktif olduktan sonra environment variable ile kontrol edilir
 SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT', 'False').lower() == 'true'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# HSTS (HTTP Strict Transport Security)
-SECURE_HSTS_SECONDS = int(os.environ.get('SECURE_HSTS_SECONDS', 31536000))  # 1 year
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
+# HSTS (HTTP Strict Transport Security) - Only active when SSL is enabled
+# HSTS forces browsers to use HTTPS for future requests
+SECURE_HSTS_SECONDS = int(os.environ.get('SECURE_HSTS_SECONDS', 31536000)) if SECURE_SSL_REDIRECT else 0  # 1 year when SSL active, 0 when inactive
+SECURE_HSTS_INCLUDE_SUBDOMAINS = SECURE_SSL_REDIRECT  # Only include subdomains when SSL is active
+SECURE_HSTS_PRELOAD = SECURE_SSL_REDIRECT  # Only preload when SSL is active
 
 # Cookies
-SESSION_COOKIE_SECURE = False  # Set to True when SSL is ready
+# SSL aktif olduktan sonra SECURE_SSL_REDIRECT=True yapın ve bu değerleri True yapın
+# NOT: SSL aktif olmadan True yaparsanız site çalışmaz!
+SSL_ACTIVE = os.environ.get('SECURE_SSL_REDIRECT', 'False').lower() == 'true'
+SESSION_COOKIE_SECURE = SSL_ACTIVE  # SSL aktifken True, değilse False
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'Lax'
 SESSION_COOKIE_NAME = 'collectorium_session'
 
-CSRF_COOKIE_SECURE = False  # Set to True when SSL is ready
+CSRF_COOKIE_SECURE = SSL_ACTIVE  # SSL aktifken True, değilse False
 CSRF_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SAMESITE = 'Lax'
 CSRF_COOKIE_NAME = 'collectorium_csrf'
