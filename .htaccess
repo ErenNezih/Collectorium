@@ -3,13 +3,6 @@ RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Static files direkt servis (WhiteNoise fallback for hero images)
-Alias /static/images/hero/ /home/collecto/collectorium/static/images/hero/
-<Directory /home/collecto/collectorium/static/images/hero/>
-    Options -Indexes
-    Require all granted
-</Directory>
-
 # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
 PassengerAppRoot "/home/collecto/collectorium"
 PassengerBaseURI "/"
