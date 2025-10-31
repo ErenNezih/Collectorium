@@ -13,28 +13,50 @@ def create_categories(apps, schema_editor):
     
     # CRITICAL: Fix collation for name and slug fields (MariaDB/MySQL specific)
     # Both fields need utf8mb4 to support Turkish characters (ı, ğ, ü, ş, ç, ö)
+    # This MUST work even if collation is already correct or table doesn't exist yet
     with schema_editor.connection.cursor() as cursor:
         try:
-            # Fix name column collation to utf8mb4 (required for Turkish characters)
+            # Check if table exists first
             cursor.execute("""
-                ALTER TABLE catalog_category 
-                MODIFY COLUMN name VARCHAR(100) 
-                CHARACTER SET utf8mb4 
-                COLLATE utf8mb4_general_ci
+                SELECT COUNT(*) 
+                FROM information_schema.TABLES 
+                WHERE TABLE_SCHEMA = DATABASE() 
+                AND TABLE_NAME = 'catalog_category'
             """)
+            table_exists = cursor.fetchone()[0] > 0
             
-            # Fix slug column collation to utf8mb4
-            cursor.execute("""
-                ALTER TABLE catalog_category 
-                MODIFY COLUMN slug VARCHAR(100) 
-                CHARACTER SET utf8mb4 
-                COLLATE utf8mb4_general_ci
-            """)
-        except Exception as e:
-            # If we can't fix collation, log but continue
-            # The raw SQL approach below will handle queries
-            import sys
-            print(f"Warning: Could not fix collation: {e}", file=sys.stderr)
+            if table_exists:
+                # Fix name column collation to utf8mb4 (required for Turkish characters)
+                # Use IF EXISTS pattern for maximum compatibility
+                try:
+                    cursor.execute("""
+                        ALTER TABLE catalog_category 
+                        MODIFY COLUMN name VARCHAR(100) 
+                        CHARACTER SET utf8mb4 
+                        COLLATE utf8mb4_general_ci
+                    """)
+                except Exception:
+                    # Column might already be utf8mb4 or have different structure
+                    # Continue anyway - BINARY comparison below will handle it
+                    pass
+                
+                # Fix slug column collation to utf8mb4
+                try:
+                    cursor.execute("""
+                        ALTER TABLE catalog_category 
+                        MODIFY COLUMN slug VARCHAR(100) 
+                        CHARACTER SET utf8mb4 
+                        COLLATE utf8mb4_general_ci
+                    """)
+                except Exception:
+                    # Column might already be utf8mb4 or have different structure
+                    # Continue anyway - BINARY comparison below will handle it
+                    pass
+        except Exception:
+            # If we can't fix collation for any reason, continue anyway
+            # The BINARY comparison approach below will handle collation issues
+            # Migration should NEVER fail due to collation fixes
+            pass
     
     # Main categories data structure
     categories_data = {

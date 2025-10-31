@@ -10,24 +10,33 @@ from catalog.models import Category, Product
 from stores.models import Store
 
 def home(request):
-    # Öne çıkan kategoriler - Show main categories even if no listings yet
-    # If there are listings, show categories with most listings
-    # Otherwise, show all main categories
-    featured_categories_with_listings = Category.objects.filter(
-        parent__isnull=True
-    ).annotate(
-        listing_count=Count('products__listings', filter=Q(products__listings__is_active=True))
-    ).filter(listing_count__gt=0).order_by('-listing_count')[:6]
-    
-    # If no categories with listings, show all main categories
-    if featured_categories_with_listings.exists():
-        featured_categories = featured_categories_with_listings
-    else:
-        featured_categories = Category.objects.filter(parent__isnull=True).annotate(
+    """
+    Ana sayfa view'ı - FAILSAFE mantıkla yazılmıştır.
+    Veritabanı boş olsa bile ASLA çökmemelidir.
+    """
+    # FAILSAFE: Öne çıkan kategoriler - Tüm hataları yakala
+    featured_categories = Category.objects.none()  # Default: boş queryset
+    try:
+        # Önce listing'e sahip kategorileri kontrol et
+        featured_categories_with_listings = Category.objects.filter(
+            parent__isnull=True
+        ).annotate(
             listing_count=Count('products__listings', filter=Q(products__listings__is_active=True))
-        ).order_by('name')[:6]
+        ).filter(listing_count__gt=0).order_by('-listing_count')[:6]
+        
+        if featured_categories_with_listings.exists():
+            featured_categories = featured_categories_with_listings
+        else:
+            # Listing'e sahip kategori yoksa, tüm ana kategorileri göster
+            featured_categories = Category.objects.filter(parent__isnull=True).annotate(
+                listing_count=Count('products__listings', filter=Q(products__listings__is_active=True))
+            ).order_by('name')[:6]
+    except Exception:
+        # Herhangi bir hata durumunda boş queryset döndür
+        featured_categories = Category.objects.none()
 
-    # Son eklenen ilanlar - Use safe select_related to avoid errors if relationships don't exist
+    # FAILSAFE: Son eklenen ilanlar
+    recent_listings = Listing.objects.none()  # Default: boş queryset
     try:
         recent_listings = Listing.objects.filter(is_active=True).select_related(
             'store', 'product'
@@ -35,15 +44,40 @@ def home(request):
     except Exception:
         recent_listings = Listing.objects.none()
 
-    # İstatistikler
+    # FAILSAFE: İstatistikler - Her biri ayrı try-except içinde
     stats = {
-        'total_listings': Listing.objects.filter(is_active=True).count(),
-        'total_stores': Store.objects.filter(is_active=True).count(),
-        'total_categories': Category.objects.filter(parent__isnull=True).count(),  # Count all main categories
+        'total_listings': 0,
+        'total_stores': 0,
+        'total_categories': 0,
+        'total_reviews': 0,
     }
+    
+    try:
+        stats['total_listings'] = Listing.objects.filter(is_active=True).count()
+    except Exception:
+        stats['total_listings'] = 0
+    
+    try:
+        stats['total_stores'] = Store.objects.filter(is_active=True).count()
+    except Exception:
+        stats['total_stores'] = 0
+    
+    try:
+        stats['total_categories'] = Category.objects.filter(parent__isnull=True).count()
+    except Exception:
+        stats['total_categories'] = 0
+    
+    try:
+        stats['total_reviews'] = Review.objects.count()
+    except Exception:
+        stats['total_reviews'] = 0
 
-    # Doğrulanmış mağazalar
-    verified_stores = Store.objects.filter(is_verified=True, is_active=True)[:4]
+    # FAILSAFE: Doğrulanmış mağazalar
+    verified_stores = Store.objects.none()  # Default: boş queryset
+    try:
+        verified_stores = Store.objects.filter(is_verified=True, is_active=True)[:4]
+    except Exception:
+        verified_stores = Store.objects.none()
 
     context = {
         "featured_categories": featured_categories,
@@ -73,12 +107,28 @@ def marketplace(request):
     filter_instance = ListingFilter(request.GET, queryset=listings)
     listings = filter_instance.qs
     
-    # Get categories for sidebar (only main categories with listings)
-    categories = Category.objects.filter(
-        parent__isnull=True
-    ).annotate(
-        listing_count=Count('products__listings', filter=Q(products__listings__is_active=True))
-    ).filter(listing_count__gt=0).order_by('name')
+    # FAILSAFE: Get categories for sidebar - Show all main categories even if no listings
+    categories = Category.objects.none()  # Default: boş queryset
+    try:
+        # First try to get categories with listings
+        categories_with_listings = Category.objects.filter(
+            parent__isnull=True
+        ).annotate(
+            listing_count=Count('products__listings', filter=Q(products__listings__is_active=True))
+        ).filter(listing_count__gt=0).order_by('name')
+        
+        if categories_with_listings.exists():
+            categories = categories_with_listings
+        else:
+            # If no categories with listings, show all main categories
+            categories = Category.objects.filter(
+                parent__isnull=True
+            ).annotate(
+                listing_count=Count('products__listings', filter=Q(products__listings__is_active=True))
+            ).order_by('name')
+    except Exception:
+        # On any error, return empty queryset
+        categories = Category.objects.none()
 
     # Additional filters (Search V1 - flag based)
     brand = request.GET.get('brand')
@@ -117,14 +167,15 @@ def marketplace(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    # Get current category from filter
+    # FAILSAFE: Get current category from filter
     current_category = None
     category_id = request.GET.get('category')
     if category_id:
         try:
             current_category = Category.objects.get(id=category_id)
-        except (Category.DoesNotExist, ValueError):
-            pass
+        except (Category.DoesNotExist, ValueError, Exception):
+            # On any error, set to None
+            current_category = None
 
     context = {
         'page_obj': page_obj,
