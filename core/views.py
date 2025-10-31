@@ -211,6 +211,12 @@ class ContactView(TemplateView):
 class SellerGuideView(TemplateView):
     template_name = "pages/seller_guide.html"
 
+class CommissionsView(TemplateView):
+    template_name = "pages/commissions.html"
+
+class SecurityTipsView(TemplateView):
+    template_name = "pages/security_tips.html"
+
 
 class TrustCenterView(TemplateView):
     template_name = "pages/trust_center.html"

@@ -1,114 +1,413 @@
 {% extends 'base.html' %}
 
-{% block title %}Satıcı Rehberi - Collectorium{% endblock %}
+{% block title %}Satış Rehberi - Collectorium{% endblock %}
 
 {% block content %}
-<div class="bg-white py-16">
-    <div class="container mx-auto px-4 max-w-4xl">
+<div class="bg-white">
+    <div class="container mx-auto px-4 py-16">
+        <div class="max-w-4xl mx-auto">
+            <!-- Ana Başlık -->
         <div class="text-center mb-12">
-            <h1 class="text-4xl font-bold text-brand-navy mb-4">Satıcı Rehberi</h1>
-            <p class="text-lg text-brand-mute">Collectorium'da başarılı bir satıcı olmanız için bilmeniz gerekenler</p>
+                <h1 class="text-5xl font-bold text-brand-navy mb-4">Satış Rehberi</h1>
+                <p class="text-xl text-brand-mute max-w-2xl mx-auto">
+                    Collectorium'da başarılı bir satıcı olmanın A'dan Z'ye rehberi. Koleksiyonunuzu paraya çevirmenin en kolay yolu.
+                </p>
         </div>
 
-        <div class="prose max-w-none">
+            <div class="prose prose-lg max-w-none text-brand-mute">
+                <!-- GİRİŞ -->
+                <section class="mb-12">
+                    <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                        <h2 class="text-3xl font-bold text-brand-navy mb-4">Hoş Geldiniz, Geleceğin Satıcısı!</h2>
+                        <p class="text-lg leading-relaxed mb-4">
+                            Collectorium'a hoş geldiniz! Bu rehber, platformda başarılı bir satıcı olmanız için ihtiyacınız olan tüm bilgileri içerir. Korkmayın, satış yapmak sandığınızdan çok daha kolay. Adım adım ilerleyelim ve koleksiyonunuzu paraya çevirelim.
+                        </p>
+                        <p class="text-lg leading-relaxed">
+                            <strong>Merak etmeyin:</strong> Bu rehber, sıfırdan başlayan bir satıcı için hazırlandı. Tecrübeniz olmasa bile, bu rehberi takip ederek ilk satışınızı yapabilirsiniz.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ADIM 1: SATICI HESABI -->
             <section class="mb-12">
-                <h2 class="text-2xl font-semibold text-brand-navy mb-4">🚀 Nasıl Başlarım?</h2>
-                <div class="bg-gray-50 rounded-xl p-6 space-y-4">
-                    <div class="flex items-start space-x-3">
-                        <span class="flex-shrink-0 w-8 h-8 bg-brand-red text-white rounded-full flex items-center justify-center font-bold">1</span>
-                        <div>
-                            <h3 class="font-semibold text-brand-ink">Satıcı Hesabı Oluşturun</h3>
-                            <p class="text-brand-mute">Kayıt olurken "Satıcı" rolünü seçin. Sistem otomatik olarak sizin için bir mağaza oluşturacaktır.</p>
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">Adım 1: Satıcı Hesabınızı Oluşturun</h2>
+                    <div class="space-y-6">
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-4">1.1. Kayıt Olun</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                Collectorium'da satış yapmak için önce bir hesap oluşturmanız gerekir. Endişelenmeyin, bu süreç sadece birkaç dakika sürer!
+                            </p>
+                            <ol class="list-decimal list-inside space-y-3 text-sm ml-4">
+                                <li><a href="{% url 'account_signup' %}" class="text-brand-red hover:underline font-semibold">Kayıt Ol</a> sayfasına gidin</li>
+                                <li>Kayıt formunda <strong>"Satıcı"</strong> rolünü seçin</li>
+                                <li>E-posta adresinizi ve güçlü bir şifre girin</li>
+                                <li>Hesabınızı doğrulamak için e-postanızı kontrol edin</li>
+                            </ol>
+                            <p class="text-sm text-brand-mute mt-4">
+                                <strong>💡 İpucu:</strong> Google hesabınızla da giriş yapabilirsiniz. Bu, hesap oluşturma sürecini daha da hızlandırır.
+                            </p>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-4">1.2. Mağazanız Otomatik Oluşturulur</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                Harika haber! Collectorium'da "Satıcı" rolüyle kayıt olduğunuzda, sistem <strong>otomatik olarak sizin için bir mağaza oluşturur</strong>. Hiçbir ek adım gerekmez!
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 text-sm ml-4">
+                                <li>Mağaza adınız, kullanıcı adınızla otomatik oluşturulur</li>
+                                <li>Mağaza URL'iniz benzersizdir ve kolay hatırlanır</li>
+                                <li>Profil sayfanızdan mağaza bilgilerinizi düzenleyebilirsiniz</li>
+                            </ul>
+                            <p class="text-sm text-brand-mute mt-4">
+                                <strong>Sonraki Adım:</strong> Mağazanız hazır! Şimdi ilk ilanınızı oluşturabilirsiniz.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-4">1.3. Mağazanızı Özelleştirin (Opsiyonel ama Önerilir)</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                Mağazanız otomatik oluşturulur, ancak onu özelleştirmek satışlarınızı artırabilir. Birkaç dakika ayırarak mağazanızı profesyonel hale getirin:
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 text-sm ml-4">
+                                <li><strong>Mağaza Açıklaması:</strong> Koleksiyonunuzun hikayesini anlatın. Müşteriler, tutkulu satıcıları sever.</li>
+                                <li><strong>Logo/Banner:</strong> Mağazanıza bir logo veya banner ekleyin. Görsel kimlik, güven oluşturur.</li>
+                                <li><strong>İletişim Bilgileri:</strong> Profil bilgilerinizi güncelleyin. Aktif bir satıcı görünümü verin.</li>
+                            </ul>
+                            <p class="text-sm text-brand-mute mt-4">
+                                <strong>Önemli:</strong> Mağaza özelleştirmesi zorunlu değildir. İlk ilanınızı hemen oluşturabilir, mağazanızı daha sonra özelleştirebilirsiniz.
+                            </p>
                         </div>
                     </div>
-                    <div class="flex items-start space-x-3">
-                        <span class="flex-shrink-0 w-8 h-8 bg-brand-red text-white rounded-full flex items-center justify-center font-bold">2</span>
-                        <div>
-                            <h3 class="font-semibold text-brand-ink">Mağazanızı Özelleştirin</h3>
-                            <p class="text-brand-mute">Profilinizden mağaza bilgilerinizi düzenleyin, logo ekleyin ve açıklama yazın.</p>
+                </section>
+
+                <!-- ADIM 2: MÜKEMMEL İLAN -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">Adım 2: Mükemmel İlanı Hazırlayın</h2>
+                    <p class="text-lg leading-relaxed mb-6">
+                        İyi bir ilan, satışın %80'ini sağlar. Bu bölümde, alıcıların dikkatini çeken ve satış yapan ilanların sırlarını öğreneceksiniz.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-4">2.1. Fotoğrafçılık: Ürününüzü En İyi Şekilde Gösterin</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                <strong>Kritik Kural:</strong> İyi fotoğraflar olmadan satış olmaz. Alıcılar ürünü göremeden satın almazlar. Bu yüzden fotoğraflara gereken önemi verin.
+                            </p>
+                            
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-xl font-semibold text-brand-navy mb-3">📸 Fotoğraf Çekimi İpuçları:</h4>
+                                <ul class="list-disc list-inside space-y-2 text-sm">
+                                    <li><strong>En Az 5-6 Fotoğraf:</strong> Ürününüzü farklı açılardan gösterin. Ön, arka, yan, detay fotoğrafları çekin.</li>
+                                    <li><strong>İyi Işık:</strong> Doğal ışık en iyisidir. Ürünü güneş ışığı alan bir yerde çekin. Yapay ışık kullanıyorsanız, yumuşak ve dağınık ışık tercih edin.</li>
+                                    <li><strong>Net Görüntü:</strong> Fotoğraflarınız net ve odakta olmalı. Bulanık fotoğraflar satış şansınızı düşürür.</li>
+                                    <li><strong>Temiz Arka Plan:</strong> Ürünü düz, tek renkli bir arka planda çekin. Karışık arka planlar dikkati dağıtır.</li>
+                                    <li><strong>Kusurları Gösterin:</strong> Ürününüzde kusur varsa, dürüstçe gösterin. Bu güven oluşturur ve sonradan sorun çıkmaz.</li>
+                                    <li><strong>Ölçek Referansı:</strong> Küçük ürünler için bir referans nesnesi (kalem, bozuk para vb.) ekleyin. Büyüklüğü anlamak kolaylaşır.</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-4">
+                                <p class="text-sm font-semibold text-brand-navy mb-2">⚠️ Fotoğraf Hatalarından Kaçının:</p>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li>Filtre kullanmayın (ürünü olduğundan farklı göstermeyin)</li>
+                                    <li>Çok karanlık veya çok parlak fotoğraflar çekmeyin</li>
+                                    <li>Diğer ürünlerle karışık fotoğraflar kullanmayın</li>
+                                    <li>İnternet'ten fotoğraf kopyalamayın (telif hakkı ihlali)</li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex items-start space-x-3">
-                        <span class="flex-shrink-0 w-8 h-8 bg-brand-red text-white rounded-full flex items-center justify-center font-bold">3</span>
-                        <div>
-                            <h3 class="font-semibold text-brand-ink">İlk İlanınızı Oluşturun</h3>
-                            <p class="text-brand-mute">"İlanlarım" sayfasından "Yeni İlan" butonuna tıklayın ve ürününüzün detaylarını girin.</p>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-4">2.2. Başlık Yazımı: Alıcıların Sizi Bulmasını Sağlayın</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                Başlık, ilanınızın ilk izlenimidir. İyi bir başlık, alıcıların ilanınızı bulmasını ve açmasını sağlar.
+                            </p>
+                            
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-xl font-semibold text-brand-navy mb-3">✍️ Başarılı Başlık Örnekleri:</h4>
+                                <div class="space-y-3 text-sm">
+                                    <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                                        <p class="font-semibold text-green-800 mb-1">✅ İyi Başlık:</p>
+                                        <p class="text-brand-mute">"Pokemon TCG Base Set Charizard Holo - NM/MT Durumunda - PSA Değerlendirmeli"</p>
+                                        <p class="text-xs text-brand-mute mt-2"><strong>Neden İyi:</strong> Marka, set, ürün adı, durum ve özellik bilgisi içeriyor.</p>
+                                    </div>
+                                    <div class="bg-red-50 border border-red-200 rounded-lg p-3">
+                                        <p class="font-semibold text-red-800 mb-1">❌ Kötü Başlık:</p>
+                                        <p class="text-brand-mute">"Kart Satıyorum"</p>
+                                        <p class="text-xs text-brand-mute mt-2"><strong>Neden Kötü:</strong> Hiçbir bilgi vermiyor, arama motorlarında bulunamaz.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-4 rounded-lg mt-4">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">Başlık Yazma Kuralları:</h4>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li><strong>Anahtar Kelimeler:</strong> Alıcıların arayabileceği kelimeleri kullanın (marka, model, kategori)</li>
+                                    <li><strong>Durum Bilgisi:</strong> Ürünün durumunu belirtin (Yeni, İkinci El, Kullanılmış, Mint vb.)</li>
+                                    <li><strong>Özel Özellikler:</strong> Varsa özel özellikleri ekleyin (Limited Edition, Signed, Graded vb.)</li>
+                                    <li><strong>Kısa ve Net:</strong> Başlık çok uzun olmamalı, ama bilgilendirici olmalı</li>
+                                    <li><strong>BÜYÜK HARF Kullanmayın:</strong> Sadece önemli kelimeleri büyük harfle yazın, tümü değil</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-4">2.3. Açıklama Detayları: Dürüstlük Güven Oluşturur</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                İlan açıklamanız, alıcıya ürün hakkında her şeyi anlatmalıdır. Dürüst ve detaylı açıklamalar, güven oluşturur ve satışları artırır.
+                            </p>
+                            
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-xl font-semibold text-brand-navy mb-3">📝 Açıklamada Bulunması Gerekenler:</h4>
+                                <ul class="list-disc list-inside space-y-2 text-sm">
+                                    <li><strong>Ürün Hikayesi:</strong> Ürününüzün hikayesini anlatın. Nereden aldınız? Ne kadar süredir sizde? Bu hikayeler değer katabilir.</li>
+                                    <li><strong>Durum Açıklaması:</strong> Ürünün durumunu detaylıca açıklayın. "İyi durumda" yerine "Hafif kullanım izleri var, köşelerde küçük yıpranmalar mevcut" gibi spesifik açıklamalar yapın.</li>
+                                    <li><strong>Kusurları Belirtin:</strong> Ürününüzde kusur varsa, mutlaka belirtin. Gizlemek, sonradan iade ile sonuçlanır ve güven kaybına neden olur.</li>
+                                    <li><strong>Özellikler:</strong> Ürünün teknik özelliklerini, boyutlarını, ağırlığını belirtin.</li>
+                                    <li><strong>İçerik:</strong> Ürünle birlikte ne geldiğini açıklayın (kutu, sertifika, aksesuar vb.)</li>
+                                    <li><strong>Değerlendirme Bilgisi:</strong> Varsa PSA, BGS gibi değerlendirme bilgilerini ekleyin.</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
+                                <p class="text-sm font-semibold text-brand-navy mb-2">💡 Dürüstlük Neden Önemli?</p>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li>Dürüst açıklamalar, alıcı güveni oluşturur</li>
+                                    <li>Gizlenen kusurlar, iade ve şikayet riski taşır</li>
+                                    <li>İyi yorumlar ve değerlendirmeler, gelecekteki satışlarınızı artırır</li>
+                                    <li>Güvenilir satıcılar, daha fazla satış yapar</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-4">2.4. Fiyatlandırma: Ürünün Değerini Bulun</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                Doğru fiyatlandırma, satışın anahtarıdır. Çok yüksek fiyat alıcı bulmaz, çok düşük fiyat ise zarar ettirir.
+                            </p>
+                            
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-xl font-semibold text-brand-navy mb-3">💰 Fiyat Araştırması Nasıl Yapılır?</h4>
+                                <ol class="list-decimal list-inside space-y-2 text-sm">
+                                    <li><strong>Platform İçi Araştırma:</strong> Collectorium'da benzer ürünleri arayın ve fiyatlarını inceleyin</li>
+                                    <li><strong>Durum Farkı:</strong> Ürününüzün durumuna göre fiyat belirleyin (Yeni ürün, ikinci el üründen daha pahalıdır)</li>
+                                    <li><strong>Nadir Ürünler:</strong> Nadir veya limited edition ürünlerde, piyasa araştırması yapın</li>
+                                    <li><strong>Değerlendirme Etkisi:</strong> PSA/BGS gibi değerlendirmeli ürünler, değerlendirmesiz ürünlerden daha değerlidir</li>
+                                    <li><strong>Rekabetçi Fiyat:</strong> En düşük fiyatı değil, rekabetçi bir fiyat belirleyin</li>
+                                </ol>
+                            </div>
+
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-xl font-semibold text-brand-navy mb-3">💡 Fiyatlandırma İpuçları:</h4>
+                                <ul class="list-disc list-inside space-y-2 text-sm">
+                                    <li><strong>Makul Bir Başlangıç Fiyatı:</strong> Çok yüksek başlamayın, müşteri kaybedersiniz</li>
+                                    <li><strong>Esnek Olun:</strong> Makul teklifleri değerlendirin</li>
+                                    <li><strong>Kargo Maliyeti:</strong> Kargo ücretini de hesaba katın (alıcı ödese bile, rekabetçi fiyat belirlerken dikkate alın)</li>
+                                    <li><strong>Komisyon Hesabı:</strong> Collectorium'un komisyon oranını (<a href="{% url 'commissions' %}" class="text-brand-red hover:underline">detaylar için tıklayın</a>) hesaba katın</li>
+                                    <li><strong>Zaman Faktörü:</strong> Hızlı satmak istiyorsanız, biraz daha düşük fiyat koyabilirsiniz</li>
+                                </ul>
                         </div>
                     </div>
                 </div>
             </section>
 
+                <!-- ADIM 3: SATIŞ VE KARGO -->
             <section class="mb-12">
-                <h2 class="text-2xl font-semibold text-brand-navy mb-4">💰 Komisyon Oranları</h2>
-                <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded">
-                    <p class="text-brand-ink"><strong>Standart Komisyon:</strong> %5</p>
-                    <p class="text-brand-mute mt-2">Her satıştan %5 komisyon kesintisi yapılır. Örneğin, 100₺'lik bir ürün sattığınızda 95₺ kazanırsınız.</p>
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">Adım 3: Satış ve Kargo Süreci</h2>
+                    <p class="text-lg leading-relaxed mb-6">
+                        Harika! Bir alıcı ürününüzü satın aldı. Şimdi ne olacak? Endişelenmeyin, süreç çok basit.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-4">3.1. Satış Bildirimi</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                Bir ürün satıldığında, size <strong>anında bildirim</strong> gönderilir:
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 text-sm ml-4">
+                                <li><strong>E-posta Bildirimi:</strong> Kayıtlı e-posta adresinize satış bildirimi gönderilir</li>
+                                <li><strong>SMS Bildirimi:</strong> Telefon numaranıza SMS ile bildirim gönderilir (opsiyonel)</li>
+                                <li><strong>Platform Bildirimi:</strong> Platform üzerinde bildirim görünür</li>
+                            </ul>
+                            <p class="text-sm text-brand-mute mt-4">
+                                <strong>İçerik:</strong> Bildirimde alıcının adı, adresi, ödeme bilgileri ve sipariş numarası yer alır.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-4">3.2. Ürünü Güvenli Paketleyin</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                Ürününüzün hasarsız teslim edilmesi için doğru paketleme çok önemlidir. İyi paketleme, iade riskini azaltır ve müşteri memnuniyetini artırır.
+                            </p>
+                            
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-xl font-semibold text-brand-navy mb-3">📦 Paketleme İpuçları:</h4>
+                                <ul class="list-disc list-inside space-y-2 text-sm">
+                                    <li><strong>Sağlam Kutu:</strong> Ürününüzün boyutuna uygun, sağlam bir kutu kullanın</li>
+                                    <li><strong>Koruyucu Malzeme:</strong> Ürünü bubble wrap, köpük veya kağıt ile sarın</li>
+                                    <li><strong>Boşluk Doldurun:</strong> Kutunun içinde boşluk bırakmayın, köpük veya kağıt ile doldurun</li>
+                                    <li><strong>Kırılgan İşareti:</strong> Kırılgan ürünler için "Kırılgan" etiketi ekleyin</li>
+                                    <li><strong>Bantlama:</strong> Kutuyu sağlam şekilde bantlayın, açılmasını önleyin</li>
+                                    <li><strong>Adres Kontrolü:</strong> Kargo etiketindeki adresin doğru olduğundan emin olun</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-4">
+                                <p class="text-sm font-semibold text-brand-navy mb-2">⚠️ Kötü Paketleme Sonuçları:</p>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li>Ürün hasarı ve iade riski</li>
+                                    <li>Müşteri memnuniyetsizliği</li>
+                                    <li>Olumsuz değerlendirme</li>
+                                    <li>Gelecekteki satış kaybı</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-4">3.3. Kargo Süreci</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                Collectorium, anlaşmalı kargo firmaları ile çalışır. Size en yakın kargo şubesine giderek ürününüzü gönderebilirsiniz.
+                            </p>
+                            
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-xl font-semibold text-brand-navy mb-3">🚚 Kargo Adımları:</h4>
+                                <ol class="list-decimal list-inside space-y-2 text-sm">
+                                    <li><strong>Kargo Etiketini Yazdırın:</strong> Platform üzerinden kargo etiketini indirin ve yazdırın</li>
+                                    <li><strong>Ürünü Paketleyin:</strong> Yukarıdaki paketleme ipuçlarını takip edin</li>
+                                    <li><strong>Kargo Şubesine Gidin:</strong> En yakın anlaşmalı kargo şubesine gidin</li>
+                                    <li><strong>Teslim Edin:</strong> Paketi kargo görevlisine teslim edin ve takip numarasını alın</li>
+                                    <li><strong>Takip Numarasını Girin:</strong> Platform üzerinden takip numarasını girin, alıcı takip edebilsin</li>
+                                </ol>
+                            </div>
+
+                            <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-4 rounded-lg mt-4">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">💡 Kargo İpuçları:</h4>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li><strong>Hızlı Gönderim:</strong> Ürünü satıştan sonra <strong>1-3 iş günü</strong> içinde gönderin</li>
+                                    <li><strong>Takip Numarası:</strong> Takip numarasını mutlaka platforma girin</li>
+                                    <li><strong>Sigorta:</strong> Değerli ürünler için kargo sigortası yaptırın</li>
+                                    <li><strong>Alıcı İletişimi:</strong> Kargo çıktığında alıcıya bildirim gönderilir</li>
+                                </ul>
+                            </div>
+                        </div>
                 </div>
             </section>
 
+                <!-- ADIM 4: ÖDEME -->
             <section class="mb-12">
-                <h2 class="text-2xl font-semibold text-brand-navy mb-4">📸 Kaliteli İlan Oluşturma İpuçları</h2>
-                <ul class="space-y-3">
-                    <li class="flex items-start space-x-2">
-                        <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                        <span><strong>Net Fotoğraflar:</strong> Ürününüzü farklı açılardan, iyi ışıkta çekin.</span>
-                    </li>
-                    <li class="flex items-start space-x-2">
-                        <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                        <span><strong>Detaylı Açıklama:</strong> Ürünün kondisyonunu, özelliklerini ve varsa kusurlarını belirtin.</span>
-                    </li>
-                    <li class="flex items-start space-x-2">
-                        <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                        <span><strong>Doğru Fiyatlandırma:</strong> Piyasa araştırması yapın ve rekabetçi fiyat belirleyin.</span>
-                    </li>
-                    <li class="flex items-start space-x-2">
-                        <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                        <span><strong>Hızlı Yanıt:</strong> Alıcı sorularını en kısa sürede cevaplayın.</span>
-                    </li>
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">Adım 4: Ödemenizi Alın</h2>
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-4">4.1. "Param Güvende" Sistemi</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                Collectorium'da satış yapmanın en büyük avantajlarından biri, <strong>"Param Güvende"</strong> sistemidir. Bu sistem, hem alıcıyı hem de sizi korur.
+                            </p>
+                            
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-xl font-semibold text-brand-navy mb-3">🛡️ Nasıl Çalışır?</h4>
+                                <ol class="list-decimal list-inside space-y-2 text-sm">
+                                    <li>Alıcı ürünü satın alır ve ödemeyi yapar</li>
+                                    <li>Ödeme, Collectorium tarafından <strong>güvenli bir şekilde tutulur</strong></li>
+                                    <li>Siz ürünü kargoya verirsiniz</li>
+                                    <li>Alıcı ürünü teslim alır ve onaylar</li>
+                                    <li>Ödeme, hesabınıza <strong>otomatik olarak</strong> aktarılır</li>
+                                </ol>
+                            </div>
+
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
+                                <p class="text-sm font-semibold text-brand-navy mb-2">✅ Bu Sistemin Avantajları:</p>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li><strong>Dolandırıcılık Koruması:</strong> Sahte ödeme, havale dolandırıcılığı gibi riskler ortadan kalkar</li>
+                                    <li><strong>Güven:</strong> Alıcılar, ödemelerinin güvende olduğunu bilir</li>
+                                    <li><strong>Otomatik İşlem:</strong> Elle ödeme alma derdi yoktur</li>
+                                    <li><strong>Disput Çözümü:</strong> Sorun çıkarsa, Collectorium arabuluculuk yapar</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-4">4.2. Ödemenin Hesabınıza Geçme Süresi</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                Ödemeniz, alıcı ürünü teslim aldıktan ve onayladıktan sonra hesabınıza geçer.
+                            </p>
+                            
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-xl font-semibold text-brand-navy mb-3">⏱️ Ödeme Süreleri:</h4>
+                                <ul class="list-disc list-inside space-y-2 text-sm">
+                                    <li><strong>Alıcı Onayı:</strong> Alıcı ürünü teslim aldıktan sonra onaylar</li>
+                                    <li><strong>Otomatik Ödeme:</strong> Onay sonrası ödeme <strong>anında</strong> hesabınıza geçer</li>
+                                    <li><strong>Banka Hesabına Çekme:</strong> Platform bakiyenizden banka hesabınıza çekmek için <strong>1-2 iş günü</strong> sürer</li>
+                                    <li><strong>Otomatik Onay:</strong> Alıcı 3 gün içinde onaylamazsa, ödeme otomatik olarak hesabınıza geçer</li>
                 </ul>
+                            </div>
+
+                            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-4">
+                                <p class="text-sm text-brand-mute">
+                                    <strong>Önemli:</strong> Ödeme, ürün teslim edilmeden önce yapılmaz. Bu sistem, hem sizi hem de alıcıyı korur. Alıcı ürünü görmeden ödeme yapmaz, siz de ödeme almadan ürün göndermezsiniz.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-4">4.3. Komisyon Kesintisi</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                Collectorium'un komisyon oranı, satış fiyatı üzerinden hesaplanır ve ödeme yapılırken otomatik olarak kesilir.
+                            </p>
+                            <p class="text-sm text-brand-mute">
+                                Detaylı komisyon bilgileri için <a href="{% url 'commissions' %}" class="text-brand-red hover:underline font-semibold">Komisyonlar</a> sayfamızı ziyaret edebilirsiniz.
+                            </p>
+                        </div>
+                    </div>
             </section>
 
+                <!-- BAŞARI İPUÇLARI -->
             <section class="mb-12">
-                <h2 class="text-2xl font-semibold text-brand-navy mb-4">🔒 Güvenlik İpuçları</h2>
-                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded space-y-2">
-                    <p class="flex items-start space-x-2">
-                        <svg class="w-5 h-5 text-yellow-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-                        </svg>
-                        <span>Platform dışında ödeme talep etmeyin veya kabul etmeyin</span>
-                    </p>
-                    <p class="flex items-start space-x-2">
-                        <svg class="w-5 h-5 text-yellow-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-                        </svg>
-                        <span>Kişisel bilgilerinizi (telefon, adres) mesajlarda paylaşmayın</span>
-                    </p>
-                    <p class="flex items-start space-x-2">
-                        <svg class="w-5 h-5 text-yellow-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-                        </svg>
-                        <span>Şüpheli davranışları hemen destek ekibine bildirin</span>
-                    </p>
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">Başarı İpuçları: Satışlarınızı Artırın</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">📱 Hızlı Yanıt</h3>
+                            <p class="text-sm text-brand-mute">
+                                Alıcı sorularını <strong>24 saat içinde</strong> yanıtlayın. Hızlı yanıt, satış şansınızı %300 artırır.
+                            </p>
+                        </div>
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">⭐ İyi Değerlendirmeler</h3>
+                            <p class="text-sm text-brand-mute">
+                                Her satıştan sonra müşterilerden değerlendirme isteyin. İyi değerlendirmeler, gelecekteki satışlarınızı artırır.
+                            </p>
+                        </div>
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">📦 Hızlı Gönderim</h3>
+                            <p class="text-sm text-brand-mute">
+                                Ürünleri <strong>1-2 gün içinde</strong> gönderin. Hızlı gönderim, müşteri memnuniyetini artırır.
+                            </p>
+                        </div>
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">🔔 Bildirimleri Açın</h3>
+                            <p class="text-sm text-brand-mute">
+                                E-posta ve SMS bildirimlerini açın. Yeni satışlardan hemen haberdar olun.
+                            </p>
+                        </div>
                 </div>
             </section>
 
-            <section class="text-center bg-brand-navy text-white rounded-2xl p-8">
-                <h2 class="text-2xl font-semibold mb-4">Başlamaya Hazır mısınız?</h2>
-                <p class="mb-6 text-gray-300">Hemen bugün satıcı hesabı oluşturun ve koleksiyonunuzu paraya çevirin!</p>
-                <a href="{% url 'account_signup' %}" class="inline-block bg-brand-red text-white font-semibold py-3 px-8 rounded-xl hover:bg-red-700 transition-all">
+                <!-- SON ADIM -->
+                <section class="text-center bg-gradient-to-br from-brand-navy to-brand-red text-white rounded-2xl p-12">
+                    <h2 class="text-3xl font-bold mb-4">Başlamaya Hazır mısınız?</h2>
+                    <p class="text-xl mb-8 text-gray-200">
+                        Koleksiyonunuzu paraya çevirmenin tam zamanı. İlk satışınızı bugün yapın!
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="{% url 'account_signup' %}" class="inline-block bg-white text-brand-red font-semibold py-3 px-8 rounded-xl hover:bg-gray-100 transition-all">
                     Satıcı Hesabı Oluştur
                 </a>
+                        <a href="{% url 'commissions' %}" class="inline-block bg-brand-red/20 text-white font-semibold py-3 px-8 rounded-xl hover:bg-brand-red/30 transition-all border-2 border-white">
+                            Komisyonları Gör
+                        </a>
+                    </div>
             </section>
+            </div>
         </div>
     </div>
 </div>
 {% endblock %}
-

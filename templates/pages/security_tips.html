@@ -1,0 +1,356 @@
+{% extends 'base.html' %}
+
+{% block title %}Güvenlik İpuçları - Collectorium{% endblock %}
+
+{% block content %}
+<div class="bg-white">
+    <div class="container mx-auto px-4 py-16">
+        <div class="max-w-4xl mx-auto">
+            <!-- Ana Başlık -->
+            <div class="text-center mb-12">
+                <h1 class="text-5xl font-bold text-brand-navy mb-4">Güvenlik İpuçları</h1>
+                <p class="text-xl text-brand-mute max-w-2xl mx-auto">
+                    Biz arkanızdayız. Olası dolandırıcılık girişimlerine karşı korunmanız için hazırladığımız kapsamlı rehber.
+                </p>
+            </div>
+
+            <div class="prose prose-lg max-w-none text-brand-mute">
+                <!-- GİRİŞ -->
+                <section class="mb-12">
+                    <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                        <h2 class="text-3xl font-bold text-brand-navy mb-4">Sizleri Önemsiyoruz</h2>
+                        <p class="text-lg leading-relaxed mb-4">
+                            Collectorium olarak, satıcılarımızın güvenliği bizim için en önemli önceliktir. Bu sayfa, sizleri olası dolandırıcılık girişimlerine karşı eğitmek ve proaktif bir şekilde korumak amacıyla hazırlanmıştır.
+                        </p>
+                        <p class="text-lg leading-relaxed">
+                            <strong>Unutmayın:</strong> Biz arkanızdayız. Şüpheli bir durumla karşılaştığınızda, derhal bizimle iletişime geçin. Size yardımcı olmak için buradayız.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ALTIN KURAL 1 -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">Altın Kural 1: İletişimi Sadece Collectorium Üzerinden Yapın</h2>
+                    <div class="space-y-6">
+                        <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">⚠️ Platform Dışına Çıkma Talepleri</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                Bir alıcı, size WhatsApp, Telegram, SMS veya başka bir platform üzerinden iletişim kurmanızı isterse, <strong>bu büyük bir kırmızı bayraktır</strong>.
+                            </p>
+                            
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">🚫 Neden Tehlikeli?</h4>
+                                <ul class="list-disc list-inside space-y-2 text-sm">
+                                    <li><strong>Kayıt Yok:</strong> Platform dışındaki yazışmalar kayıt altına alınmaz ve kanıt olarak kullanılamaz</li>
+                                    <li><strong>Dolandırıcılık Riski:</strong> Dolandırıcılar, platform dışına çıkarak sistem kontrollerinden kaçmak ister</li>
+                                    <li><strong>Güvenlik Koruması Yok:</strong> Platform dışında, Collectorium'un güvenlik önlemleri devreye girmez</li>
+                                    <li><strong>Desteğe Ulaşamama:</strong> Sorun çıkarsa, platform dışı yazışmalar için destek alamazsınız</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">✅ Doğru Yaklaşım:</h4>
+                                <ul class="list-disc list-inside space-y-2 text-sm">
+                                    <li><strong>Tüm İletişim Platform İçinde:</strong> Alıcılarla sadece Collectorium mesajlaşma sistemi üzerinden iletişim kurun</li>
+                                    <li><strong>Reddetme:</strong> Platform dışına çıkma talebini nazikçe reddedin: "Tüm iletişimimizi Collectorium üzerinden yapalım, bu hem sizin hem de benim güvenliğimiz için önemli"</li>
+                                    <li><strong>Rapor Edin:</strong> Platform dışına çıkma talebinde bulunan alıcıları derhal rapor edin</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+                            <p class="text-sm font-semibold text-brand-navy mb-2">💡 Hatırlatma:</p>
+                            <p class="text-sm text-brand-mute">
+                                Collectorium'un mesajlaşma sistemi, tüm yazışmaları kayıt altına alır. Bu, hem sizin hem de alıcının güvenliği için kritik öneme sahiptir. Sorun çıkarsa, yazışmalar kanıt olarak kullanılabilir.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ALTIN KURAL 2 -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">Altın Kural 2: Ödemeyi Sadece Sistem Üzerinden Alın</h2>
+                    <div class="space-y-6">
+                        <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">💸 En Büyük Dolandırıcılık Yöntemi</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                <strong>"Param Güvende" sistemi dışında ödeme kabul etmek, en büyük dolandırıcılık riskidir.</strong> Alıcılar size IBAN'a havale, nakit ödeme veya başka bir yöntemle ödeme yapmayı önerse, <strong>kesinlikle kabul etmeyin</strong>.
+                            </p>
+                            
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">🚫 Kabul Etmemeniz Gereken Ödeme Yöntemleri:</h4>
+                                <ul class="list-disc list-inside space-y-2 text-sm">
+                                    <li><strong>IBAN'a Havale/EFT:</strong> "Direkt hesabınıza havale yapayım" teklifi</li>
+                                    <li><strong>Nakit Ödeme:</strong> "Kapıda nakit ödeyeyim" teklifi</li>
+                                    <li><strong>Western Union/PayPal:</strong> "PayPal ile ödeyeyim" gibi platform dışı ödeme teklifleri</li>
+                                    <li><strong>Kapora/Taksit:</strong> "Önce kapora atayım, sonra kalanı" gibi ödeme planları</li>
+                                    <li><strong>Ödeme Vadesi:</strong> "Ürünü gönder, sonra öderim" teklifi</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">✅ Sadece Kabul Edilebilir Ödeme Yöntemi:</h4>
+                                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                    <p class="text-lg font-semibold text-green-800 mb-2">💳 Collectorium "Param Güvende" Sistemi</p>
+                                    <p class="text-sm text-brand-mute mb-3">
+                                        Tüm ödemeler, Collectorium'un güvenli ödeme sistemi üzerinden yapılmalıdır. Bu sistem:
+                                    </p>
+                                    <ul class="list-disc list-inside space-y-1 text-sm">
+                                        <li>Ödemeyi güvenli bir şekilde tutar</li>
+                                        <li>Ürün teslim edilene kadar ödemeyi korur</li>
+                                        <li>Alıcı onayından sonra otomatik olarak size aktarır</li>
+                                        <li>Dolandırıcılık riskini ortadan kaldırır</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">💡 Neden "Param Güvende" Sistemi?</h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li><strong>Güvenlik:</strong> Sahte ödeme, havale dolandırıcılığı gibi riskler ortadan kalkar</li>
+                                <li><strong>Otomatik İşlem:</strong> Elle ödeme alma derdi yoktur</li>
+                                <li><strong>Koruma:</strong> Hem siz hem de alıcı korunursunuz</li>
+                                <li><strong>Disput Çözümü:</strong> Sorun çıkarsa, Collectorium arabuluculuk yapar</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ALTIN KURAL 3 -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">Altın Kural 3: Kişisel Bilgilerinizi Korumaya Alın</h2>
+                    <div class="space-y-6">
+                        <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">🔒 Asla Paylaşmamanız Gereken Bilgiler</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                Alıcılarla iletişim kurarken, aşağıdaki kişisel bilgilerinizi <strong>asla paylaşmayın</strong>:
+                            </p>
+                            
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-white p-4 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-brand-navy mb-2">🚫 Hassas Bilgiler:</h4>
+                                    <ul class="list-disc list-inside space-y-1 text-sm">
+                                        <li>T.C. Kimlik Numarası</li>
+                                        <li>Telefon numarası (kişisel)</li>
+                                        <li>Ev adresi (kargo adresi hariç)</li>
+                                        <li>Banka hesap numarası/IBAN</li>
+                                        <li>Kredi kartı bilgileri</li>
+                                        <li>Doğum tarihi</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-brand-navy mb-2">⚠️ Neden Tehlikeli?</h4>
+                                    <ul class="list-disc list-inside space-y-1 text-sm">
+                                        <li>Kimlik hırsızlığı riski</li>
+                                        <li>Dolandırıcılık amaçlı kullanım</li>
+                                        <li>Kişisel güvenlik riski</li>
+                                        <li>KVKK ihlali</li>
+                                        <li>Veri kötüye kullanımı</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">✅ Paylaşabileceğiniz Bilgiler</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                Alıcılarla paylaşabileceğiniz güvenli bilgiler:
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 text-sm ml-4">
+                                <li><strong>Ürün Bilgileri:</strong> Ürün hakkında teknik detaylar, durum açıklamaları</li>
+                                <li><strong>Kargo Bilgileri:</strong> Kargo takip numarası, teslimat durumu</li>
+                                <li><strong>Platform Kullanıcı Adı:</strong> Collectorium üzerindeki kullanıcı adınız</li>
+                                <li><strong>Mağaza Bilgileri:</strong> Mağaza açıklamanız, satış politikalarınız</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+                            <p class="text-sm font-semibold text-brand-navy mb-2">💡 Güvenlik İpucu:</p>
+                            <p class="text-sm text-brand-mute">
+                                Bir alıcı kişisel bilgilerinizi isterse, nazikçe reddedin: "Tüm iletişimimizi Collectorium üzerinden yapalım. Kişisel bilgilerimiz güvenlik nedeniyle paylaşılamaz." Şüpheli durumları derhal rapor edin.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- YAYGIN DOLANDIRICILIK TAKTİKLERİ -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">Yaygın Dolandırıcılık Taktiklerini Tanıyın</h2>
+                    <p class="text-lg leading-relaxed mb-6">
+                        Dolandırıcılar, sürekli yeni yöntemler deniyor. Aşağıdaki senaryoları tanıyın ve bu tür tekliflerle karşılaştığınızda derhal reddedin ve rapor edin.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">🚨 Senaryo 1: "Ödemeyi Yaptım, Dekontu Sonra Atacağım"</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                <strong>Kırmızı Bayrak:</strong> Bir alıcı, ödemeyi yaptığını söyler ama dekont göndermez veya "sonra göndereceğim" der.
+                            </p>
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">✅ Doğru Yaklaşım:</h4>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li>Ödeme dekontunu görmeden asla ürün göndermeyin</li>
+                                    <li>Collectorium sisteminde ödeme onayı görünmüyorsa, ödeme yapılmamıştır</li>
+                                    <li>Dekont talebi şüpheli ise, durumu rapor edin</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">🚨 Senaryo 2: "Ürünü Yurt Dışındaki Kuzenime Gönder"</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                <strong>Kırmızı Bayrak:</strong> Alıcı, ürünün farklı bir adrese gönderilmesini ister ve kargo ücretini fazlasıyla ödemeyi teklif eder.
+                            </p>
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">✅ Doğru Yaklaşım:</h4>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li>Sadece sipariş sırasında belirtilen adrese gönderin</li>
+                                    <li>Adres değişikliği taleplerini Collectorium destek ekibi üzerinden yapın</li>
+                                    <li>Şüpheli adres değişikliklerini rapor edin</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">🚨 Senaryo 3: "Fiyatı Düşür, Kapıda Nakit Ödeyeyim"</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                <strong>Kırmızı Bayrak:</strong> Alıcı, fiyatı düşürmenizi ister ve kapıda nakit ödeme teklif eder.
+                            </p>
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">✅ Doğru Yaklaşım:</h4>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li>Nakit ödeme kabul etmeyin, sadece sistem üzerinden ödeme alın</li>
+                                    <li>Fiyat indirimi yapmak istiyorsanız, ilan fiyatını güncelleyin</li>
+                                    <li>Platform dışı ödeme tekliflerini reddedin ve rapor edin</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">🚨 Senaryo 4: "Telefon Numaranı Ver, Daha Hızlı İletişim Kuralım"</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                <strong>Kırmızı Bayrak:</strong> Alıcı, telefon numaranızı ister ve WhatsApp üzerinden iletişim kurmak ister.
+                            </p>
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">✅ Doğru Yaklaşım:</h4>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li>Telefon numaranızı asla paylaşmayın</li>
+                                    <li>Tüm iletişimi Collectorium mesajlaşma sistemi üzerinden yapın</li>
+                                    <li>Platform dışına çıkma taleplerini reddedin ve rapor edin</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">🚨 Senaryo 5: "Hızlı Satmak İstiyorsan, IBAN'ını Ver"</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                <strong>Kırmızı Bayrak:</strong> Alıcı, "hızlı satış" vaadiyle direkt IBAN'a havale yapmayı teklif eder.
+                            </p>
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">✅ Doğru Yaklaşım:</h4>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li>IBAN bilgilerinizi asla paylaşmayın</li>
+                                    <li>Tüm ödemeler Collectorium sistemi üzerinden yapılmalıdır</li>
+                                    <li>Bu tür teklifleri derhal reddedin ve rapor edin</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ŞÜPHELİ DURUMU BİLDİRME -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">Şüpheli Bir Durumu Bize Bildirin</h2>
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">🚨 Ne Zaman Rapor Etmelisiniz?</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                Aşağıdaki durumlardan herhangi biriyle karşılaşırsanız, derhal bizimle iletişime geçin:
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 text-sm ml-4">
+                                <li>Platform dışına çıkma talebi</li>
+                                <li>Sistem dışı ödeme teklifi</li>
+                                <li>Kişisel bilgi talebi</li>
+                                <li>Şüpheli davranış veya mesajlar</li>
+                                <li>Sahte ödeme dekontu</li>
+                                <li>Adres değişikliği talebi (şüpheli)</li>
+                                <li>Dolandırıcılık şüphesi</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">📞 Nasıl Rapor Edersiniz?</h3>
+                            <ol class="list-decimal list-inside space-y-3 text-sm">
+                                <li><strong>Platform Üzerinden:</strong> Şüpheli mesaj veya kullanıcıyı platform üzerinden rapor edin</li>
+                                <li><strong>İletişim Sayfası:</strong> <a href="{% url 'contact' %}" class="text-brand-red hover:underline font-semibold">İletişim</a> sayfamızdan bize ulaşın</li>
+                                <li><strong>E-posta:</strong> Destek ekibimize e-posta gönderin</li>
+                                <li><strong>Kanıtları Paylaşın:</strong> Mesaj ekran görüntüleri, şüpheli davranış örnekleri paylaşın</li>
+                            </ol>
+                        </div>
+
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">✅ Rapor Etmenin Avantajları</h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li><strong>Hızlı Müdahale:</strong> Şüpheli kullanıcılar derhal incelenir ve gerekirse engellenir</li>
+                                <li><strong>Diğer Satıcıları Koruma:</strong> Raporunuz, diğer satıcıları da korur</li>
+                                <li><strong>Platform Güvenliği:</strong> Güvenli bir platform için katkıda bulunursunuz</li>
+                                <li><strong>Destek:</strong> Destek ekibimiz size yardımcı olur</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- GÜVENLİK KONTROL LİSTESİ -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">Güvenlik Kontrol Listesi</h2>
+                    <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                        <p class="text-lg leading-relaxed mb-4">
+                            Her satış öncesi bu kontrol listesini kullanın:
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="bg-white p-4 rounded-lg">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-3">✅ Güvenli Satış İşaretleri:</h4>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li>Alıcı, Collectorium üzerinden mesajlaşıyor</li>
+                                    <li>Ödeme, sistem üzerinden yapılıyor</li>
+                                    <li>Adres, sipariş sırasında belirtilen adres</li>
+                                    <li>Normal sorular soruyor, şüpheli talepler yok</li>
+                                    <li>Ödeme onayı sistemde görünüyor</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-3">🚫 Şüpheli İşaretler:</h4>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li>Platform dışına çıkma talebi</li>
+                                    <li>Sistem dışı ödeme teklifi</li>
+                                    <li>Kişisel bilgi talebi</li>
+                                    <li>Acil satış baskısı</li>
+                                    <li>Şüpheli adres değişikliği</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SONUÇ -->
+                <section class="text-center bg-gradient-to-br from-brand-navy to-brand-red text-white rounded-2xl p-12">
+                    <h2 class="text-3xl font-bold mb-4">Biz Arkanızdayız</h2>
+                    <p class="text-xl mb-8 text-gray-200">
+                        Güvenliğiniz bizim için önceliktir. Şüpheli bir durumla karşılaştığınızda, derhal bizimle iletişime geçin.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="{% url 'contact' %}" class="inline-block bg-white text-brand-red font-semibold py-3 px-8 rounded-xl hover:bg-gray-100 transition-all">
+                            Destek Ekibine Ulaş
+                        </a>
+                        <a href="{% url 'seller_guide' %}" class="inline-block bg-brand-red/20 text-white font-semibold py-3 px-8 rounded-xl hover:bg-brand-red/30 transition-all border-2 border-white">
+                            Satış Rehberini Oku
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

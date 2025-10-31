@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+
+{% block title %}Komisyonlar - Collectorium{% endblock %}
+
+{% block content %}
+<div class="bg-white">
+    <div class="container mx-auto px-4 py-16">
+        <div class="max-w-4xl mx-auto">
+            <!-- Ana Başlık -->
+            <div class="text-center mb-12">
+                <h1 class="text-5xl font-bold text-brand-navy mb-4">Komisyonlar</h1>
+                <p class="text-xl text-brand-mute max-w-2xl mx-auto">
+                    Tam şeffaflık, gizli ücret yok. Collectorium'da satış yapmanın maliyetini net bir şekilde öğrenin.
+                </p>
+            </div>
+
+            <div class="prose prose-lg max-w-none text-brand-mute">
+                <!-- GİRİŞ -->
+                <section class="mb-12">
+                    <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                        <h2 class="text-3xl font-bold text-brand-navy mb-4">Şeffaflık Manifestosu</h2>
+                        <p class="text-lg leading-relaxed mb-4">
+                            Biz satıcılarımızın gizli ücretlerden nefret ettiğini biliyoruz. Bu yüzden, Collectorium'da satış yapmanın maliyetini <strong>en açık ve net şekilde</strong> burada açıklıyoruz.
+                        </p>
+                        <p class="text-lg leading-relaxed">
+                            <strong>Garantimiz:</strong> Burada gördüğünüzden başka hiçbir ücret talep edilmeyecektir. İlan listeleme ücreti yok, aylık mağaza kirası yok, gizli ücret yok. Sadece başarılı satışlardan komisyon alınır.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- NET KOMİSYON ORANI -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">Net Komisyon Oranımız</h2>
+                    <div class="bg-gradient-to-br from-brand-red to-brand-red/80 text-white rounded-2xl p-12 text-center mb-8">
+                        <div class="mb-4">
+                            <span class="text-6xl font-bold">%5</span>
+                        </div>
+                        <p class="text-2xl font-semibold mb-2">Başarılı Her Satıştan</p>
+                        <p class="text-lg opacity-90">
+                            Bu oran, satış fiyatının üzerinden hesaplanır ve satış başarılı olduğunda kesilir.
+                        </p>
+                    </div>
+
+                    <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-brand-navy mb-3">💡 Nasıl Hesaplanır?</h3>
+                        <p class="text-lg leading-relaxed mb-4">
+                            Komisyon, <strong>satış fiyatı üzerinden</strong> hesaplanır. Örneğin:
+                        </p>
+                        <ul class="list-disc list-inside space-y-2 text-sm ml-4">
+                            <li>100 TL'lik bir ürün sattıysanız → Komisyon: 5 TL</li>
+                            <li>500 TL'lik bir ürün sattıysanız → Komisyon: 25 TL</li>
+                            <li>1.000 TL'lik bir ürün sattıysanız → Komisyon: 50 TL</li>
+                        </ul>
+                        <p class="text-sm text-brand-mute mt-4">
+                            <strong>Önemli:</strong> Komisyon, kargo ücreti üzerinden değil, sadece ürün fiyatı üzerinden hesaplanır.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- BU ÜCRETE NELER DAHİL -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">Bu Ücrete Neler Dahil?</h2>
+                    <p class="text-lg leading-relaxed mb-6">
+                        Bu %5 komisyon, sadece bir kesinti değildir. Aşağıdaki tüm hizmetlerin karşılığıdır:
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <div class="text-4xl mb-3">💳</div>
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">Güvenli Ödeme Altyapısı</h3>
+                            <p class="text-sm text-brand-mute">
+                                iyzico gibi güvenli ödeme sistemleri entegrasyonu. Kredi kartı, banka kartı ve havale ödeme seçenekleri. PCI-DSS uyumlu güvenlik.
+                            </p>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <div class="text-4xl mb-3">🛡️</div>
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">7/24 Güvenlik</h3>
+                            <p class="text-sm text-brand-mute">
+                                Dolandırıcılık tespiti ve önleme sistemi. SSL şifreleme. Güvenli veri saklama. KVKK uyumlu veri koruma.
+                            </p>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <div class="text-4xl mb-3">🚀</div>
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">Platform Bakımı</h3>
+                            <p class="text-sm text-brand-mute">
+                                Sürekli güncellenen platform. Hata düzeltmeleri. Performans optimizasyonları. Yeni özellikler ve iyileştirmeler.
+                            </p>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <div class="text-4xl mb-3">💬</div>
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">Müşteri Desteği</h3>
+                            <p class="text-sm text-brand-mute">
+                                7/24 müşteri desteği. Sorun çözme ve arabuluculuk. Alıcı-satıcı uyuşmazlıklarının çözümü.
+                            </p>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <div class="text-4xl mb-3">📊</div>
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">Satış Yönetimi</h3>
+                            <p class="text-sm text-brand-mute">
+                                Otomatik sipariş yönetimi. Stok takibi. Satış raporları ve analitikler. Gelir takibi.
+                            </p>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <div class="text-4xl mb-3">🔍</div>
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">Pazarlama ve Görünürlük</h3>
+                            <p class="text-sm text-brand-mute">
+                                Marketplace'te görünürlük. Arama motoru optimizasyonu. Kategori ve filtreleme sistemleri. Öne çıkan ilanlar.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-6 mt-6">
+                        <p class="text-lg font-semibold text-brand-navy mb-2">✅ Özetle:</p>
+                        <p class="text-sm text-brand-mute">
+                            Bu %5 komisyon, sadece bir kesinti değil, size sunduğumuz <strong>tüm hizmetlerin karşılığıdır</strong>. Ayrıca ödeme sistemi, güvenlik, platform bakımı veya müşteri desteği için ek ücret talep edilmez.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ÖRNEK HESAPLAMA -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">Örnek Hesaplama Tablosu</h2>
+                    <p class="text-lg leading-relaxed mb-6">
+                        Farklı satış tutarları için net kazancınızı görmek için aşağıdaki tabloyu inceleyebilirsiniz:
+                    </p>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                            <thead class="bg-brand-navy text-white">
+                                <tr>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold">Satış Fiyatı</th>
+                                    <th class="px-6 py-4 text-center text-sm font-semibold">Komisyon (%5)</th>
+                                    <th class="px-6 py-4 text-center text-sm font-semibold">Satıcının Net Kazancı</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 text-sm font-medium text-brand-navy">50 TL</td>
+                                    <td class="px-6 py-4 text-sm text-center text-brand-mute">2,50 TL</td>
+                                    <td class="px-6 py-4 text-sm text-center font-semibold text-green-600">47,50 TL</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 text-sm font-medium text-brand-navy">100 TL</td>
+                                    <td class="px-6 py-4 text-sm text-center text-brand-mute">5,00 TL</td>
+                                    <td class="px-6 py-4 text-sm text-center font-semibold text-green-600">95,00 TL</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 bg-green-50">
+                                    <td class="px-6 py-4 text-sm font-medium text-brand-navy">250 TL</td>
+                                    <td class="px-6 py-4 text-sm text-center text-brand-mute">12,50 TL</td>
+                                    <td class="px-6 py-4 text-sm text-center font-semibold text-green-600">237,50 TL</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 text-sm font-medium text-brand-navy">500 TL</td>
+                                    <td class="px-6 py-4 text-sm text-center text-brand-mute">25,00 TL</td>
+                                    <td class="px-6 py-4 text-sm text-center font-semibold text-green-600">475,00 TL</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 text-sm font-medium text-brand-navy">1.000 TL</td>
+                                    <td class="px-6 py-4 text-sm text-center text-brand-mute">50,00 TL</td>
+                                    <td class="px-6 py-4 text-sm text-center font-semibold text-green-600">950,00 TL</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 text-sm font-medium text-brand-navy">2.500 TL</td>
+                                    <td class="px-6 py-4 text-sm text-center text-brand-mute">125,00 TL</td>
+                                    <td class="px-6 py-4 text-sm text-center font-semibold text-green-600">2.375,00 TL</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 text-sm font-medium text-brand-navy">5.000 TL</td>
+                                    <td class="px-6 py-4 text-sm text-center text-brand-mute">250,00 TL</td>
+                                    <td class="px-6 py-4 text-sm text-center font-semibold text-green-600">4.750,00 TL</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-6">
+                        <p class="text-sm text-brand-mute">
+                            <strong>Not:</strong> Yukarıdaki hesaplamalar, kargo ücreti hariçtir. Kargo ücreti alıcı tarafından ödenir ve komisyon hesaplamasına dahil değildir.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- GİZLİ ÜCRET YOK -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">Gizli Ücret Yoktur Garantisi</h2>
+                    <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg">
+                        <h3 class="text-2xl font-semibold text-brand-navy mb-4">✅ Collectorium'da Olmayan Ücretler:</h3>
+                        <ul class="list-disc list-inside space-y-3 text-sm ml-4">
+                            <li><strong>İlan Listeleme Ücreti:</strong> İlan yayınlamak tamamen ücretsizdir. Kaç ilan yayınlarsanız yayınlayın, ek ücret talep edilmez.</li>
+                            <li><strong>Aylık Mağaza Kirası:</strong> Mağaza açmak ve kullanmak tamamen ücretsizdir. Aylık, yıllık veya başka bir periyodik ücret yoktur.</li>
+                            <li><strong>Gizli Komisyonlar:</strong> Komisyon oranı %5'tir ve başka bir ek komisyon kesintisi yapılmaz.</li>
+                            <li><strong>Ödeme İşlem Ücreti:</strong> Ödeme işlemleri için ek ücret talep edilmez. iyzico gibi ödeme sistemlerinin ücretleri komisyon içinde dahildir.</li>
+                            <li><strong>Bakım Ücreti:</strong> Platform bakımı ve güncellemeler için ek ücret talep edilmez.</li>
+                            <li><strong>Müşteri Desteği Ücreti:</strong> Müşteri desteği tamamen ücretsizdir.</li>
+                            <li><strong>İlan Güncelleme Ücreti:</strong> İlanlarınızı istediğiniz kadar güncelleyebilirsiniz, ek ücret yoktur.</li>
+                            <li><strong>Reklam Ücreti:</strong> Marketplace'te görünürlük için ek ücret talep edilmez.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg mt-6">
+                        <h3 class="text-xl font-semibold text-brand-navy mb-3">💎 Tek Ücret, Net Kazanç</h3>
+                        <p class="text-lg leading-relaxed mb-4">
+                            Collectorium'da tek bir ücret vardır: <strong>Başarılı satışlardan %5 komisyon</strong>. Bu kadar basit.
+                        </p>
+                        <p class="text-sm text-brand-mute">
+                            Satış yapmazsanız, hiçbir ücret ödemezsiniz. Sadece başarılı satışlardan komisyon alınır. Bu, sizin için en adil sistemdir.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ÖDEME SÜRECİ -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">Ödeme Süreci</h2>
+                    <div class="space-y-4">
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">💰 Nasıl Ödenir?</h3>
+                            <ol class="list-decimal list-inside space-y-2 text-sm">
+                                <li>Alıcı ürünü satın alır ve ödemeyi yapar</li>
+                                <li>Ödeme, Collectorium tarafından güvenli bir şekilde tutulur</li>
+                                <li>Siz ürünü kargoya verirsiniz</li>
+                                <li>Alıcı ürünü teslim alır ve onaylar</li>
+                                <li>Komisyon kesildikten sonra kalan tutar, <strong>otomatik olarak</strong> platform bakiyenize aktarılır</li>
+                                <li>Bakiyenizden banka hesabınıza çekim yapabilirsiniz</li>
+                            </ol>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">⏱️ Ödeme Süreleri</h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li><strong>Platform Bakiyesine:</strong> Alıcı onayından sonra <strong>anında</strong> geçer</li>
+                                <li><strong>Banka Hesabına:</strong> Bakiye çekimi <strong>1-2 iş günü</strong> içinde tamamlanır</li>
+                                <li><strong>Otomatik Onay:</strong> Alıcı 3 gün içinde onaylamazsa, ödeme otomatik olarak hesabınıza geçer</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SONUÇ -->
+                <section class="text-center bg-gradient-to-br from-brand-navy to-brand-red text-white rounded-2xl p-12">
+                    <h2 class="text-3xl font-bold mb-4">Şeffaflık, Güven, Başarı</h2>
+                    <p class="text-xl mb-8 text-gray-200">
+                        Collectorium'da satış yapmak için gereken tek şey: İyi ürünler ve dürüstlük. Gerisini biz hallediyoruz.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="{% url 'seller_guide' %}" class="inline-block bg-white text-brand-red font-semibold py-3 px-8 rounded-xl hover:bg-gray-100 transition-all">
+                            Satış Rehberini Oku
+                        </a>
+                        <a href="{% url 'account_signup' %}" class="inline-block bg-brand-red/20 text-white font-semibold py-3 px-8 rounded-xl hover:bg-brand-red/30 transition-all border-2 border-white">
+                            Hemen Başla
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

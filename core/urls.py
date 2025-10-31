@@ -1,6 +1,6 @@
 ﻿from django.urls import path
 from . import views, health
-from .views import AboutView, PrivacyPolicyView, TermsOfServiceView, ContactView, SellerGuideView, TrustCenterView, DeliveryAndReturnsView, DistanceSalesContractView, CookiePolicyView
+from .views import AboutView, PrivacyPolicyView, TermsOfServiceView, ContactView, SellerGuideView, CommissionsView, SecurityTipsView, TrustCenterView, DeliveryAndReturnsView, DistanceSalesContractView, CookiePolicyView
 
 urlpatterns = [
     path("", views.home, name="home"),
@@ -20,6 +20,8 @@ urlpatterns = [
     path('kullanici-sozlesmesi/', TermsOfServiceView.as_view(), name='user_agreement'),  # Kullanıcı Sözleşmesi (Kullanım Koşulları ile aynı)
     path('iletisim/', ContactView.as_view(), name='contact'),
     path('satici-rehberi/', SellerGuideView.as_view(), name='seller_guide'),
+    path('komisyonlar/', CommissionsView.as_view(), name='commissions'),
+    path('guvenlik-ipuclari/', SecurityTipsView.as_view(), name='security_tips'),
     # Yeni Yasal Sayfalar
     path('teslimat-ve-iade/', DeliveryAndReturnsView.as_view(), name='delivery_and_returns'),
     path('mesafeli-satis-sozlesmesi/', DistanceSalesContractView.as_view(), name='distance_sales_contract'),
