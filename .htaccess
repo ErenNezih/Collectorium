@@ -1,3 +1,7 @@
+# SVG MIME Type Support
+AddType image/svg+xml .svg
+AddType image/svg+xml .svgz
+
 # Force HTTPS Redirect - SSL Certificate Active
 RewriteEngine On
 RewriteCond %{HTTPS} off
