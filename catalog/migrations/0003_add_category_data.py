@@ -9,6 +9,33 @@ def create_categories(apps, schema_editor):
     Create the complete category hierarchy for Collectorium.
     """
     Category = apps.get_model('catalog', 'Category')
+    db_alias = schema_editor.connection.alias
+    
+    # Fix collation for slug field if needed (MariaDB/MySQL specific)
+    # This ensures slug comparisons work regardless of table collation
+    with schema_editor.connection.cursor() as cursor:
+        try:
+            # Check current collation
+            cursor.execute("""
+                SELECT COLLATION_NAME 
+                FROM information_schema.COLUMNS 
+                WHERE TABLE_SCHEMA = DATABASE() 
+                AND TABLE_NAME = 'catalog_category' 
+                AND COLUMN_NAME = 'slug'
+            """)
+            result = cursor.fetchone()
+            if result and result[0] and 'latin1' in result[0].lower():
+                # Fix slug column collation to utf8mb4
+                cursor.execute("""
+                    ALTER TABLE catalog_category 
+                    MODIFY COLUMN slug VARCHAR(100) 
+                    CHARACTER SET utf8mb4 
+                    COLLATE utf8mb4_general_ci
+                """)
+        except Exception:
+            # If we can't fix collation, continue anyway
+            # The raw SQL approach below will handle it
+            pass
     
     # Main categories data structure
     categories_data = {
@@ -120,25 +147,49 @@ def create_categories(apps, schema_editor):
         return slug
     
     # Create main categories and their children
-    # IMPORTANT: Use slug for checking existence to avoid MariaDB collation issues
-    # Slug is ASCII-only and avoids 'Illegal mix of collations' errors
+    # CRITICAL: Use raw SQL for existence check to avoid collation issues
+    # This bypasses Django ORM's collation handling
+    db_alias = schema_editor.connection.alias
+    
     for main_category_name, subcategories in categories_data.items():
-        # Create main category - check by slug (ASCII, no collation issues)
+        # Create main category - use raw SQL to check existence (collation-safe)
         main_slug = create_slug(main_category_name)
-        main_category = Category.objects.filter(slug=main_slug).first()
-        if not main_category:
-            main_category = Category.objects.create(
+        
+        # Check existence using raw SQL with BINARY comparison (collation-safe)
+        # BINARY forces byte-by-byte comparison, bypassing collation entirely
+        with schema_editor.connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT id FROM catalog_category 
+                WHERE BINARY slug = BINARY %s
+                LIMIT 1
+            """, [main_slug])
+            result = cursor.fetchone()
+            main_category_id = result[0] if result else None
+        
+        if main_category_id:
+            main_category = Category.objects.using(db_alias).get(pk=main_category_id)
+        else:
+            main_category = Category.objects.using(db_alias).create(
                 name=main_category_name,
                 slug=main_slug,
                 parent=None,
             )
         
-        # Create subcategories - check by slug
+        # Create subcategories - use raw SQL for existence check
         for subcategory_name in subcategories:
             sub_slug = create_slug(subcategory_name)
-            existing_sub = Category.objects.filter(slug=sub_slug).first()
-            if not existing_sub:
-                Category.objects.create(
+            
+            with schema_editor.connection.cursor() as cursor:
+                cursor.execute("""
+                    SELECT id FROM catalog_category 
+                    WHERE BINARY slug = BINARY %s
+                    LIMIT 1
+                """, [sub_slug])
+                result = cursor.fetchone()
+                sub_category_id = result[0] if result else None
+            
+            if not sub_category_id:
+                Category.objects.using(db_alias).create(
                     name=subcategory_name,
                     slug=sub_slug,
                     parent=main_category,
@@ -150,6 +201,7 @@ def reverse_categories(apps, schema_editor):
     Remove the categories created by this migration.
     """
     Category = apps.get_model('catalog', 'Category')
+    db_alias = schema_editor.connection.alias
     
     # Helper function to create slug (same as forward migration)
     def create_slug(name):
@@ -161,7 +213,7 @@ def reverse_categories(apps, schema_editor):
         return slug
     
     # Delete in reverse order (children first, then parents)
-    # Use slug to avoid collation issues
+    # Use raw SQL to avoid collation issues
     main_category_names = [
         'Koleksiyon Kartları (TCG & Spor)',
         'Figürler & Oyuncaklar',
@@ -175,10 +227,22 @@ def reverse_categories(apps, schema_editor):
     
     for main_name in main_category_names:
         main_slug = create_slug(main_name)
-        category = Category.objects.filter(slug=main_slug, parent__isnull=True).first()
-        if category:
+        
+        # Find category using raw SQL with BINARY comparison (collation-safe)
+        with schema_editor.connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT id FROM catalog_category 
+                WHERE BINARY slug = BINARY %s
+                AND parent_id IS NULL
+                LIMIT 1
+            """, [main_slug])
+            result = cursor.fetchone()
+            category_id = result[0] if result else None
+        
+        if category_id:
+            category = Category.objects.using(db_alias).get(pk=category_id)
             # Delete all children first
-            Category.objects.filter(parent=category).delete()
+            Category.objects.using(db_alias).filter(parent=category).delete()
             # Then delete the parent
             category.delete()
 
