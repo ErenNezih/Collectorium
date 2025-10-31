@@ -120,10 +120,12 @@ def create_categories(apps, schema_editor):
         return slug
     
     # Create main categories and their children
+    # IMPORTANT: Use slug for checking existence to avoid MariaDB collation issues
+    # Slug is ASCII-only and avoids 'Illegal mix of collations' errors
     for main_category_name, subcategories in categories_data.items():
-        # Create main category - use filter().first() instead of get_or_create to avoid collation issues
+        # Create main category - check by slug (ASCII, no collation issues)
         main_slug = create_slug(main_category_name)
-        main_category = Category.objects.filter(name=main_category_name).first()
+        main_category = Category.objects.filter(slug=main_slug).first()
         if not main_category:
             main_category = Category.objects.create(
                 name=main_category_name,
@@ -131,10 +133,10 @@ def create_categories(apps, schema_editor):
                 parent=None,
             )
         
-        # Create subcategories
+        # Create subcategories - check by slug
         for subcategory_name in subcategories:
             sub_slug = create_slug(subcategory_name)
-            existing_sub = Category.objects.filter(name=subcategory_name).first()
+            existing_sub = Category.objects.filter(slug=sub_slug).first()
             if not existing_sub:
                 Category.objects.create(
                     name=subcategory_name,
@@ -149,7 +151,17 @@ def reverse_categories(apps, schema_editor):
     """
     Category = apps.get_model('catalog', 'Category')
     
+    # Helper function to create slug (same as forward migration)
+    def create_slug(name):
+        import re
+        slug = name.lower()
+        slug = re.sub(r'[^\w\s-]', '', slug)
+        slug = re.sub(r'[-\s]+', '-', slug)
+        slug = slug.strip('-')
+        return slug
+    
     # Delete in reverse order (children first, then parents)
+    # Use slug to avoid collation issues
     main_category_names = [
         'Koleksiyon Kartları (TCG & Spor)',
         'Figürler & Oyuncaklar',
@@ -162,8 +174,8 @@ def reverse_categories(apps, schema_editor):
     ]
     
     for main_name in main_category_names:
-        # Use filter().first() to avoid collation issues
-        category = Category.objects.filter(name=main_name, parent__isnull=True).first()
+        main_slug = create_slug(main_name)
+        category = Category.objects.filter(slug=main_slug, parent__isnull=True).first()
         if category:
             # Delete all children first
             Category.objects.filter(parent=category).delete()

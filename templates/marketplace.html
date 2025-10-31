@@ -30,29 +30,49 @@
             <!-- Search -->
             <div>
               <label class="block text-sm font-medium text-brand-ink mb-1">Ara</label>
-              {{ filter.form.search }}
+              <input type="text" name="search" value="{{ filter.form.search.value|default:'' }}" 
+                     placeholder="Ürün, kategori ara..." 
+                     class="w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-navy focus:ring-brand-navy sm:text-sm">
             </div>
             
             <!-- Category Filter -->
             <div>
               <label class="block text-sm font-medium text-brand-ink mb-1">Kategori</label>
-              {{ filter.form.category }}
+              <select name="category" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-navy focus:ring-brand-navy sm:text-sm">
+                <option value="">Tüm Kategoriler</option>
+                {% for category in categories %}
+                <option value="{{ category.id }}" {% if filter.form.category.value == category.id|stringformat:"s" %}selected{% endif %}>
+                  {{ category.name }} ({{ category.listing_count }})
+                </option>
+                {% endfor %}
+              </select>
             </div>
             
             <!-- Price Range -->
             <div>
-              <label class="block text-sm font-medium text-brand-ink mb-1">Fiyat Aralığı</label>
+              <label class="block text-sm font-medium text-brand-ink mb-1">Fiyat Aralığı (TL)</label>
               <div class="flex gap-2">
-                {{ filter.form.min_price }}
+                <input type="number" name="min_price" value="{{ filter.form.min_price.value|default:'' }}" 
+                       placeholder="Min" 
+                       class="w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-navy focus:ring-brand-navy text-sm">
                 <span class="self-center text-brand-mute">-</span>
-                {{ filter.form.max_price }}
+                <input type="number" name="max_price" value="{{ filter.form.max_price.value|default:'' }}" 
+                       placeholder="Max" 
+                       class="w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-navy focus:ring-brand-navy text-sm">
               </div>
             </div>
             
             <!-- Condition -->
             <div>
               <label class="block text-sm font-medium text-brand-ink mb-1">Durum</label>
-              {{ filter.form.condition }}
+              <select name="condition" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-brand-navy focus:ring-brand-navy sm:text-sm">
+                <option value="">Tüm Durumlar</option>
+                <option value="new" {% if filter.form.condition.value == 'new' %}selected{% endif %}>Yeni</option>
+                <option value="like_new" {% if filter.form.condition.value == 'like_new' %}selected{% endif %}>Sıfıra Yakın</option>
+                <option value="good" {% if filter.form.condition.value == 'good' %}selected{% endif %}>İyi</option>
+                <option value="fair" {% if filter.form.condition.value == 'fair' %}selected{% endif %}>Orta</option>
+                <option value="poor" {% if filter.form.condition.value == 'poor' %}selected{% endif %}>Kötü</option>
+              </select>
             </div>
             
             <!-- Hidden fields for sort -->
