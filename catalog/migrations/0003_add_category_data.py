@@ -121,26 +121,26 @@ def create_categories(apps, schema_editor):
     
     # Create main categories and their children
     for main_category_name, subcategories in categories_data.items():
-        # Create main category
+        # Create main category - use filter().first() instead of get_or_create to avoid collation issues
         main_slug = create_slug(main_category_name)
-        main_category, created = Category.objects.get_or_create(
-            name=main_category_name,
-            defaults={
-                'slug': main_slug,
-                'parent': None,
-            }
-        )
+        main_category = Category.objects.filter(name=main_category_name).first()
+        if not main_category:
+            main_category = Category.objects.create(
+                name=main_category_name,
+                slug=main_slug,
+                parent=None,
+            )
         
         # Create subcategories
         for subcategory_name in subcategories:
             sub_slug = create_slug(subcategory_name)
-            Category.objects.get_or_create(
-                name=subcategory_name,
-                defaults={
-                    'slug': sub_slug,
-                    'parent': main_category,
-                }
-            )
+            existing_sub = Category.objects.filter(name=subcategory_name).first()
+            if not existing_sub:
+                Category.objects.create(
+                    name=subcategory_name,
+                    slug=sub_slug,
+                    parent=main_category,
+                )
 
 
 def reverse_categories(apps, schema_editor):
@@ -162,14 +162,13 @@ def reverse_categories(apps, schema_editor):
     ]
     
     for main_name in main_category_names:
-        try:
-            category = Category.objects.get(name=main_name, parent__isnull=True)
+        # Use filter().first() to avoid collation issues
+        category = Category.objects.filter(name=main_name, parent__isnull=True).first()
+        if category:
             # Delete all children first
             Category.objects.filter(parent=category).delete()
             # Then delete the parent
             category.delete()
-        except Category.DoesNotExist:
-            pass
 
 
 class Migration(migrations.Migration):
