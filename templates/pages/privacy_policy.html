@@ -1,99 +1,505 @@
 {% extends 'base.html' %}
 
-{% block title %}Gizlilik Politikası - Collectorium{% endblock %}
+{% block title %}Gizlilik ve Çerez Politikası - Collectorium{% endblock %}
 
 {% block content %}
 <div class="bg-white">
     <div class="container mx-auto px-4 py-16">
-        <div class="max-w-3xl mx-auto">
-            <h1 class="text-4xl font-bold text-brand-navy mb-6 border-b pb-4">Gizlilik Politikası</h1>
-            <div class="prose prose-lg max-w-none text-brand-mute">
-                <p>
-                    Bu gizlilik politikası, Collectorium platformu ("Site") tarafından toplanan, kullanılan ve paylaşılan kişisel bilgilerinizin nasıl yönetildiğini açıklamaktadır. Siteyi kullanarak bu politikayı kabul etmiş sayılırsınız.
+        <div class="max-w-4xl mx-auto">
+            <!-- Ana Başlık -->
+            <div class="text-center mb-12">
+                <h1 class="text-5xl font-bold text-brand-navy mb-4">Gizlilik ve Çerez Politikası</h1>
+                <p class="text-xl text-brand-mute max-w-2xl mx-auto">
+                    Kişisel verilerinizin korunması bizim için önceliktir. KVKK'ya tam uyumlu, şeffaf ve güvenli veri yönetimi.
                 </p>
-                <p class="text-sm text-brand-mute mb-6">
+                <p class="text-sm text-brand-mute mt-4">
                     <strong>Son Güncelleme:</strong> {{ "now"|date:"d F Y" }}
                 </p>
-                <p>
-                    Bu Gizlilik Politikası, Collectorium platformunun ("Platform", "Site", "Servis", "Biz") kişisel verilerinizi nasıl topladığını, kullandığını, koruduğunu ve paylaştığını açıklamaktadır. 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") uyarınca hazırlanmıştır.
-                </p>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">1. TOPLANAN KİŞİSEL VERİLER</h2>
-                <p>
-                    Platformu kullanırken aşağıdaki kişisel verileriniz toplanabilir:
-                </p>
-                <ul class="list-disc list-inside mt-4 space-y-2">
-                    <li><strong>Kimlik Bilgileri:</strong> Ad, soyad, e-posta adresi, telefon numarası</li>
-                    <li><strong>Adres Bilgileri:</strong> Teslimat adresi, fatura adresi</li>
-                    <li><strong>Hesap Bilgileri:</strong> Kullanıcı adı, şifre (şifrelerleştirilmiş), profil bilgileri</li>
-                    <li><strong>Ödeme Bilgileri:</strong> Ödeme yöntemi bilgileri (doğrudan saklanmaz, güvenli ödeme sistemleri tarafından işlenir)</li>
-                    <li><strong>İşlem Bilgileri:</strong> Satın alma geçmişi, ilanlar, mesajlaşma kayıtları</li>
-                    <li><strong>Teknik Bilgiler:</strong> IP adresi, tarayıcı bilgileri, cihaz bilgileri, çerezler</li>
-                </ul>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">2. KİŞİSEL VERİLERİNİZİN KULLANIM AMAÇLARI</h2>
-                <p>
-                    Toplanan kişisel verileriniz aşağıdaki amaçlarla kullanılmaktadır:
-                </p>
-                <ul class="list-disc list-inside mt-4 space-y-2">
-                    <li>Sipariş ve ödeme işlemlerinin yönetilmesi</li>
-                    <li>Hesap yönetimi ve müşteri desteği sağlanması</li>
-                    <li>Platform hizmetlerinin iyileştirilmesi ve kişiselleştirilmesi</li>
-                    <li>Yasal yükümlülüklerin yerine getirilmesi</li>
-                    <li>Güvenlik önlemlerinin alınması ve dolandırıcılığın önlenmesi</li>
-                    <li>Pazarlama faaliyetleri (onayınız dahilinde)</li>
-                </ul>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">3. KİŞİSEL VERİLERİNİZİN PAYLAŞILMASI</h2>
-                <p>
-                    Kişisel verileriniz, yasal zorunluluklar ve aşağıdaki durumlar haricinde üçüncü kişilerle paylaşılmaz:
-                </p>
-                <ul class="list-disc list-inside mt-4 space-y-2">
-                    <li><strong>Hizmet Sağlayıcılar:</strong> Ödeme işlemcisi, kargo firmaları, bulut sunucu hizmetleri gibi hizmet sağlayıcılar</li>
-                    <li><strong>Yasal Zorunluluklar:</strong> Yasa, mahkeme kararı veya resmi makam talebi durumunda</li>
-                    <li><strong>İş Ortakları:</strong> Güvenlik, analiz ve pazarlama hizmetleri sağlayan iş ortakları (yalnızca gerekli veriler, gizlilik sözleşmeleri ile)</li>
-                </ul>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">4. VERİ GÜVENLİĞİ</h2>
-                <p>
-                    Kişisel verilerinizin güvenliği için teknik ve idari güvenlik önlemleri alınmaktadır. SSL şifreleme, güvenli ödeme sistemleri ve düzenli güvenlik güncellemeleri kullanılmaktadır. Ancak, hiçbir veri aktarımı %100 güvenli olmadığından, mutlak güvenlik garanti edilemez.
-                </p>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">5. ÇEREZLER (COOKIES)</h2>
-                <p>
-                    Platform, hizmet kalitesini artırmak ve kullanıcı deneyimini iyileştirmek amacıyla çerezler kullanmaktadır. Detaylı bilgi için lütfen <a href="{% url 'cookie_policy' %}" class="text-brand-red hover:underline">Çerez Politikası</a> sayfamızı ziyaret edin.
-                </p>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">6. KVKK HAKLARINIZ</h2>
-                <p>
-                    6698 sayılı Kanun gereğince, aşağıdaki haklara sahipsiniz:
-                </p>
-                <ul class="list-disc list-inside mt-4 space-y-2">
-                    <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
-                    <li>Kişisel verileriniz işlenmişse buna ilişkin bilgi talep etme</li>
-                    <li>Kişisel verilerinizin işlenme amacını öğrenme</li>
-                    <li>Kişisel verilerinizin yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme</li>
-                    <li>Kişisel verilerinizin eksik veya yanlış işlenmiş olması halinde bunların düzeltilmesini isteme</li>
-                    <li>Kişisel verilerinizin silinmesini veya yok edilmesini isteme</li>
-                    <li>Düzeltme, silme ve yok etme işlemlerinin aktarıldığı üçüncü kişilere bildirilmesini isteme</li>
-                    <li>İşlenen verilerin münhasıran otomatik sistemler ile analiz edilmesi suretiyle kişinin kendisi aleyhine bir sonucun ortaya çıkmasına itiraz etme</li>
-                    <li>Kişisel verilerin kanuna aykırı olarak işlenmesi sebebiyle zarara uğraması halinde zararın giderilmesini talep etme</li>
-                </ul>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">7. VERİ SAKLAMA SÜRESİ</h2>
-                <p>
-                    Kişisel verileriniz, toplama amaçları ve yasal saklama süreleri gereğince gerekli süre boyunca saklanır. Hesabınızı silmeniz durumunda, yasal saklama süreleri saklı kalmak kaydıyla verileriniz silinir.
-                </p>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">8. POLİTİKA DEĞİŞİKLİKLERİ</h2>
-                <p>
-                    Bu Gizlilik Politikası zaman zaman güncellenebilir. Önemli değişiklikler için kullanıcılara e-posta ile bildirim yapılabilir. Güncel politika metni Platform üzerinde yayınlandığı tarihten itibaren geçerlidir.
-                </p>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">9. İLETİŞİM</h2>
-                <p>
-                    Kişisel verilerinizle ilgili sorularınız, talepleriniz veya şikayetleriniz için lütfen <a href="{% url 'contact' %}" class="text-brand-red hover:underline">İletişim</a> sayfamızı ziyaret edin. KVKK kapsamındaki başvurularınızı <strong>Veri Sorumlusu</strong> olarak Collectorium'a iletebilirsiniz.
-                </p>
+            </div>
+
+            <div class="prose prose-lg max-w-none text-brand-mute">
+                <!-- GİRİŞ -->
+                <section class="mb-12">
+                    <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                        <h2 class="text-3xl font-bold text-brand-navy mb-4">Giriş ve Kapsam</h2>
+                        <p class="text-lg leading-relaxed mb-4">
+                            Bu Gizlilik ve Çerez Politikası ("Politika"), Collectorium platformunun ("Platform", "Site", "Servis", "Biz", "Collectorium") kişisel verilerinizi nasıl topladığını, kullandığını, koruduğunu, paylaştığını ve sakladığını açıklamaktadır.
+                        </p>
+                        <p class="text-lg leading-relaxed mb-4">
+                            Bu Politika, <strong>6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK")</strong> ve ilgili mevzuat hükümleri uyarınca hazırlanmıştır. Platformu kullanarak, bu Politika'nın tüm hükümlerini kabul etmiş sayılırsınız.
+                        </p>
+                        <p class="text-lg leading-relaxed">
+                            <strong>Veri Sorumlusu:</strong> Collectorium, kişisel verilerinizin işlenmesinden sorumlu veri sorumlusudur. Bu Politika kapsamındaki tüm haklarınızı ve yükümlülüklerimizi burada açıkça belirtiyoruz.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- TOPLANAN KİŞİSEL VERİLER -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">1. Toplanan Kişisel Veriler</h2>
+                    <p class="text-lg leading-relaxed mb-4">
+                        KVKK'nın 3. maddesi uyarınca, <strong>kişisel veri</strong>, kimliği belirli veya belirlenebilir gerçek kişiye ilişkin her türlü bilgidir. Platformu kullanırken aşağıdaki kişisel verileriniz toplanabilir:
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-3">1.1. Kimlik Bilgileri</h3>
+                            <ul class="list-disc list-inside space-y-2 ml-4">
+                                <li>Ad ve soyad</li>
+                                <li>E-posta adresi (hesap oluşturma ve iletişim için)</li>
+                                <li>Telefon numarası (doğrulama ve sipariş bildirimleri için)</li>
+                                <li>Doğum tarihi (yaş doğrulama için, opsiyonel)</li>
+                                <li>TC Kimlik No (satıcı doğrulama için, yalnızca satıcılar için)</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-3">1.2. Adres Bilgileri</h3>
+                            <ul class="list-disc list-inside space-y-2 ml-4">
+                                <li>Teslimat adresi (ülke, il, ilçe, mahalle, sokak, bina no, daire no)</li>
+                                <li>Fatura adresi (farklıysa)</li>
+                                <li>Posta kodu</li>
+                                <li>Adres başlığı (ev, iş yeri vb.)</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-3">1.3. Hesap ve Profil Bilgileri</h3>
+                            <ul class="list-disc list-inside space-y-2 ml-4">
+                                <li>Kullanıcı adı</li>
+                                <li>Şifre (şifreleme ile saklanır, hiçbir zaman düz metin olarak saklanmaz)</li>
+                                <li>Profil fotoğrafı (avatar)</li>
+                                <li>Mağaza adı (satıcılar için)</li>
+                                <li>Biyografi ve açıklamalar</li>
+                                <li>Rol bilgisi (alıcı/satıcı)</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-3">1.4. Finansal ve Ödeme Bilgileri</h3>
+                            <p class="text-lg leading-relaxed mb-2">
+                                <strong>Önemli:</strong> Kredi kartı bilgileri, banka hesap numaraları gibi hassas finansal veriler <strong>doğrudan saklanmaz</strong>. Bu bilgiler güvenli ödeme sistemleri (iyzico) tarafından işlenir ve PCI-DSS standartlarına uygun şekilde korunur.
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 ml-4">
+                                <li>Ödeme yöntemi tercihleri (kart, havale vb.)</li>
+                                <li>Fatura bilgileri (şirket adı, vergi dairesi, vergi numarası - fatura istenirse)</li>
+                                <li>Ödeme geçmişi ve işlem kayıtları</li>
+                                <li>Bakiye ve cüzdan bilgileri</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-3">1.5. İşlem ve Aktivite Bilgileri</h3>
+                            <ul class="list-disc list-inside space-y-2 ml-4">
+                                <li>Satın alma geçmişi</li>
+                                <li>Yayınlanan ilanlar ve içerikleri</li>
+                                <li>Mesajlaşma kayıtları (satıcı-alıcı arasındaki iletişimler)</li>
+                                <li>Favori listeleri</li>
+                                <li>Arama geçmişi</li>
+                                <li>Görüntülenen ürünler</li>
+                                <li>Sepet içeriği</li>
+                                <li>Değerlendirme ve yorumlar</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-3">1.6. Teknik ve Otomatik Toplanan Bilgiler</h3>
+                            <ul class="list-disc list-inside space-y-2 ml-4">
+                                <li>IP adresi</li>
+                                <li>Tarayıcı türü ve versiyonu</li>
+                                <li>İşletim sistemi bilgileri</li>
+                                <li>Cihaz bilgileri (mobil, tablet, masaüstü)</li>
+                                <li>Erişim zamanları ve tarihleri</li>
+                                <li>Sayfa görüntüleme süreleri</li>
+                                <li>Tıklama davranışları</li>
+                                <li>Çerezler ve benzeri teknolojiler (detaylı bilgi için Çerezler bölümüne bakınız)</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-3">1.7. Sosyal Medya Bilgileri (Google OAuth)</h3>
+                            <p class="text-lg leading-relaxed mb-2">
+                                Google hesabınızla giriş yaparsanız, Google'dan aşağıdaki bilgiler alınabilir:
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 ml-4">
+                                <li>Google profil adı</li>
+                                <li>E-posta adresi</li>
+                                <li>Profil fotoğrafı URL'si</li>
+                            </ul>
+                            <p class="text-sm text-brand-mute mt-3">
+                                <strong>Not:</strong> Google OAuth kullanımında, Google'ın gizlilik politikası da geçerlidir. Bu bilgiler yalnızca hesap oluşturma ve doğrulama amacıyla kullanılır.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VERİ KULLANIM AMAÇLARI -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">2. Kişisel Verilerinizin Kullanım Amaçları</h2>
+                    <p class="text-lg leading-relaxed mb-4">
+                        KVKK'nın 5. ve 6. maddeleri uyarınca, kişisel verileriniz <strong>belirli, açık ve meşru amaçlar</strong> için işlenir. Toplanan kişisel verileriniz aşağıdaki amaçlarla kullanılmaktadır:
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">📦 Hizmet Sunumu</h3>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Sipariş ve ödeme işlemlerinin yönetilmesi</li>
+                                <li>Ürün teslimatının sağlanması</li>
+                                <li>İade ve değişim işlemlerinin yürütülmesi</li>
+                                <li>Hesap yönetimi ve müşteri desteği</li>
+                                <li>Mesajlaşma ve iletişim özellikleri</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">🔐 Güvenlik ve Yasal Uyum</h3>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Güvenlik önlemlerinin alınması</li>
+                                <li>Dolandırıcılığın önlenmesi ve tespiti</li>
+                                <li>Yasal yükümlülüklerin yerine getirilmesi</li>
+                                <li>Mahkeme kararlarına uyum</li>
+                                <li>Resmi makam taleplerinin yerine getirilmesi</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">🚀 Hizmet İyileştirme</h3>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Platform hizmetlerinin iyileştirilmesi</li>
+                                <li>Kullanıcı deneyiminin kişiselleştirilmesi</li>
+                                <li>İstatistiksel analizler ve raporlama</li>
+                                <li>Hata tespiti ve performans optimizasyonu</li>
+                                <li>Yeni özelliklerin geliştirilmesi</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">📢 Pazarlama ve İletişim</h3>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Pazarlama faaliyetleri (onayınız dahilinde)</li>
+                                <li>Kampanya ve promosyon bildirimleri</li>
+                                <li>Ürün önerileri ve kişiselleştirilmiş içerik</li>
+                                <li>E-bülten gönderimi (abone iseniz)</li>
+                                <li>Anket ve geri bildirim talepleri</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-6">
+                        <p class="text-sm text-brand-mute">
+                            <strong>⚠️ Önemli:</strong> Pazarlama amaçlı e-posta ve SMS gönderimleri için açık rızanız alınır. Bu rızayı istediğiniz zaman geri çekebilirsiniz. Rızanızı geri çekmeniz durumunda, yalnızca hizmet sunumu için gerekli bildirimler gönderilmeye devam eder.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- VERİ PAYLAŞIMI -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">3. Kişisel Verilerinizin Paylaşılması</h2>
+                    <p class="text-lg leading-relaxed mb-4">
+                        KVKK'nın 8. ve 9. maddeleri uyarınca, kişisel verileriniz <strong>yasal zorunluluklar ve aşağıdaki durumlar haricinde üçüncü kişilerle paylaşılmaz</strong>. Verileriniz paylaşıldığında, gizlilik sözleşmeleri ile korunur ve yalnızca belirtilen amaçlar için kullanılır.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-3">3.1. Hizmet Sağlayıcılar</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                Platform hizmetlerinin sunulması için aşağıdaki hizmet sağlayıcılarla veri paylaşımı yapılabilir:
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 ml-4">
+                                <li><strong>Ödeme İşlemcileri (iyzico):</strong> Güvenli ödeme işlemleri için gerekli bilgiler (kart bilgileri doğrudan saklanmaz)</li>
+                                <li><strong>Kargo Firmaları:</strong> Teslimat için adres ve iletişim bilgileri</li>
+                                <li><strong>Bulut Sunucu Hizmetleri:</strong> Verilerin güvenli saklanması için (veri işleme sözleşmeleri ile)</li>
+                                <li><strong>E-posta Servis Sağlayıcıları:</strong> Bildirim ve iletişim e-postalarının gönderilmesi</li>
+                                <li><strong>SMS Servis Sağlayıcıları:</strong> SMS bildirimlerinin gönderilmesi</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-3">3.2. Yasal Zorunluluklar</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                Aşağıdaki durumlarda, yasal zorunluluklar gereğince verileriniz paylaşılabilir:
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 ml-4">
+                                <li>Mahkeme kararları ve hukuki süreçler</li>
+                                <li>Savcılık ve kolluk kuvvetleri talepleri</li>
+                                <li>Vergi mevzuatı gereğince vergi dairesi talepleri</li>
+                                <li>Düzenleyici kurumların talepleri</li>
+                                <li>6502 sayılı Tüketici Kanunu gereğince tüketici hakem heyetleri</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold text-brand-navy mb-3">3.3. İş Ortakları ve Analiz Hizmetleri</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                Platformun iyileştirilmesi ve analiz edilmesi için aşağıdaki iş ortaklarıyla sınırlı veri paylaşımı yapılabilir:
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 ml-4">
+                                <li><strong>Google Analytics:</strong> Web sitesi trafiği ve kullanıcı davranışı analizi (anonimleştirilmiş veriler)</li>
+                                <li><strong>Hata Takip Sistemleri:</strong> Platform hatalarının tespiti ve çözümü</li>
+                                <li><strong>Güvenlik Hizmetleri:</strong> Dolandırıcılık tespiti ve önleme</li>
+                            </ul>
+                            <p class="text-sm text-brand-mute mt-3">
+                                <strong>Not:</strong> Bu paylaşımlarda yalnızca gerekli ve anonimleştirilmiş veriler kullanılır. Kişisel kimlik bilgileriniz bu hizmetlerle paylaşılmaz.
+                            </p>
+                        </div>
+
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                            <p class="text-sm font-semibold text-brand-navy mb-2">🔒 Veri Paylaşımında Güvenlik:</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Tüm veri paylaşımları gizlilik sözleşmeleri ile korunur</li>
+                                <li>Üçüncü taraf hizmet sağlayıcılar KVKK'ya uyumlu olmalıdır</li>
+                                <li>Veriler yalnızca belirtilen amaçlar için kullanılır</li>
+                                <li>Veri işleme sözleşmeleri ile yükümlülükler belirlenir</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VERİ GÜVENLİĞİ -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">4. Veri Güvenliği</h2>
+                    <p class="text-lg leading-relaxed mb-4">
+                        KVKK'nın 12. maddesi gereğince, kişisel verilerinizin güvenliği için <strong>teknik ve idari güvenlik önlemleri</strong> alınmaktadır. Verilerinizin korunması bizim için en önemli önceliktir.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">🔐 Teknik Güvenlik Önlemleri</h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li><strong>SSL/TLS Şifreleme:</strong> Tüm veri aktarımları 256-bit SSL şifreleme ile korunur</li>
+                                <li><strong>Şifre Güvenliği:</strong> Şifreler bcrypt algoritması ile hash'lenir, düz metin saklanmaz</li>
+                                <li><strong>Güvenli Ödeme:</strong> PCI-DSS uyumlu ödeme sistemleri (iyzico) kullanılır</li>
+                                <li><strong>Firewall ve DDoS Koruması:</strong> Sunucu seviyesinde güvenlik duvarları</li>
+                                <li><strong>Düzenli Yedekleme:</strong> Veriler günlük olarak yedeklenir</li>
+                                <li><strong>Güvenlik Güncellemeleri:</strong> Düzenli güvenlik yamaları ve güncellemeler</li>
+                                <li><strong>Erişim Kontrolü:</strong> Verilere erişim yetkilendirme ile sınırlandırılır</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">👥 İdari Güvenlik Önlemleri</h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li><strong>Personel Eğitimi:</strong> KVKK ve veri güvenliği eğitimleri</li>
+                                <li><strong>Gizlilik Sözleşmeleri:</strong> Tüm personel gizlilik sözleşmesi imzalar</li>
+                                <li><strong>Erişim Logları:</strong> Veri erişimleri kayıt altına alınır</li>
+                                <li><strong>Düzenli Denetimler:</strong> Güvenlik denetimleri ve testler</li>
+                                <li><strong>Olay Müdahale Planı:</strong> Veri ihlali durumunda müdahale prosedürleri</li>
+                                <li><strong>Yetkilendirme:</strong> Verilere erişim en az yetki prensibi ile sınırlandırılır</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                        <p class="text-sm text-brand-mute">
+                            <strong>⚠️ Önemli Uyarı:</strong> Hiçbir veri aktarımı %100 güvenli olmadığından, mutlak güvenlik garanti edilemez. Ancak, endüstri standartlarına uygun en yüksek seviyede güvenlik önlemleri alınmaktadır. Veri ihlali durumunda, KVKK'nın 12. maddesi gereğince <strong>en geç 72 saat içinde</strong> Kişisel Verileri Koruma Kurulu'na bildirim yapılır ve etkilenen kişiler bilgilendirilir.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- KVKK HAKLARI -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">5. KVKK Kapsamındaki Haklarınız</h2>
+                    <p class="text-lg leading-relaxed mb-4">
+                        KVKK'nın 11. maddesi gereğince, kişisel verilerinizle ilgili aşağıdaki haklara sahipsiniz. Bu haklarınızı kullanmak için <a href="{% url 'contact' %}" class="text-brand-red hover:underline font-semibold">İletişim</a> sayfamızdan bize ulaşabilirsiniz.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-2">1. Bilgi Alma Hakkı</h3>
+                            <ul class="list-disc list-inside space-y-1 text-sm ml-4">
+                                <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
+                                <li>İşlenmişse buna ilişkin bilgi talep etme</li>
+                                <li>İşlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme</li>
+                                <li>Yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-2">2. Düzeltme ve Güncelleme Hakkı</h3>
+                            <p class="text-sm text-brand-mute ml-4">
+                                Kişisel verilerinizin eksik veya yanlış işlenmiş olması halinde bunların düzeltilmesini isteme ve bu kapsamda yapılan işlemin, kişisel verilerin aktarıldığı üçüncü kişilere bildirilmesini isteme.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-2">3. Silme ve Yok Etme Hakkı</h3>
+                            <p class="text-sm text-brand-mute ml-4 mb-2">
+                                KVKK'nın 7. maddesinde öngörülen şartlar çerçevesinde kişisel verilerinizin silinmesini veya yok edilmesini isteme ve bu kapsamda yapılan işlemin, kişisel verilerin aktarıldığı üçüncü kişilere bildirilmesini isteme.
+                            </p>
+                            <p class="text-xs text-brand-mute ml-4">
+                                <strong>Not:</strong> Yasal saklama süreleri ve hukuki yükümlülükler saklı kalmak kaydıyla silme talebi yerine getirilir.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-2">4. İtiraz ve İşleme Durdurma Hakkı</h3>
+                            <ul class="list-disc list-inside space-y-1 text-sm ml-4">
+                                <li>İşlenen verilerin münhasıran otomatik sistemler ile analiz edilmesi suretiyle kişinin kendisi aleyhine bir sonucun ortaya çıkmasına itiraz etme</li>
+                                <li>Kanuna aykırı olarak kişisel verilerin işlenmesi sebebiyle zarara uğraması halinde zararın giderilmesini talep etme</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-2">5. Başvuru Hakkı</h3>
+                            <p class="text-sm text-brand-mute ml-4">
+                                KVKK kapsamındaki haklarınızın ihlali durumunda, Kişisel Verileri Koruma Kurulu'na şikayette bulunma hakkına sahipsiniz. Şikayetlerinizi <a href="https://www.kvkk.gov.tr" target="_blank" rel="noopener noreferrer" class="text-brand-red hover:underline">www.kvkk.gov.tr</a> adresinden yapabilirsiniz.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg mt-6">
+                        <h3 class="text-xl font-semibold text-brand-navy mb-3">Haklarınızı Nasıl Kullanırsınız?</h3>
+                        <ol class="list-decimal list-inside space-y-2 text-sm">
+                            <li><a href="{% url 'contact' %}" class="text-brand-red hover:underline font-semibold">İletişim</a> sayfamızdan bize ulaşın</li>
+                            <li>Kimliğinizi doğrulayın (e-posta veya telefon ile doğrulama)</li>
+                            <li>Hangi hakkınızı kullanmak istediğinizi belirtin</li>
+                            <li>Talebiniz en geç <strong>30 gün</strong> içinde değerlendirilir ve sonuçlandırılır</li>
+                        </ol>
+                        <p class="text-sm text-brand-mute mt-4">
+                            <strong>Not:</strong> Başvurularınız ücretsizdir. Ancak, başvurunun haksız veya kötüniyetli olduğu tespit edilirse, KVKK'nın 13. maddesi gereğince ücret talep edilebilir.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- VERİ SAKLAMA SÜRESİ -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">6. Veri Saklama Süresi</h2>
+                    <p class="text-lg leading-relaxed mb-4">
+                        KVKK'nın 4. maddesi gereğince, kişisel verileriniz <strong>işleme amaçlarının gerektirdiği süre kadar</strong> saklanır. Ayrıca, ilgili mevzuatta öngörülen saklama süreleri de dikkate alınır.
+                    </p>
+
+                    <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg mb-6">
+                        <h3 class="text-xl font-semibold text-brand-navy mb-4">Saklama Süreleri:</h3>
+                        <ul class="list-disc list-inside space-y-3 text-sm">
+                            <li><strong>Hesap Bilgileri:</strong> Hesap aktif olduğu sürece saklanır. Hesap silindiğinde, yasal saklama süreleri (ör. fatura saklama) saklı kalmak kaydıyla silinir.</li>
+                            <li><strong>İşlem Kayıtları:</strong> 6502 sayılı Tüketici Kanunu gereğince <strong>3 yıl</strong> saklanır.</li>
+                            <li><strong>Fatura Bilgileri:</strong> Vergi mevzuatı gereğince <strong>10 yıl</strong> saklanır.</li>
+                            <li><strong>Mesajlaşma Kayıtları:</strong> Hizmet sunumu süresince saklanır, hesap silindiğinde silinir.</li>
+                            <li><strong>Log Kayıtları:</strong> Güvenlik ve işleme amaçları için <strong>1 yıl</strong> saklanır.</li>
+                            <li><strong>Pazarlama İzinleri:</strong> İzin geri çekilene kadar saklanır.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                        <p class="text-sm text-brand-mute">
+                            <strong>Önemli:</strong> Yasal saklama süreleri dolduktan sonra, kişisel verileriniz otomatik olarak silinir veya anonimleştirilir. Hesabınızı silmek istediğinizde, yasal saklama süreleri saklı kalmak kaydıyla verileriniz silinir.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ÇEREZLER -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">7. Çerezler (Cookies) ve Benzeri Teknolojiler</h2>
+                    <p class="text-lg leading-relaxed mb-4">
+                        Platform, hizmet kalitesini artırmak, kullanıcı deneyimini iyileştirmek ve platformun teknik işleyişini sağlamak amacıyla çerezler ve benzeri teknolojiler kullanmaktadır.
+                    </p>
+
+                    <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg mb-6">
+                        <h3 class="text-xl font-semibold text-brand-navy mb-4">Çerez Nedir?</h3>
+                        <p class="text-lg leading-relaxed mb-4">
+                            Çerezler (Cookies), web sitelerini ziyaret ettiğinizde tarayıcınız tarafından cihazınıza kaydedilen küçük metin dosyalarıdır. Bu dosyalar, platformun düzgün çalışmasını sağlar, kullanıcı deneyimini iyileştirir ve site istatistiklerinin toplanmasına yardımcı olur.
+                        </p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">7.1. Zorunlu Çerezler</h3>
+                            <p class="text-sm text-brand-mute mb-2">
+                                Bu çerezler, Platformun temel işlevlerinin çalışması için gereklidir ve devre dışı bırakılamaz:
+                            </p>
+                            <ul class="list-disc list-inside space-y-1 text-sm ml-4">
+                                <li><strong>Oturum Çerezleri:</strong> Giriş yaptığınızda sizi hatırlar (SESSIONID)</li>
+                                <li><strong>Güvenlik Çerezleri:</strong> CSRF koruması, güvenli ödeme işlemleri (CSRFTOKEN)</li>
+                                <li><strong>Sepet Çerezleri:</strong> Alışveriş sepetinizin içeriğini saklar</li>
+                                <li><strong>Dil ve Bölge Çerezleri:</strong> Tercih ettiğiniz dil ve bölge ayarları</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">7.2. Performans ve Analiz Çerezleri</h3>
+                            <p class="text-sm text-brand-mute mb-2">
+                                Bu çerezler (onayınız dahilinde), Platformun performansını ölçmek ve kullanıcı deneyimini iyileştirmek için kullanılır:
+                            </p>
+                            <ul class="list-disc list-inside space-y-1 text-sm ml-4">
+                                <li><strong>Google Analytics:</strong> Ziyaret sayıları, sayfa görüntüleme istatistikleri, kullanıcı davranış analizi</li>
+                                <li><strong>Hata Takibi:</strong> Platform hatalarının tespiti ve performans optimizasyonu</li>
+                            </ul>
+                            <p class="text-xs text-brand-mute mt-2 ml-4">
+                                <strong>Not:</strong> Bu çerezler anonimleştirilmiş veriler toplar ve kişisel kimlik bilgilerinizi içermez.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">7.3. İşlevsellik Çerezleri</h3>
+                            <p class="text-sm text-brand-mute mb-2">
+                                Bu çerezler, Platformun gelişmiş özelliklerini kullanmanıza olanak tanır:
+                            </p>
+                            <ul class="list-disc list-inside space-y-1 text-sm ml-4">
+                                <li>Görüntüleme tercihleri (liste/grid görünümü)</li>
+                                <li>Arama geçmişi ve filtre tercihleri</li>
+                                <li>Favori listeleri</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">7.4. Pazarlama Çerezleri</h3>
+                            <p class="text-sm text-brand-mute mb-2">
+                                Bu çerezler (onayınız dahilinde), size daha uygun içerik ve reklamlar göstermek için kullanılır:
+                            </p>
+                            <ul class="list-disc list-inside space-y-1 text-sm ml-4">
+                                <li>İlgi alanlarınıza göre özelleştirilmiş içerik</li>
+                                <li>Pazarlama kampanyalarının etkinliğinin ölçülmesi</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg mt-6">
+                        <h3 class="text-xl font-semibold text-brand-navy mb-3">Çerez Ayarlarınızı Nasıl Yönetirsiniz?</h3>
+                        <p class="text-lg leading-relaxed mb-4">
+                            Tarayıcı ayarlarınızdan çerezleri kontrol edebilir veya devre dışı bırakabilirsiniz. Ancak, zorunlu çerezlerin devre dışı bırakılması, Platformun bazı özelliklerinin çalışmamasına neden olabilir.
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <strong>Chrome:</strong> Ayarlar > Gizlilik ve Güvenlik > Çerezler
+                            </div>
+                            <div>
+                                <strong>Firefox:</strong> Seçenekler > Gizlilik ve Güvenlik > Çerezler
+                            </div>
+                            <div>
+                                <strong>Safari:</strong> Tercihler > Gizlilik > Çerezler
+                            </div>
+                            <div>
+                                <strong>Edge:</strong> Ayarlar > Gizlilik > Çerezler
+                            </div>
+                        </div>
+                        <p class="text-sm text-brand-mute mt-4">
+                            <strong>Detaylı Bilgi:</strong> Çerezler hakkında daha fazla bilgi için <a href="{% url 'cookie_policy' %}" class="text-brand-red hover:underline font-semibold">Çerez Politikası</a> sayfamızı ziyaret edebilirsiniz.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- POLİTİKA DEĞİŞİKLİKLERİ -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">8. Politika Değişiklikleri</h2>
+                    <p class="text-lg leading-relaxed mb-4">
+                        Bu Gizlilik ve Çerez Politikası zaman zaman güncellenebilir. Önemli değişiklikler için kullanıcılara e-posta ile bildirim yapılabilir. Güncel politika metni Platform üzerinde yayınlandığı tarihten itibaren geçerlidir.
+                    </p>
+                    <p class="text-lg leading-relaxed">
+                        Politika değişikliklerini takip etmek için bu sayfayı düzenli olarak ziyaret etmenizi öneririz. Politika değişikliklerinden haberdar olmak için <strong>"Son Güncelleme"</strong> tarihini kontrol edebilirsiniz.
+                    </p>
+                </section>
+
+                <!-- İLETİŞİM -->
+                <section class="text-center py-8 border-t-2 border-brand-red/20">
+                    <h2 class="text-2xl font-bold text-brand-navy mb-4">Sorularınız mı Var?</h2>
+                    <p class="text-lg text-brand-mute mb-6">
+                        Kişisel verilerinizle ilgili sorularınız, talepleriniz veya şikayetleriniz için bizimle iletişime geçmekten çekinmeyin. KVKK kapsamındaki başvurularınızı <strong>Veri Sorumlusu</strong> olarak Collectorium'a iletebilirsiniz.
+                    </p>
+                    <a href="{% url 'contact' %}" class="inline-block bg-brand-red text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-red/90 transition-colors duration-200">
+                        İletişim Sayfası
+                    </a>
+                </section>
             </div>
         </div>
     </div>

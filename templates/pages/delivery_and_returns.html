@@ -5,82 +5,351 @@
 {% block content %}
 <div class="bg-white">
     <div class="container mx-auto px-4 py-16">
-        <div class="max-w-3xl mx-auto">
-            <h1 class="text-4xl font-bold text-brand-navy mb-6 border-b pb-4">Teslimat ve İade Şartları</h1>
-            <div class="prose prose-lg max-w-none text-brand-mute">
-                <p class="text-sm text-brand-mute mb-6">
+        <div class="max-w-4xl mx-auto">
+            <!-- Ana Başlık -->
+            <div class="text-center mb-12">
+                <h1 class="text-5xl font-bold text-brand-navy mb-4">Teslimat ve İade Şartları</h1>
+                <p class="text-xl text-brand-mute max-w-2xl mx-auto">
+                    Tüm sorularınızın cevabı burada. Güvenli ve kolay alışveriş için hazırladığımız detaylı bilgiler.
+                </p>
+                <p class="text-sm text-brand-mute mt-4">
                     <strong>Son Güncelleme:</strong> {{ "now"|date:"d F Y" }}
                 </p>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">TESLİMAT ŞARTLARI</h2>
-                
-                <h3 class="text-xl font-semibold text-brand-navy mt-6">1. Teslimat Süreleri</h3>
-                <p>
-                    Ürünleriniz, sipariş onaylandıktan sonra 1-3 iş günü içinde kargoya verilir. Teslimat süreleri, seçilen kargo firmasına ve teslimat adresine göre değişiklik gösterebilir. Standart teslimat süresi 2-7 iş günü arasındadır.
-                </p>
-                
-                <h3 class="text-xl font-semibold text-brand-navy mt-6">2. Teslimat Adresi</h3>
-                <p>
-                    Sipariş sırasında belirttiğiniz teslimat adresine ürünler gönderilir. Adres bilgilerinizin doğru ve eksiksiz olması önemlidir. Yanlış veya eksik adres bilgisi nedeniyle oluşabilecek gecikme veya kayıplardan Collectorium sorumlu değildir.
-                </p>
-                
-                <h3 class="text-xl font-semibold text-brand-navy mt-6">3. Kargo Ücreti</h3>
-                <p>
-                    Kargo ücretleri, seçilen kargo firmasına ve teslimat adresine göre belirlenir ve sipariş sırasında gösterilir. Kargo ücreti, alıcı tarafından ödenir. Belirli tutar üzerindeki siparişlerde kargo ücretsiz olabilir.
-                </p>
-                
-                <h3 class="text-xl font-semibold text-brand-navy mt-6">4. Teslimat Kontrolü</h3>
-                <p>
-                    Ürün teslim alınırken, paketin hasar görüp görmediği kontrol edilmelidir. Hasarlı veya eksik ürün teslim alındığında, kargo tutanağına "hasarlı" veya "eksik" şeklinde not düşülmeli ve derhal satıcı ve Collectorium ile iletişime geçilmelidir.
-                </p>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">İADE ŞARTLARI</h2>
-                
-                <h3 class="text-xl font-semibold text-brand-navy mt-6">1. İade Hakkı</h3>
-                <p>
-                    6502 sayılı Tüketicinin Korunması Hakkında Kanun gereğince, tüketiciler satın aldıkları ürünleri teslim aldıkları tarihten itibaren 14 (on dört) gün içinde, herhangi bir gerekçe göstermeksizin iade edebilir.
-                </p>
-                
-                <h3 class="text-xl font-semibold text-brand-navy mt-6">2. İade Koşulları</h3>
-                <p>
-                    İade edilecek ürünün aşağıdaki koşulları sağlaması gerekmektedir:
-                </p>
-                <ul class="list-disc list-inside mt-4 space-y-2">
-                    <li>Ürün, orijinal ambalajında ve faturası ile birlikte olmalıdır</li>
-                    <li>Ürün kullanılmamış, hasar görmemiş ve orijinal halinde olmalıdır</li>
-                    <li>Aksesuarlar, kullanım kılavuzu ve varsa garanti belgeleri eksiksiz olmalıdır</li>
-                    <li>Kişisel hijyen ürünleri, iç çamaşırı gibi ürünlerde iade kabul edilmez (yasal gereklilik)</li>
-                </ul>
-                
-                <h3 class="text-xl font-semibold text-brand-navy mt-6">3. İade İşlem Süreci</h3>
-                <p>
-                    İade talebi, teslimat tarihinden itibaren 14 gün içinde platform üzerinden veya <a href="{% url 'contact' %}" class="text-brand-red hover:underline">İletişim</a> sayfası üzerinden iletilmelidir. İade onaylandıktan sonra, ürün kargo firması aracılığıyla satıcıya gönderilir.
-                </p>
-                
-                <h3 class="text-xl font-semibold text-brand-navy mt-6">4. İade Kargo Ücreti</h3>
-                <p>
-                    Ürün hatası veya yanlış ürün gönderimi durumunda iade kargo ücreti satıcıya aittir. Diğer durumlarda (sadece beğenmeme, ürünün uygun olmaması vb.) iade kargo ücreti alıcıya aittir.
-                </p>
-                
-                <h3 class="text-xl font-semibold text-brand-navy mt-6">5. İade Ödemesi</h3>
-                <p>
-                    İade edilen ürünler kontrol edildikten sonra, ödeme orijinal ödeme yöntemi üzerinden iade edilir. İade süreci ürünün satıcıya ulaşmasından itibaren 14 iş günü içinde tamamlanır.
-                </p>
-                
-                <h3 class="text-xl font-semibold text-brand-navy mt-6">6. Değişim</h3>
-                <p>
-                    Ürün değişimi, iade işlemi gerçekleştirildikten sonra yeni ürün siparişi verilerek yapılabilir. Değişim işleminde kargo ücreti her iki taraf için de geçerlidir.
-                </p>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">AYIPLI MAL İADESİ</h2>
-                <p>
-                    Teslim edilen ürün ayıplı veya kusurlu ise, 6502 sayılı Kanun gereğince tüketici ücretsiz olarak tamir, bedelsiz değiştirme, ödemede indirim veya bedel iadesi talep edebilir. Ayıplı mal durumunda iade kargo ücreti satıcıya aittir.
-                </p>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">SORULARINIZ İÇİN</h2>
-                <p>
-                    Teslimat ve iade işlemleri ile ilgili sorularınız için lütfen <a href="{% url 'contact' %}" class="text-brand-red hover:underline">İletişim</a> sayfamızı ziyaret edin veya platform üzerinden satıcı ile iletişime geçin.
-                </p>
+            </div>
+
+            <div class="prose prose-lg max-w-none text-brand-mute">
+                <!-- TESLİMAT ŞARTLARI -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">📦 TESLİMAT ŞARTLARI</h2>
+                    
+                    <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg mb-6">
+                        <h3 class="text-2xl font-semibold text-brand-navy mb-4">1. Teslimat Süreleri</h3>
+                        <div class="space-y-4">
+                            <p class="text-lg leading-relaxed">
+                                <strong>Kargoya Verme Süresi:</strong> Ürünleriniz, sipariş onaylandıktan ve ödeme onayı alındıktan sonra <strong>1-3 iş günü</strong> içinde kargoya verilir. Hafta sonları ve resmi tatiller iş günü sayılmaz.
+                            </p>
+                            <p class="text-lg leading-relaxed">
+                                <strong>Ortalama Teslimat Süresi:</strong> Standart teslimat süresi, seçilen kargo firmasına ve teslimat adresine göre değişiklik gösterir:
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 ml-4">
+                                <li><strong>İstanbul, Ankara, İzmir:</strong> 1-2 iş günü</li>
+                                <li><strong>Diğer İller:</strong> 2-5 iş günü</li>
+                                <li><strong>İlçe ve Köyler:</strong> 3-7 iş günü</li>
+                            </ul>
+                            <p class="text-lg leading-relaxed mt-4">
+                                <strong>Önemli Not:</strong> Kargo firmalarının yoğun dönemlerinde (bayram, yılbaşı, kampanya dönemleri vb.) teslimat süreleri uzayabilir. Bu durumda sizlere bilgi verilir.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg mb-6">
+                        <h3 class="text-2xl font-semibold text-brand-navy mb-4">2. Teslimat Adresi ve Bilgileri</h3>
+                        <div class="space-y-4">
+                            <p class="text-lg leading-relaxed">
+                                Sipariş sırasında belirttiğiniz teslimat adresine ürünler gönderilir. <strong>Adres bilgilerinizin doğru, eksiksiz ve güncel olması kritik öneme sahiptir.</strong>
+                            </p>
+                            <div class="bg-red-50 border border-red-200 rounded-lg p-4 mt-4">
+                                <p class="text-brand-mute font-semibold mb-2">⚠️ Dikkat:</p>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li>Yanlış veya eksik adres bilgisi nedeniyle oluşabilecek gecikme, kayıp veya ek maliyetlerden Collectorium ve satıcı sorumlu değildir.</li>
+                                    <li>Yanlış adres nedeniyle geri dönen kargolar için ek kargo ücreti talep edilebilir.</li>
+                                    <li>Adres değişikliği talepleri, ürün kargoya verilmeden önce yapılmalıdır.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg mb-6">
+                        <h3 class="text-2xl font-semibold text-brand-navy mb-4">3. Kargo Ücreti</h3>
+                        <div class="space-y-4">
+                            <p class="text-lg leading-relaxed">
+                                <strong>Kargo Ücretini Kim Öder?</strong> Kargo ücreti, <strong>alıcı tarafından ödenir</strong> ve sipariş sırasında toplam tutara eklenir.
+                            </p>
+                            <p class="text-lg leading-relaxed">
+                                <strong>Kargo Ücreti Nasıl Belirlenir?</strong> Kargo ücretleri, seçilen kargo firmasına, ürünün ağırlığına, boyutuna ve teslimat adresine göre otomatik olarak hesaplanır ve sipariş öncesinde size gösterilir.
+                            </p>
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-xl font-semibold text-brand-navy mb-3">💎 Ücretsiz Kargo</h4>
+                                <p class="text-lg leading-relaxed mb-2">
+                                    Bazı satıcılarımız, belirli tutar üzerindeki siparişlerde ücretsiz kargo seçeneği sunmaktadır. Ücretsiz kargo koşulları her ilan sayfasında açıkça belirtilir.
+                                </p>
+                                <p class="text-sm text-brand-mute">
+                                    <strong>Örnek:</strong> "500 TL ve üzeri siparişlerde ücretsiz kargo" gibi koşullar ilan açıklamasında yer alır.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg mb-6">
+                        <h3 class="text-2xl font-semibold text-brand-navy mb-4">4. Teslimat Kontrolü ve Hasarlı Paket Durumu</h3>
+                        <div class="space-y-4">
+                            <p class="text-lg leading-relaxed font-semibold text-brand-navy">
+                                ⚠️ KRİTİK: Ürün teslim alınırken mutlaka kontrol edin!
+                            </p>
+                            <p class="text-lg leading-relaxed">
+                                Ürününüzü teslim alırken, <strong>kargo teslim tutanağı imzalanmadan önce</strong> aşağıdaki kontrolleri yapmanız çok önemlidir:
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 ml-4">
+                                <li>Paketin dış ambalajında hasar, yırtık veya ezilme var mı?</li>
+                                <li>Paket açıldığında ürün eksik mi veya hasarlı mı?</li>
+                                <li>Ürün sipariş ettiğiniz ürün mü?</li>
+                                <li>Aksesuarlar ve belgeler eksiksiz mi?</li>
+                            </ul>
+                            
+                            <div class="bg-red-50 border border-red-200 rounded-lg p-4 mt-4">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">Hasarlı veya Eksik Ürün Teslim Aldıysanız Ne Yapmalısınız?</h4>
+                                <ol class="list-decimal list-inside space-y-2 text-sm">
+                                    <li><strong>Kargo Tutanağına Not Düşün:</strong> Kargo teslim tutanağına <strong>"hasarlı"</strong> veya <strong>"eksik"</strong> şeklinde açıkça not düşün ve kargo görevlisinden onay alın.</li>
+                                    <li><strong>Fotoğraf Çekin:</strong> Hasarlı paket ve ürünün fotoğraflarını çekin (minimum 3-4 fotoğraf).</li>
+                                    <li><strong>Derhal İletişime Geçin:</strong> En geç <strong>24 saat içinde</strong>:
+                                        <ul class="list-disc list-inside ml-4 mt-2">
+                                            <li>Platform üzerinden satıcıya mesaj gönderin</li>
+                                            <li><a href="{% url 'contact' %}" class="text-brand-red hover:underline font-semibold">İletişim</a> sayfamızdan Collectorium destek ekibine ulaşın</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Bilgileri Paylaşın:</strong> Kargo tutanağı, fotoğraflar ve açıklama ile birlikte durumu bildirin.</li>
+                                </ol>
+                                <p class="text-sm font-semibold text-brand-navy mt-3">
+                                    💡 Önemli: Kargo tutanağına not düşmeden teslim alırsanız, hasar durumunda hak kaybına uğrayabilirsiniz. Bu nedenle mutlaka kontrol edin ve şüpheli durumlarda tutanağa not düşün.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                        <h3 class="text-2xl font-semibold text-brand-navy mb-4">5. Teslimat Takibi</h3>
+                        <p class="text-lg leading-relaxed">
+                            Siparişinizin durumunu platform üzerindeki "Siparişlerim" bölümünden takip edebilirsiniz. Kargo takip numarası size e-posta ve SMS ile gönderilir. Kargo firmasının web sitesinden de takip edebilirsiniz.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- İADE ŞARTLARI -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">↩️ İADE ŞARTLARI</h2>
+                    
+                    <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg mb-6">
+                        <h3 class="text-2xl font-semibold text-brand-navy mb-4">1. 14 Günlük Cayma Hakkı (6502 Sayılı Kanun)</h3>
+                        <div class="space-y-4">
+                            <p class="text-lg leading-relaxed">
+                                <strong>6502 sayılı Tüketicinin Korunması Hakkında Kanun'un 15. maddesi</strong> gereğince, tüketiciler satın aldıkları ürünleri <strong>teslim aldıkları tarihten itibaren 14 (on dört) gün içinde</strong>, herhangi bir gerekçe göstermeksizin ve cezai şart ödemeksizin iade edebilir.
+                            </p>
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">📅 Süre Hesaplama:</h4>
+                                <ul class="list-disc list-inside space-y-1 text-sm">
+                                    <li>Cayma hakkı süresi, ürünün <strong>teslim alındığı tarihten itibaren</strong> başlar.</li>
+                                    <li>14 günlük süre, <strong>takvim günü</strong> olarak hesaplanır (hafta sonları ve tatiller dahil).</li>
+                                    <li>14. günün sonunda iade talebi yapılmışsa geçerlidir.</li>
+                                    <li>İade talebi, satıcıya veya Collectorium'a ulaştığı tarih geçerlilik için önemlidir.</li>
+                                </ul>
+                            </div>
+                            <p class="text-lg leading-relaxed mt-4">
+                                <strong>Örnek:</strong> Ürünü 1 Ocak'ta teslim aldıysanız, 15 Ocak saat 23:59'a kadar iade talebinde bulunabilirsiniz.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg mb-6">
+                        <h3 class="text-2xl font-semibold text-brand-navy mb-4">2. İade Edilemeyen Ürünler</h3>
+                        <div class="space-y-4">
+                            <p class="text-lg leading-relaxed">
+                                6502 sayılı Kanun'un 15. maddesi gereğince, aşağıdaki ürünlerde cayma hakkı kullanılamaz:
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 ml-4">
+                                <li><strong>Kişisel Hijyen Ürünleri:</strong> İç çamaşırı, mayolar, diş fırçaları, tıraş bıçakları vb.</li>
+                                <li><strong>Özel Hazırlanan Ürünler:</strong> Satıcının özel olarak hazırladığı, kişiselleştirilmiş ürünler</li>
+                                <li><strong>Hızlı Bozulan Ürünler:</strong> Son kullanma tarihi geçmiş veya bozulmuş ürünler</li>
+                                <li><strong>Açılmış Ses/Video Kayıtları:</strong> DVD, CD, kaset gibi koruyucu ambalajı açılmış ürünler</li>
+                                <li><strong>Gazete ve Dergiler:</strong> Günlük gazeteler ve dergiler</li>
+                                <li><strong>Dijital İçerikler:</strong> İndirilmiş veya etkinleştirilmiş dijital ürünler</li>
+                            </ul>
+                            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-4">
+                                <p class="text-sm text-brand-mute">
+                                    <strong>Not:</strong> Bu ürünlerde cayma hakkı kullanılamaz, ancak <strong>ayıplı mal</strong> durumunda tüm haklarınız saklıdır.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg mb-6">
+                        <h3 class="text-2xl font-semibold text-brand-navy mb-4">3. İade Koşulları</h3>
+                        <p class="text-lg leading-relaxed mb-4">
+                            İade edilecek ürünün aşağıdaki koşulları sağlaması gerekmektedir:
+                        </p>
+                        <ul class="list-disc list-inside space-y-2 ml-4">
+                            <li>Ürün, <strong>orijinal ambalajında</strong> ve <strong>faturası</strong> ile birlikte olmalıdır</li>
+                            <li>Ürün <strong>kullanılmamış</strong>, <strong>hasar görmemiş</strong> ve <strong>orijinal halinde</strong> olmalıdır</li>
+                            <li><strong>Aksesuarlar</strong>, <strong>kullanım kılavuzu</strong> ve varsa <strong>garanti belgeleri</strong> eksiksiz olmalıdır</li>
+                            <li>Ürün üzerinde <strong>test amaçlı kullanım izleri</strong> bulunmamalıdır</li>
+                            <li>Ürünün <strong>seri numarası</strong> veya <strong>kimlik bilgileri</strong> silinmemiş olmalıdır</li>
+                        </ul>
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-4 mt-4">
+                            <p class="text-sm font-semibold text-brand-navy mb-2">⚠️ Dikkat:</p>
+                            <p class="text-sm text-brand-mute">
+                                Yukarıdaki koşulları sağlamayan ürünlerin iadesi kabul edilmez ve ürün size geri gönderilir. Bu durumda ek kargo ücreti talep edilebilir.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg mb-6">
+                        <h3 class="text-2xl font-semibold text-brand-navy mb-4">4. İade İşlem Süreci (Adım Adım)</h3>
+                        <ol class="list-decimal list-inside space-y-3 ml-4">
+                            <li class="text-lg leading-relaxed">
+                                <strong>İade Talebi Oluşturun:</strong> Teslimat tarihinden itibaren 14 gün içinde platform üzerindeki "Siparişlerim" bölümünden iade talebi oluşturun veya <a href="{% url 'contact' %}" class="text-brand-red hover:underline font-semibold">İletişim</a> sayfası üzerinden bize ulaşın.
+                            </li>
+                            <li class="text-lg leading-relaxed">
+                                <strong>İade Nedeni Belirtin:</strong> İade talebinde nedeninizi açıkça belirtin (beğenmeme, uygun olmama, boyut uyumsuzluğu vb.).
+                            </li>
+                            <li class="text-lg leading-relaxed">
+                                <strong>Onay Bekleyin:</strong> Satıcı veya Collectorium destek ekibi iade talebinizi en geç 2 iş günü içinde onaylar.
+                            </li>
+                            <li class="text-lg leading-relaxed">
+                                <strong>Ürünü Gönderin:</strong> Onay sonrası size gönderilen kargo etiketini kullanarak ürünü satıcıya gönderin.
+                            </li>
+                            <li class="text-lg leading-relaxed">
+                                <strong>Kontrol ve İade:</strong> Satıcı ürünü kontrol eder ve uygunsa ödeme iadesi yapılır.
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg mb-6">
+                        <h3 class="text-2xl font-semibold text-brand-navy mb-4">5. İade Kargo Ücreti - Kim Öder?</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white p-4 rounded-lg">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">✅ İade Kargo Ücreti SATICIYA AİTTİR:</h4>
+                                <ul class="list-disc list-inside space-y-1 text-sm ml-4">
+                                    <li>Ürün <strong>hatalı</strong> veya <strong>kusurlu</strong> ise</li>
+                                    <li><strong>Yanlış ürün</strong> gönderilmişse</li>
+                                    <li>Ürün <strong>sipariş edilenden farklı</strong> ise</li>
+                                    <li>Ürün <strong>eksik</strong> gönderilmişse</li>
+                                    <li>Ürün <strong>hasarlı</strong> teslim edilmişse</li>
+                                    <li>Satıcı <strong>vaat ettiği özellikleri</strong> sağlamamışsa</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">❌ İade Kargo Ücreti ALICIYA AİTTİR:</h4>
+                                <ul class="list-disc list-inside space-y-1 text-sm ml-4">
+                                    <li>Sadece <strong>beğenmeme</strong> durumunda</li>
+                                    <li>Ürünün <strong>uygun olmaması</strong> durumunda</li>
+                                    <li><strong>Boyut/kalite</strong> uyumsuzluğu (satıcı hatası değilse)</li>
+                                    <li><strong>Keyfi iade</strong> durumlarında</li>
+                                </ul>
+                            </div>
+                            <p class="text-sm text-brand-mute mt-4">
+                                <strong>Önemli:</strong> İade kargo ücreti, iade onayı sırasında size bildirilir. Kargo ücreti alıcıya aitse, iade işlemi sırasında bu ücret talep edilir.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg mb-6">
+                        <h3 class="text-2xl font-semibold text-brand-navy mb-4">6. İade Edilen Paranın Hesaba Geçme Süresi</h3>
+                        <div class="space-y-4">
+                            <p class="text-lg leading-relaxed">
+                                İade edilen ürünler satıcıya ulaştıktan sonra kontrol edilir ve uygunsa ödeme iadesi yapılır.
+                            </p>
+                            <div class="bg-white p-4 rounded-lg mt-4">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-3">⏱️ İade Süreleri:</h4>
+                                <ul class="list-disc list-inside space-y-2 text-sm">
+                                    <li><strong>Ürün Kontrolü:</strong> Ürün satıcıya ulaştıktan sonra <strong>2-3 iş günü</strong> içinde kontrol edilir.</li>
+                                    <li><strong>İade Onayı:</strong> Kontrol sonrası uygunsa <strong>1 iş günü</strong> içinde iade onaylanır.</li>
+                                    <li><strong>Ödeme İadesi:</strong> Onay sonrası ödeme, <strong>orijinal ödeme yönteminize</strong> iade edilir.</li>
+                                    <li><strong>Banka/Hesap:</strong> Kredi kartı, banka kartı veya havale ile ödeme yaptıysanız, iade <strong>5-7 iş günü</strong> içinde hesabınıza yansır.</li>
+                                    <li><strong>Cüzdan:</strong> Cüzdan bakiyenize iade yapıldıysa, iade <strong>anında</strong> görünür.</li>
+                                </ul>
+                            </div>
+                            <p class="text-lg leading-relaxed mt-4">
+                                <strong>Toplam Süre:</strong> Ürünün satıcıya ulaşmasından itibaren <strong>en geç 14 iş günü</strong> içinde iade işlemi tamamlanır ve ödeme hesabınıza yansır.
+                            </p>
+                            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-4">
+                                <p class="text-sm text-brand-mute">
+                                    <strong>Not:</strong> Bankalar arası işlem süreleri farklılık gösterebilir. İade 14 iş günü içinde hesabınıza yansımazsa lütfen bizimle iletişime geçin.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg mb-6">
+                        <h3 class="text-2xl font-semibold text-brand-navy mb-4">7. Değişim İşlemi</h3>
+                        <p class="text-lg leading-relaxed mb-4">
+                            Ürün değişimi, iade işlemi gerçekleştirildikten sonra yeni ürün siparişi verilerek yapılabilir. Değişim işleminde:
+                        </p>
+                        <ul class="list-disc list-inside space-y-2 ml-4">
+                            <li>Eski ürünün iadesi yapılır (iade kargo ücreti yukarıdaki kurallara göre belirlenir)</li>
+                            <li>Yeni ürün için normal kargo ücreti geçerlidir</li>
+                            <li>Değişim işlemi için özel bir süre sınırı yoktur, ancak 14 günlük cayma hakkı süresi içinde iade yapılmalıdır</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- AYIPLI MAL -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">🔧 AYIPLI MAL DURUMU VE TÜKETİCİ HAKLARI</h2>
+                    
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg mb-6">
+                        <h3 class="text-2xl font-semibold text-brand-navy mb-4">Ayıplı Mal Nedir?</h3>
+                        <p class="text-lg leading-relaxed mb-4">
+                            6502 sayılı Tüketicinin Korunması Hakkında Kanun'un 8. maddesi gereğince, <strong>ayıplı mal</strong>, satış sırasında belirtilen veya beklenen özelliklere sahip olmayan, normal kullanım amacına uygun olmayan veya kusurlu üründür.
+                        </p>
+                        <p class="text-lg leading-relaxed">
+                            <strong>Örnekler:</strong> Bozuk ürün, eksik parça, çalışmayan ürün, sipariş edilenden farklı ürün, ambalajı açılmış/bozulmuş ürün vb.
+                        </p>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg mb-6">
+                        <h3 class="text-2xl font-semibold text-brand-navy mb-4">Ayıplı Mal Durumunda Tüketicinin Hakları</h3>
+                        <p class="text-lg leading-relaxed mb-4">
+                            6502 sayılı Kanun'un 11. maddesi gereğince, ayıplı mal durumunda tüketici aşağıdaki haklardan <strong>birini seçme hakkına</strong> sahiptir:
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-4 mt-4">
+                            <div class="bg-white p-4 rounded-lg">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">1. Ücretsiz Tamir</h4>
+                                <p class="text-sm text-brand-mute">Ürünün kusursuz şekilde tamir edilmesini talep edebilirsiniz.</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">2. Bedelsiz Değiştirme</h4>
+                                <p class="text-sm text-brand-mute">Ürünün kusursuz bir benzeri ile değiştirilmesini talep edebilirsiniz.</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">3. Ödemede İndirim</h4>
+                                <p class="text-sm text-brand-mute">Ürünü kabul edip, fiyatında indirim talep edebilirsiniz.</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg">
+                                <h4 class="text-lg font-semibold text-brand-navy mb-2">4. Bedel İadesi</h4>
+                                <p class="text-sm text-brand-mute">Sözleşmeden cayarak tüm ödemenizin iadesini talep edebilirsiniz.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg mt-4">
+                            <p class="text-sm text-brand-mute">
+                                <strong>Önemli:</strong> Ayıplı mal durumunda tüm bu haklar <strong>ücretsizdir</strong>. İade kargo ücreti, tamir masrafları ve diğer tüm giderler <strong>satıcıya aittir</strong>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                        <h3 class="text-2xl font-semibold text-brand-navy mb-4">Ayıplı Mal Şikayeti Nasıl Yapılır?</h3>
+                        <ol class="list-decimal list-inside space-y-2 ml-4">
+                            <li class="text-lg leading-relaxed">Ürünü teslim aldığınızda veya kullanmaya başladığınızda ayıbı tespit edin</li>
+                            <li class="text-lg leading-relaxed">Ayıbı fotoğraflayın veya video kaydedin</li>
+                            <li class="text-lg leading-relaxed">Derhal platform üzerinden satıcıya mesaj gönderin veya <a href="{% url 'contact' %}" class="text-brand-red hover:underline font-semibold">İletişim</a> sayfamızdan bize ulaşın</li>
+                            <li class="text-lg leading-relaxed">Tercih ettiğiniz çözümü belirtin (tamir, değişim, indirim veya iade)</li>
+                            <li class="text-lg leading-relaxed">Satıcı veya Collectorium destek ekibi süreci yönetir</li>
+                        </ol>
+                        <p class="text-lg leading-relaxed mt-4">
+                            <strong>Garanti Süresi:</strong> Ayıplı mal şikayetleri, ürünün teslim alındığı tarihten itibaren <strong>2 yıl</strong> içinde yapılabilir.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- İLETİŞİM -->
+                <section class="text-center py-8 border-t-2 border-brand-red/20">
+                    <h2 class="text-2xl font-bold text-brand-navy mb-4">Sorularınız mı Var?</h2>
+                    <p class="text-lg text-brand-mute mb-6">
+                        Teslimat ve iade işlemleri ile ilgili tüm sorularınız için bizimle iletişime geçmekten çekinmeyin.
+                    </p>
+                    <a href="{% url 'contact' %}" class="inline-block bg-brand-red text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-red/90 transition-colors duration-200">
+                        İletişim Sayfası
+                    </a>
+                </section>
             </div>
         </div>
     </div>

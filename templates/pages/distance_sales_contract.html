@@ -5,76 +5,461 @@
 {% block content %}
 <div class="bg-white">
     <div class="container mx-auto px-4 py-16">
-        <div class="max-w-3xl mx-auto">
-            <h1 class="text-4xl font-bold text-brand-navy mb-6 border-b pb-4">Mesafeli Satış Sözleşmesi</h1>
-            <div class="prose prose-lg max-w-none text-brand-mute">
-                <p class="text-sm text-brand-mute mb-6">
+        <div class="max-w-4xl mx-auto">
+            <!-- Ana Başlık -->
+            <div class="text-center mb-12">
+                <h1 class="text-5xl font-bold text-brand-navy mb-4">Mesafeli Satış Sözleşmesi</h1>
+                <p class="text-xl text-brand-mute max-w-2xl mx-auto">
+                    6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Satış Sözleşmeleri Yönetmeliği'ne uygun olarak hazırlanmıştır.
+                </p>
+                <p class="text-sm text-brand-mute mt-4">
                     <strong>Son Güncelleme:</strong> {{ "now"|date:"d F Y" }}
                 </p>
-                
-                <p>
-                    Bu Mesafeli Satış Sözleşmesi ("Sözleşme"), 6502 sayılı Tüketicinin Korunması Hakkında Kanun ve ilgili mevzuat hükümleri uyarınca, Collectorium platformu üzerinden gerçekleştirilen mesafeli satış işlemlerine ilişkindir.
-                </p>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">1. TARAFLAR</h2>
-                <p>
-                    <strong>SATICI:</strong> Collectorium platformu üzerinde hesap açarak ürün satışında bulunan gerçek veya tüzel kişi satıcılar.<br>
-                    <strong>ALICI:</strong> Collectorium platformu üzerinden ürün satın alan gerçek veya tüzel kişi tüketiciler.
-                </p>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">2. KONU</h2>
-                <p>
-                    Bu Sözleşme'nin konusu, Alıcının platform üzerinden satın aldığı koleksiyon ürünlerinin satışı ve teslimatına ilişkin hak ve yükümlülüklerin belirlenmesidir.
-                </p>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">3. SAKİNLEŞME HAKKI</h2>
-                <p>
-                    Tüketiciler, 6502 sayılı Kanun'un 15. maddesi gereğince, sipariş verdikleri ürünü teslim aldıkları tarihten itibaren 14 (on dört) gün içinde, herhangi bir gerekçe göstermeksizin ve cezai şart ödemeksizin, ürünü iade ederek satış sözleşmesinden cayma hakkına sahiptir.
-                </p>
-                <p>
-                    Cayma hakkının kullanılabilmesi için ürünün, ambalajının ve varsa aksesuarlarının hasar görmemiş, kullanılmamış ve orijinal durumunda olması gerekmektedir.
-                </p>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">4. İADE KOŞULLARI</h2>
-                <p>
-                    İade işlemi için aşağıdaki koşullar geçerlidir:
-                </p>
-                <ul class="list-disc list-inside mt-4 space-y-2">
-                    <li>İade talebi, teslimat tarihinden itibaren 14 gün içinde iletilmelidir</li>
-                    <li>Ürün, orijinal ambalajında, hasarsız ve kullanılmamış durumda olmalıdır</li>
-                    <li>İade kargo ücreti, ürün hatası veya yanlış ürün gönderimi durumunda satıcıya, diğer durumlarda alıcıya aittir</li>
-                    <li>İade edilen ürünler kontrol edildikten sonra ödeme iade edilir</li>
-                </ul>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">5. TESLİMAT</h2>
-                <p>
-                    Ürünler, sipariş sırasında belirtilen adrese, seçilen kargo firması aracılığıyla teslim edilir. Teslimat süreleri, seçilen kargo yöntemine ve teslimat adresine göre değişiklik gösterebilir. Satıcı, belirlenen süre içinde ürünü teslim etmekle yükümlüdür.
-                </p>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">6. ÖDEME</h2>
-                <p>
-                    Platform üzerinden güvenli ödeme sistemleri kullanılarak ödeme yapılır. Ödeme onaylandıktan sonra sipariş işleme alınır. Ödeme işlemleri, belirtilen komisyon oranları düşüldükten sonra satıcıya aktarılır.
-                </p>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">7. AYIPLI MAL</h2>
-                <p>
-                    Teslim edilen ürün, sipariş sırasında belirtilen özelliklere sahip değilse, eksikse, kusurluysa veya ayıplıysa, tüketici satıcıdan ücretsiz olarak tamir, bedelsiz değiştirme veya ödemede indirim talep edebilir. Ayıplı mal nedeniyle kullanılmayan veya kullanılamayan süre için garanti süresi uzatılır.
-                </p>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">8. SORUMLULUK</h2>
-                <p>
-                    Satıcı, satılan ürünün kalitesinden, durumundan ve yasal uygunluğundan sorumludur. Collectorium platform olarak, kullanıcılar arasındaki işlemlerde aracılık yapar ve satılan ürünlerin kalitesinden veya durumundan sorumlu değildir.
-                </p>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">9. UYUŞMAZLIKLARIN ÇÖZÜMÜ</h2>
-                <p>
-                    Bu Sözleşme'den kaynaklanan uyuşmazlıkların çözümünde öncelikle Türkiye Cumhuriyeti Tüketici Hakem Heyetleri ve Tüketici Mahkemeleri yetkilidir. Taraflar, ayrıca Tüketici Hakem Heyetleri ve Tüketici Mahkemeleri önünde anlaşmazlıkların çözümünde bulunmayı kabul eder.
-                </p>
-                
-                <h2 class="text-2xl font-bold text-brand-navy mt-8">10. İLETİŞİM</h2>
-                <p>
-                    Mesafeli satış sözleşmesi ile ilgili sorularınız için lütfen <a href="{% url 'contact' %}" class="text-brand-red hover:underline">İletişim</a> sayfamızı ziyaret edin veya platform üzerinden satıcı ile iletişime geçin.
-                </p>
+            </div>
+
+            <div class="prose prose-lg max-w-none text-brand-mute">
+                <!-- GİRİŞ -->
+                <section class="mb-12">
+                    <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                        <h2 class="text-3xl font-bold text-brand-navy mb-4">Giriş</h2>
+                        <p class="text-lg leading-relaxed mb-4">
+                            Bu Mesafeli Satış Sözleşmesi ("Sözleşme"), <strong>6502 sayılı Tüketicinin Korunması Hakkında Kanun</strong> ve <strong>Mesafeli Satış Sözleşmeleri Yönetmeliği</strong> hükümleri uyarınca, Collectorium platformu ("Platform") üzerinden gerçekleştirilen mesafeli satış işlemlerine ilişkindir.
+                        </p>
+                        <p class="text-lg leading-relaxed mb-4">
+                            Bu Sözleşme, Platform üzerinden yapılan her satış işleminde geçerlidir ve taraflar arasındaki hak ve yükümlülükleri belirler. Sipariş vermek suretiyle bu Sözleşme'nin tüm hükümlerini kabul etmiş sayılırsınız.
+                        </p>
+                        <p class="text-lg leading-relaxed">
+                            <strong>Önemli:</strong> Bu Sözleşme, tüketici haklarını korumak amacıyla hazırlanmıştır ve tüketici lehine yorumlanır.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- TARAFLAR -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">1. TARAFLAR</h2>
+                    <div class="space-y-4">
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">1.1. Satıcı</h3>
+                            <p class="text-lg leading-relaxed mb-2">
+                                <strong>SATICI:</strong> Collectorium platformu üzerinde hesap açarak ürün satışında bulunan gerçek veya tüzel kişi satıcılar.
+                            </p>
+                            <p class="text-sm text-brand-mute">
+                                Satıcı, Platform üzerinde mağaza açarak veya ilan yayınlayarak ürün satışında bulunan ve bu Sözleşme'ye taraf olan gerçek veya tüzel kişidir. Satıcının kimlik bilgileri, Platform üzerindeki mağaza sayfasında ve ilan detaylarında açıkça belirtilir.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">1.2. Alıcı (Tüketici)</h3>
+                            <p class="text-lg leading-relaxed mb-2">
+                                <strong>ALICI:</strong> Collectorium platformu üzerinden ürün satın alan gerçek veya tüzel kişi tüketiciler.
+                            </p>
+                            <p class="text-sm text-brand-mute">
+                                6502 sayılı Kanun'un 3. maddesi uyarınca, <strong>tüketici</strong>, ticari veya mesleki olmayan amaçlarla hareket eden gerçek veya tüzel kişidir. Alıcı, Platform üzerinden sipariş vererek bu Sözleşme'ye taraf olur.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">1.3. Platform (Collectorium)</h3>
+                            <p class="text-lg leading-relaxed mb-2">
+                                <strong>PLATFORM:</strong> Collectorium, alıcı ve satıcılar arasında aracılık yapan dijital pazar yeridir.
+                            </p>
+                            <p class="text-sm text-brand-mute">
+                                Collectorium, bu Sözleşme'de taraf değildir ve satılan ürünlerin kalitesi, durumu veya yasal uygunluğu konusunda sorumluluk kabul etmez. Platform, yalnızca aracılık hizmeti sunar ve bu hizmet kapsamında sorumludur.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KONU -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">2. SÖZLEŞMENİN KONUSU VE KAPSAMI</h2>
+                    <div class="space-y-4">
+                        <p class="text-lg leading-relaxed">
+                            Bu Sözleşme'nin konusu, Alıcının Platform üzerinden satın aldığı koleksiyon ürünlerinin satışı, teslimatı ve bu işleme ilişkin hak ve yükümlülüklerin belirlenmesidir.
+                        </p>
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">2.1. Ürün Bilgileri</h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>Ürünün adı, markası, modeli ve diğer özellikleri Platform üzerindeki ilan sayfasında açıkça belirtilir</li>
+                                <li>Ürün görselleri, gerçek ürünü yansıtacak şekilde yüklenir</li>
+                                <li>Ürün durumu (yeni, ikinci el, kullanılmış vb.) ilan sayfasında belirtilir</li>
+                                <li>Ürünün eksiklikleri, kusurları veya özel durumları açıkça belirtilir</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">2.2. Fiyatlandırma</h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>Ürün fiyatı, Platform üzerindeki ilan sayfasında açıkça belirtilir</li>
+                                <li>Fiyat, Türk Lirası (TL) cinsinden ve KDV dahil olarak gösterilir</li>
+                                <li>Kargo ücreti, sipariş sırasında ayrıca belirtilir ve toplam tutara eklenir</li>
+                                <li>Varsa kampanya indirimleri veya promosyonlar açıkça belirtilir</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CAYMA HAKKI -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">3. CAYMA HAKKI</h2>
+                    <div class="space-y-4">
+                        <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">3.1. Cayma Hakkının Kapsamı</h3>
+                            <p class="text-lg leading-relaxed mb-4">
+                                6502 sayılı Tüketicinin Korunması Hakkında Kanun'un <strong>15. maddesi</strong> gereğince, tüketiciler satın aldıkları ürünü <strong>teslim aldıkları tarihten itibaren 14 (on dört) gün içinde</strong>, herhangi bir gerekçe göstermeksizin ve cezai şart ödemeksizin, ürünü iade ederek satış sözleşmesinden cayma hakkına sahiptir.
+                            </p>
+                            <p class="text-lg leading-relaxed">
+                                Cayma hakkı, <strong>sadece tüketicilere</strong> tanınmış bir haktır. Ticari amaçla satın alan tüzel kişiler bu haktan yararlanamaz.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">3.2. Cayma Hakkının Kullanım Koşulları</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                Cayma hakkının kullanılabilmesi için aşağıdaki koşulların sağlanması gerekmektedir:
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 ml-4">
+                                <li>Ürün, <strong>orijinal ambalajında</strong> ve <strong>faturası</strong> ile birlikte olmalıdır</li>
+                                <li>Ürün, <strong>kullanılmamış</strong>, <strong>hasar görmemiş</strong> ve <strong>orijinal durumunda</strong> olmalıdır</li>
+                                <li>Ürünün <strong>ambalajı</strong>, <strong>aksesuarları</strong> ve varsa <strong>kullanım kılavuzu</strong> eksiksiz olmalıdır</li>
+                                <li>Ürün üzerinde <strong>test amaçlı kullanım izleri</strong> bulunmamalıdır</li>
+                                <li>Ürünün <strong>seri numarası</strong> veya <strong>kimlik bilgileri</strong> silinmemiş olmalıdır</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">3.3. Cayma Hakkı Kullanılamayan Ürünler</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                6502 sayılı Kanun'un 15. maddesi gereğince, aşağıdaki ürünlerde cayma hakkı kullanılamaz:
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 ml-4">
+                                <li>Kişisel hijyen ürünleri (iç çamaşırı, mayolar, diş fırçaları vb.)</li>
+                                <li>Satıcının özel olarak hazırladığı, kişiselleştirilmiş ürünler</li>
+                                <li>Hızlı bozulan ürünler</li>
+                                <li>Açılmış ses/video kayıtları (DVD, CD, kaset vb.)</li>
+                                <li>Gazete ve dergiler</li>
+                                <li>İndirilmiş veya etkinleştirilmiş dijital ürünler</li>
+                            </ul>
+                            <p class="text-sm text-brand-mute mt-3">
+                                <strong>Not:</strong> Bu ürünlerde cayma hakkı kullanılamaz, ancak <strong>ayıplı mal</strong> durumunda tüm haklarınız saklıdır.
+                            </p>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">3.4. Cayma Hakkının Kullanım Süreci</h3>
+                            <ol class="list-decimal list-inside space-y-2 text-sm">
+                                <li>Cayma talebi, teslimat tarihinden itibaren <strong>14 gün içinde</strong> Platform üzerinden veya <a href="{% url 'contact' %}" class="text-brand-red hover:underline font-semibold">İletişim</a> sayfası üzerinden iletilmelidir</li>
+                                <li>Cayma talebi, satıcıya veya Collectorium'a ulaştığı tarihte geçerlidir</li>
+                                <li>Satıcı veya Collectorium, cayma talebini en geç <strong>2 iş günü</strong> içinde onaylar</li>
+                                <li>Ürün, onay sonrası satıcıya gönderilir</li>
+                                <li>Satıcı ürünü kontrol eder ve uygunsa ödeme iadesi yapılır</li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- İADE KOŞULLARI -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">4. İADE KOŞULLARI VE İŞLEM SÜRECİ</h2>
+                    <div class="space-y-4">
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">4.1. İade İşlem Süreci</h3>
+                            <ol class="list-decimal list-inside space-y-2 text-sm">
+                                <li>İade talebi, teslimat tarihinden itibaren <strong>14 gün içinde</strong> Platform üzerindeki "Siparişlerim" bölümünden veya <a href="{% url 'contact' %}" class="text-brand-red hover:underline font-semibold">İletişim</a> sayfası üzerinden iletilir</li>
+                                <li>İade nedeni açıkça belirtilir (beğenmeme, uygun olmama, boyut uyumsuzluğu vb.)</li>
+                                <li>Satıcı veya Collectorium destek ekibi iade talebini en geç <strong>2 iş günü</strong> içinde onaylar</li>
+                                <li>Onay sonrası size gönderilen kargo etiketini kullanarak ürün satıcıya gönderilir</li>
+                                <li>Satıcı ürünü kontrol eder ve uygunsa ödeme iadesi yapılır</li>
+                            </ol>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">4.2. İade Kargo Ücreti</h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-white p-4 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-brand-navy mb-2">✅ Satıcıya Ait:</h4>
+                                    <ul class="list-disc list-inside space-y-1 text-sm">
+                                        <li>Ürün hatalı veya kusurlu ise</li>
+                                        <li>Yanlış ürün gönderilmişse</li>
+                                        <li>Ürün eksik gönderilmişse</li>
+                                        <li>Ürün hasarlı teslim edilmişse</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-brand-navy mb-2">❌ Alıcıya Ait:</h4>
+                                    <ul class="list-disc list-inside space-y-1 text-sm">
+                                        <li>Sadece beğenmeme durumunda</li>
+                                        <li>Ürünün uygun olmaması</li>
+                                        <li>Keyfi iade durumlarında</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">4.3. İade Ödemesi</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                İade edilen ürünler satıcıya ulaştıktan sonra kontrol edilir ve uygunsa ödeme iadesi yapılır.
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 text-sm ml-4">
+                                <li><strong>İade Süresi:</strong> Ürünün satıcıya ulaşmasından itibaren <strong>en geç 14 iş günü</strong> içinde iade işlemi tamamlanır</li>
+                                <li><strong>Ödeme Yöntemi:</strong> İade, orijinal ödeme yönteminize yapılır</li>
+                                <li><strong>Banka/Hesap:</strong> Kredi kartı, banka kartı veya havale ile ödeme yaptıysanız, iade <strong>5-7 iş günü</strong> içinde hesabınıza yansır</li>
+                                <li><strong>Cüzdan:</strong> Cüzdan bakiyenize iade yapıldıysa, iade <strong>anında</strong> görünür</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TESLİMAT -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">5. TESLİMAT</h2>
+                    <div class="space-y-4">
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">5.1. Teslimat Yükümlülüğü</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                Satıcı, sipariş edilen ürünü, sipariş sırasında belirtilen adrese, seçilen kargo firması aracılığıyla teslim etmekle yükümlüdür.
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>Ürünler, sipariş onaylandıktan ve ödeme onayı alındıktan sonra <strong>1-3 iş günü</strong> içinde kargoya verilir</li>
+                                <li>Teslimat süreleri, seçilen kargo yöntemine ve teslimat adresine göre değişiklik gösterir</li>
+                                <li>Standart teslimat süresi <strong>2-7 iş günü</strong> arasındadır</li>
+                                <li>Satıcı, belirlenen süre içinde ürünü teslim etmekle yükümlüdür</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">5.2. Teslimat Adresi ve Bilgileri</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                Alıcı, sipariş sırasında doğru, eksiksiz ve güncel teslimat adresi bilgilerini vermekle yükümlüdür.
+                            </p>
+                            <p class="text-sm text-brand-mute">
+                                Yanlış veya eksik adres bilgisi nedeniyle oluşabilecek gecikme, kayıp veya ek maliyetlerden Satıcı ve Collectorium sorumlu değildir. Yanlış adres nedeniyle geri dönen kargolar için ek kargo ücreti talep edilebilir.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">5.3. Teslimat Kontrolü</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                Alıcı, ürünü teslim alırken, <strong>kargo teslim tutanağı imzalanmadan önce</strong> paketin hasar görüp görmediğini kontrol etmekle yükümlüdür.
+                            </p>
+                            <p class="text-sm text-brand-mute">
+                                Hasarlı veya eksik ürün teslim alındığında, kargo tutanağına <strong>"hasarlı"</strong> veya <strong>"eksik"</strong> şeklinde not düşülmeli ve derhal satıcı ve Collectorium ile iletişime geçilmelidir. Kargo tutanağına not düşmeden teslim alırsanız, hasar durumunda hak kaybına uğrayabilirsiniz.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ÖDEME -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">6. ÖDEME</h2>
+                    <div class="space-y-4">
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">6.1. Ödeme Yöntemleri</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                Platform üzerinden güvenli ödeme sistemleri (iyzico) kullanılarak ödeme yapılır.
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>Kredi kartı ve banka kartı ile ödeme</li>
+                                <li>Havale/EFT ile ödeme</li>
+                                <li>Platform cüzdan bakiyesi ile ödeme</li>
+                            </ul>
+                            <p class="text-sm text-brand-mute mt-3">
+                                <strong>Önemli:</strong> Kredi kartı bilgileri doğrudan saklanmaz ve PCI-DSS standartlarına uygun şekilde işlenir.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">6.2. Ödeme Onayı ve Sipariş İşleme</h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>Ödeme onaylandıktan sonra sipariş işleme alınır</li>
+                                <li>Ödeme işlemleri, belirtilen komisyon oranları düşüldükten sonra satıcıya aktarılır</li>
+                                <li>Ödeme işlemi başarısız olursa, sipariş iptal edilir ve Alıcı bilgilendirilir</li>
+                                <li>Ödeme işlemi tamamlandıktan sonra, Alıcıya e-posta ve SMS ile onay gönderilir</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">6.3. Fatura</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                Fatura, Alıcının talebi üzerine düzenlenir ve e-posta adresine gönderilir.
+                            </p>
+                            <p class="text-sm text-brand-mute">
+                                Fatura bilgileri, sipariş sırasında belirtilen bilgiler doğrultusunda düzenlenir. Fatura düzenleme talebi, sipariş tamamlandıktan sonra <strong>30 gün</strong> içinde yapılabilir.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- AYIPLI MAL -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">7. AYIPLI MAL VE GARANTİ</h2>
+                    <div class="space-y-4">
+                        <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">7.1. Ayıplı Mal Tanımı</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                6502 sayılı Tüketicinin Korunması Hakkında Kanun'un <strong>8. maddesi</strong> gereğince, <strong>ayıplı mal</strong>, satış sırasında belirtilen veya beklenen özelliklere sahip olmayan, normal kullanım amacına uygun olmayan veya kusurlu üründür.
+                            </p>
+                            <p class="text-sm text-brand-mute">
+                                <strong>Örnekler:</strong> Bozuk ürün, eksik parça, çalışmayan ürün, sipariş edilenden farklı ürün, ambalajı açılmış/bozulmuş ürün vb.
+                            </p>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">7.2. Ayıplı Mal Durumunda Tüketici Hakları</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                6502 sayılı Kanun'un <strong>11. maddesi</strong> gereğince, ayıplı mal durumunda tüketici aşağıdaki haklardan <strong>birini seçme hakkına</strong> sahiptir:
+                            </p>
+                            <div class="grid md:grid-cols-2 gap-4 mt-4">
+                                <div class="bg-white p-4 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-brand-navy mb-2">1. Ücretsiz Tamir</h4>
+                                    <p class="text-sm text-brand-mute">Ürünün kusursuz şekilde tamir edilmesini talep edebilirsiniz.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-brand-navy mb-2">2. Bedelsiz Değiştirme</h4>
+                                    <p class="text-sm text-brand-mute">Ürünün kusursuz bir benzeri ile değiştirilmesini talep edebilirsiniz.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-brand-navy mb-2">3. Ödemede İndirim</h4>
+                                    <p class="text-sm text-brand-mute">Ürünü kabul edip, fiyatında indirim talep edebilirsiniz.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg">
+                                    <h4 class="text-lg font-semibold text-brand-navy mb-2">4. Bedel İadesi</h4>
+                                    <p class="text-sm text-brand-mute">Sözleşmeden cayarak tüm ödemenizin iadesini talep edebilirsiniz.</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-brand-mute mt-4">
+                                <strong>Önemli:</strong> Ayıplı mal durumunda tüm bu haklar <strong>ücretsizdir</strong>. İade kargo ücreti, tamir masrafları ve diğer tüm giderler <strong>satıcıya aittir</strong>.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">7.3. Garanti Süresi</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                Ayıplı mal nedeniyle kullanılmayan veya kullanılamayan süre için garanti süresi uzatılır.
+                            </p>
+                            <p class="text-sm text-brand-mute">
+                                <strong>Garanti Süresi:</strong> Ayıplı mal şikayetleri, ürünün teslim alındığı tarihten itibaren <strong>2 yıl</strong> içinde yapılabilir. Garanti süresi, ürünün tamir veya değiştirme nedeniyle kullanılamadığı süre boyunca uzatılır.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SORUMLULUK -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">8. SORUMLULUKLAR</h2>
+                    <div class="space-y-4">
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">8.1. Satıcının Sorumlulukları</h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>Satıcı, satılan ürünün <strong>kalitesinden</strong>, <strong>durumundan</strong> ve <strong>yasal uygunluğundan</strong> sorumludur</li>
+                                <li>Satıcı, ürünün sipariş sırasında belirtilen özelliklere uygun olduğunu garanti eder</li>
+                                <li>Satıcı, ürünü belirlenen süre içinde teslim etmekle yükümlüdür</li>
+                                <li>Satıcı, ayıplı mal durumunda tüketicinin haklarını yerine getirmekle yükümlüdür</li>
+                                <li>Satıcı, ürün bilgilerinin doğru ve eksiksiz olmasından sorumludur</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">8.2. Alıcının Sorumlulukları</h3>
+                            <ul class="list-disc list-inside space-y-2 text-sm">
+                                <li>Alıcı, sipariş sırasında doğru ve eksiksiz bilgi vermekle yükümlüdür</li>
+                                <li>Alıcı, ürünü teslim alırken kontrol etmekle yükümlüdür</li>
+                                <li>Alıcı, cayma hakkını kullanırken ürünün orijinal durumunu korumakla yükümlüdür</li>
+                                <li>Alıcı, ödeme yükümlülüğünü yerine getirmekle yükümlüdür</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">8.3. Platform'un (Collectorium) Sorumluluğu</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                Collectorium platform olarak, kullanıcılar arasındaki işlemlerde <strong>aracılık</strong> yapar ve satılan ürünlerin kalitesinden veya durumundan sorumlu değildir.
+                            </p>
+                            <p class="text-sm text-brand-mute">
+                                Platform, aracılık hizmeti kapsamında sorumludur. Ancak, yasadışı içerik tespit edildiğinde müdahale etme hakkını saklı tutar. Platform, kullanıcılar arasındaki uyuşmazlıklarda arabuluculuk yapabilir ancak bu zorunlu değildir.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- UYUŞMAZLIKLAR -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">9. UYUŞMAZLIKLARIN ÇÖZÜMÜ</h2>
+                    <div class="space-y-4">
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">9.1. Tüketici Hakem Heyetleri</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                6502 sayılı Tüketicinin Korunması Hakkında Kanun gereğince, bu Sözleşme'den kaynaklanan uyuşmazlıkların çözümünde öncelikle <strong>Tüketici Hakem Heyetleri</strong> yetkilidir.
+                            </p>
+                            <p class="text-sm text-brand-mute">
+                                Tüketici Hakem Heyetleri, 5.000 TL'ye kadar olan uyuşmazlıklarda karar verme yetkisine sahiptir. Tüketici Hakem Heyetleri'ne başvuru ücretsizdir ve hızlı çözüm sağlar.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">9.2. Tüketici Mahkemeleri</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                5.000 TL'nin üzerindeki uyuşmazlıklarda veya Tüketici Hakem Heyetleri'nin kararına itiraz durumunda, <strong>Tüketici Mahkemeleri</strong> yetkilidir.
+                            </p>
+                            <p class="text-sm text-brand-mute">
+                                Tüketici Mahkemeleri, tüketici lehine özel düzenlemelere sahiptir ve uyuşmazlıkların adil çözümünü sağlar.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">9.3. Yetki ve Uygulanacak Hukuk</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                Bu Sözleşme'den kaynaklanan uyuşmazlıkların çözümünde <strong>Türkiye Cumhuriyeti yasaları</strong> uygulanır.
+                            </p>
+                            <p class="text-sm text-brand-mute">
+                                Taraflar, Tüketici Hakem Heyetleri ve Tüketici Mahkemeleri önünde anlaşmazlıkların çözümünde bulunmayı kabul eder. Bu Sözleşme'nin herhangi bir maddesi geçersiz sayılsa bile, diğer maddeler geçerliliğini korur.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- YÜRÜRLÜK VE DEĞİŞİKLİKLER -->
+                <section class="mb-12">
+                    <h2 class="text-3xl font-bold text-brand-navy mb-6 border-b-2 border-brand-red pb-3">10. YÜRÜRLÜK VE DEĞİŞİKLİKLER</h2>
+                    <div class="space-y-4">
+                        <div class="bg-gradient-to-br from-brand-navy/5 to-brand-red/5 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">10.1. Sözleşme'nin Yürürlüğe Girmesi</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                Bu Sözleşme, Alıcının Platform üzerinden sipariş vermesi ve ödeme yapması ile yürürlüğe girer.
+                            </p>
+                            <p class="text-sm text-brand-mute">
+                                Sipariş vermek suretiyle, Alıcı bu Sözleşme'nin tüm hükümlerini kabul etmiş sayılır. Sözleşme, siparişin tamamlanması ve ürünün teslim edilmesi ile sona erer.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">10.2. Sözleşme Değişiklikleri</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                Bu Sözleşme, yasal düzenlemelerdeki değişiklikler nedeniyle güncellenebilir.
+                            </p>
+                            <p class="text-sm text-brand-mute">
+                                Sözleşme değişiklikleri, Platform üzerinde yayınlandığı tarihten itibaren geçerlidir. Mevcut siparişler için, sipariş verildiği tarihteki Sözleşme hükümleri geçerlidir.
+                            </p>
+                        </div>
+
+                        <div class="bg-white border-l-4 border-brand-red p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-brand-navy mb-3">10.3. Bölünebilirlik</h3>
+                            <p class="text-lg leading-relaxed mb-3">
+                                Bu Sözleşme'nin herhangi bir maddesi geçersiz sayılsa veya uygulanamaz hale gelse bile, diğer maddeler geçerliliğini korur.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- İLETİŞİM -->
+                <section class="text-center py-8 border-t-2 border-brand-red/20">
+                    <h2 class="text-2xl font-bold text-brand-navy mb-4">Sorularınız mı Var?</h2>
+                    <p class="text-lg text-brand-mute mb-6">
+                        Mesafeli satış sözleşmesi ile ilgili tüm sorularınız için bizimle iletişime geçmekten çekinmeyin. Ayrıca platform üzerinden satıcı ile doğrudan iletişime geçebilirsiniz.
+                    </p>
+                    <a href="{% url 'contact' %}" class="inline-block bg-brand-red text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-red/90 transition-colors duration-200">
+                        İletişim Sayfası
+                    </a>
+                </section>
             </div>
         </div>
     </div>
