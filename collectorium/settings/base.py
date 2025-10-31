@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     
     # Third-party apps
     'django_htmx',
+    'django_filters',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
