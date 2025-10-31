@@ -1,37 +1,99 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Kategoriler - Collectorium{% endblock %}
 
 {% block content %}
-<div class="bg-white py-12">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <h1 class="text-4xl font-bold text-brand-navy mb-4">Tüm Kategoriler</h1>
-            <p class="text-lg text-brand-mute">Koleksiyon dünyasını keşfet</p>
+<div class="bg-white py-12 sm:py-16 lg:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center mb-12 lg:mb-16">
+            <h1 class="font-orbitron text-4xl sm:text-5xl font-bold text-brand-navy mb-4">Tüm Kategoriler</h1>
+            <p class="text-lg sm:text-xl text-brand-mute max-w-2xl mx-auto">
+                Koleksiyon dünyasını keşfet. 8 ana reyon, yüzlerce alt kategori.
+            </p>
         </div>
 
         {% if categories %}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- Ana Kategori Vitrini - Görsel Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {% for category in categories %}
-            <a href="{% url 'marketplace' %}?category={{ category.slug }}" 
-               class="category-card group flex flex-col rounded-2xl bg-white shadow-card ring-1 ring-brand-line hover:shadow-xl hover:ring-brand-red/20">
-                {% if category.image %}
-                <div class="h-48 overflow-hidden rounded-t-2xl">
-                    <img src="{{ category.image.url }}" alt="{{ category.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            <a href="{% url 'catalog:subcategory_list' category.slug %}" 
+               class="group relative flex flex-col rounded-2xl bg-white shadow-card ring-1 ring-brand-line hover:shadow-xl hover:ring-brand-red/30 transition-all duration-300 overflow-hidden">
+                
+                <!-- Görsel Container - 1:1 Aspect Ratio -->
+                <div class="relative w-full aspect-square overflow-hidden bg-gradient-to-br from-brand-navy/5 to-brand-red/5">
+                    {% if category.image %}
+                        <img src="{{ category.image.url }}" 
+                             alt="{{ category.name }}" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    {% else %}
+                        <!-- Placeholder - Görsel yoksa gösterilecek -->
+                        <div class="w-full h-full flex items-center justify-center">
+                            <div class="text-center p-8">
+                                <svg class="mx-auto h-16 w-16 text-brand-mute mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                </svg>
+                                <p class="text-xs text-brand-mute">Görsel eklenmemiş</p>
+                                <p class="text-xs text-brand-mute mt-1">category_images/{{ category.slug }}.png</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Hover Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <!-- Kategori Adı Overlay (Görselin üzerinde) -->
+                    <div class="absolute bottom-0 left-0 right-0 p-4">
+                        <h3 class="text-xl font-bold text-white drop-shadow-lg group-hover:text-brand-red transition-colors duration-300">
+                            {{ category.name }}
+                        </h3>
+                        {% if category.listing_count %}
+                        <p class="text-sm text-white/90 mt-1">{{ category.listing_count }} ilan</p>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Alt Bilgi (Opsiyonel - İsteğe bağlı açıklama) -->
+                {% if category.description %}
+                <div class="p-4 bg-white">
+                    <p class="text-sm text-brand-mute line-clamp-2">{{ category.description }}</p>
                 </div>
                 {% endif %}
-                <div class="p-8">
-                    <h3 class="text-xl font-semibold text-brand-ink group-hover:text-brand-red transition-colors">{{ category.name }}</h3>
-                    <p class="mt-2 text-base text-brand-mute">{{ category.description|default:"Bu kategorideki binlerce ürünü incele." }}</p>
-                    <p class="mt-3 text-sm text-brand-red font-medium">{{ category.listing_count }} ilan mevcut</p>
+                
+                <!-- Hover Indicator -->
+                <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <svg class="w-6 h-6 text-white drop-shadow-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
                 </div>
             </a>
             {% endfor %}
         </div>
+        
+        <!-- Info Banner -->
+        <div class="mt-12 lg:mt-16 bg-gradient-to-r from-brand-navy/5 to-brand-red/5 rounded-2xl p-6 lg:p-8 border border-brand-line">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div class="flex-shrink-0">
+                    <svg class="w-8 h-8 text-brand-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-brand-navy mb-2">Kategori Görselleri Nasıl Eklenir?</h3>
+                    <p class="text-sm text-brand-mute">
+                        Her kategori için görsel dosyasını <code class="bg-white px-2 py-1 rounded text-xs">category_images/{slug}.png</code> formatında yükleyin.
+                        Örnek: <code class="bg-white px-2 py-1 rounded text-xs">category_images/koleksiyon-kartlari-tcg-spor.png</code>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
         {% else %}
+        <!-- Boş Durum -->
         <div class="text-center py-20">
             <svg class="mx-auto h-24 w-24 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
             </svg>
             <h3 class="mt-4 text-xl font-semibold text-brand-ink">Henüz kategori yok</h3>
             <p class="mt-2 text-brand-mute">Kategoriler yakında eklenecek</p>
@@ -40,4 +102,3 @@
     </div>
 </div>
 {% endblock %}
-

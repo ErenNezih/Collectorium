@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ parent_category.name }} - Alt Kategoriler - Collectorium{% endblock %}
+
+{% block content %}
+<div class="bg-white py-12 sm:py-16 lg:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <!-- Breadcrumb Navigation -->
+        <nav class="mb-8" aria-label="Breadcrumb">
+            <ol class="flex items-center space-x-2 text-sm">
+                <li><a href="{% url 'catalog:categories_list' %}" class="text-brand-mute hover:text-brand-red transition-colors">Kategoriler</a></li>
+                <li>
+                    <svg class="w-4 h-4 text-brand-mute" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                    </svg>
+                </li>
+                <li class="text-brand-navy font-medium">{{ parent_category.name }}</li>
+            </ol>
+        </nav>
+
+        <!-- Header -->
+        <div class="mb-12 lg:mb-16">
+            {% if parent_category.image %}
+            <div class="relative h-48 sm:h-64 lg:h-80 rounded-2xl overflow-hidden mb-6 bg-gradient-to-br from-brand-navy/10 to-brand-red/10">
+                <img src="{{ parent_category.image.url }}" 
+                     alt="{{ parent_category.name }}" 
+                     class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-6 lg:p-8">
+                    <h1 class="font-orbitron text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2">
+                        {{ parent_category.name }}
+                    </h1>
+                    {% if parent_category.description %}
+                    <p class="text-lg text-white/90 max-w-3xl">{{ parent_category.description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% else %}
+            <div class="mb-6">
+                <h1 class="font-orbitron text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-navy mb-2">
+                    {{ parent_category.name }}
+                </h1>
+                {% if parent_category.description %}
+                <p class="text-lg text-brand-mute max-w-3xl">{{ parent_category.description }}</p>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+
+        {% if subcategories %}
+        <!-- Alt Kategori Grid - Görsel Vitrin -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+            {% for subcategory in subcategories %}
+            <a href="{% url 'marketplace' %}?category={{ subcategory.slug }}" 
+               class="group relative flex flex-col rounded-2xl bg-white shadow-card ring-1 ring-brand-line hover:shadow-xl hover:ring-brand-red/30 transition-all duration-300 overflow-hidden">
+                
+                <!-- Görsel Container - 1:1 Aspect Ratio -->
+                <div class="relative w-full aspect-square overflow-hidden bg-gradient-to-br from-brand-navy/5 to-brand-red/5">
+                    {% if subcategory.image %}
+                        <img src="{{ subcategory.image.url }}" 
+                             alt="{{ subcategory.name }}" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    {% else %}
+                        <!-- Placeholder - Görsel yoksa gösterilecek -->
+                        <div class="w-full h-full flex items-center justify-center">
+                            <div class="text-center p-6">
+                                <svg class="mx-auto h-12 w-12 text-brand-mute mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                </svg>
+                                <p class="text-xs text-brand-mute">Görsel eklenmemiş</p>
+                                <p class="text-xs text-brand-mute mt-1 break-all">{{ subcategory.slug }}.png</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Hover Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <!-- Alt Kategori Adı Overlay -->
+                    <div class="absolute bottom-0 left-0 right-0 p-4">
+                        <h3 class="text-lg font-semibold text-white drop-shadow-lg group-hover:text-brand-red transition-colors duration-300">
+                            {{ subcategory.name }}
+                        </h3>
+                        {% if subcategory.listing_count %}
+                        <p class="text-sm text-white/90 mt-1">{{ subcategory.listing_count }} ilan</p>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Hover Indicator -->
+                <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <svg class="w-5 h-5 text-white drop-shadow-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        
+        {% else %}
+        <!-- Boş Durum -->
+        <div class="text-center py-20">
+            <svg class="mx-auto h-24 w-24 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+            <h3 class="mt-4 text-xl font-semibold text-brand-ink">Bu kategoride henüz alt kategori yok</h3>
+            <p class="mt-2 text-brand-mute">Alt kategoriler yakında eklenecek</p>
+            <a href="{% url 'catalog:categories_list' %}" class="mt-6 inline-block px-6 py-3 bg-brand-red text-white rounded-lg hover:bg-brand-red/90 transition-colors">
+                Tüm Kategorilere Dön
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

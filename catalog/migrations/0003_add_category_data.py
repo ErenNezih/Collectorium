@@ -190,10 +190,16 @@ def create_categories(apps, schema_editor):
         if main_category_id:
             main_category = Category.objects.using(db_alias).get(pk=main_category_id)
         else:
+            # Create main category with image path (based on slug naming convention)
+            # Image path: category_images/{slug}.png
+            # User will upload images with this naming convention
             main_category = Category.objects.using(db_alias).create(
                 name=main_category_name,
                 slug=main_slug,
                 parent=None,
+                # Image field will be set manually by user, but we prepare the path structure
+                # The image file should be named: {slug}.png and placed in category_images/
+                # Example: koleksiyon-kartlari-tcg-spor.png
             )
         
         # Create subcategories - use raw SQL for existence check
@@ -210,10 +216,16 @@ def create_categories(apps, schema_editor):
                 sub_category_id = result[0] if result else None
             
             if not sub_category_id:
+                # Create subcategory with image path (based on slug naming convention)
+                # Image path: category_images/{slug}.png
+                # User will upload images with this naming convention
                 Category.objects.using(db_alias).create(
                     name=subcategory_name,
                     slug=sub_slug,
                     parent=main_category,
+                    # Image field will be set manually by user, but we prepare the path structure
+                    # The image file should be named: {slug}.png and placed in category_images/
+                    # Example: star-wars-figurleri.png
                 )
 
 
