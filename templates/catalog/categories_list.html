@@ -97,6 +97,33 @@
             </svg>
             <h3 class="mt-4 text-xl font-semibold text-brand-ink">Henüz kategori yok</h3>
             <p class="mt-2 text-brand-mute">Kategoriler yakında eklenecek</p>
+            
+            <!-- Debug Bilgisi (Geliştirme için) -->
+            {% if debug_info %}
+            <div class="mt-8 max-w-2xl mx-auto bg-gray-50 rounded-lg p-6 text-left">
+                <h4 class="text-sm font-semibold text-brand-navy mb-3">🔍 Debug Bilgisi:</h4>
+                <ul class="text-xs text-brand-mute space-y-1">
+                    <li><strong>Toplam Kategori:</strong> {{ debug_info.all_categories_count|default:"N/A" }}</li>
+                    <li><strong>Ana Kategori:</strong> {{ debug_info.main_categories_count|default:"N/A" }}</li>
+                    <li><strong>Bulunan Kategoriler:</strong> {{ debug_info.found_categories|default:"0" }}</li>
+                    {% if debug_info.reason %}
+                    <li><strong>Sebep:</strong> {{ debug_info.reason }}</li>
+                    {% endif %}
+                    {% if debug_info.annotation_error %}
+                    <li><strong>Annotation Hatası:</strong> {{ debug_info.annotation_error }}</li>
+                    {% endif %}
+                    {% if debug_info.error %}
+                    <li><strong>Hata:</strong> {{ debug_info.error }}</li>
+                    {% endif %}
+                </ul>
+                <div class="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded">
+                    <p class="text-xs text-yellow-800">
+                        <strong>Çözüm:</strong> Eğer "Toplam Kategori: 0" görüyorsanız, migration çalıştırılmamış demektir. 
+                        Terminal'de <code class="bg-yellow-100 px-1 rounded">python manage.py migrate</code> komutunu çalıştırın.
+                    </p>
+                </div>
+            </div>
+            {% endif %}
         </div>
         {% endif %}
     </div>
