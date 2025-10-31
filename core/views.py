@@ -169,3 +169,46 @@ def listing_detail(request, listing_id):
         'related_listings': related_listings,
     }
     return render(request, "listings/listing_detail.html", context)
+
+# --- Statik Sayfalar ---
+
+class AboutView(TemplateView):
+    template_name = "pages/about.html"
+
+class PrivacyPolicyView(TemplateView):
+    template_name = "pages/privacy_policy.html"
+
+class TermsOfServiceView(TemplateView):
+    template_name = "pages/terms_of_service.html"
+
+class ContactView(TemplateView):
+    template_name = "pages/contact.html"
+
+class SellerGuideView(TemplateView):
+    template_name = "pages/seller_guide.html"
+
+class CommissionsView(TemplateView):
+    template_name = "pages/commissions.html"
+
+class SecurityTipsView(TemplateView):
+    template_name = "pages/security_tips.html"
+
+class DeliveryAndReturnsView(TemplateView):
+    template_name = "pages/delivery_and_returns.html"
+
+class DistanceSalesContractView(TemplateView):
+    template_name = "pages/distance_sales_contract.html"
+
+class CookiePolicyView(TemplateView):
+    template_name = "pages/privacy_policy.html"  # Çerez politikası gizlilik politikası ile aynı sayfada
+
+class TrustCenterView(TemplateView):
+    template_name = "pages/trust_center.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        default = DEFAULT_FEATURE_FLAGS.get('FEATURE_TRUST_CENTER_P1', False)
+        raw = os.environ.get('FEATURE_TRUST_CENTER_P1')
+        enabled = default if raw is None else raw.lower() in ("1","true","yes")
+        if not enabled:
+            return HttpResponseForbidden("Bu özellik şu anda aktif değil.")
+        return super().dispatch(request, *args, **kwargs)
