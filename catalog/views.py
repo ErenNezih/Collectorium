@@ -6,12 +6,26 @@ from listings.models import Listing
 
 def categories_list(request):
     """Kategoriler listesi sayfası"""
-    categories = Category.objects.annotate(
+    # Show all main categories (parent=None) regardless of listing count
+    # This ensures categories are visible even before any listings are created
+    main_categories = Category.objects.filter(parent__isnull=True).annotate(
         listing_count=Count('products__listings', filter=Q(products__listings__is_active=True))
-    ).filter(listing_count__gt=0).order_by('name')
+    ).order_by('name')
+    
+    # Get subcategories for each main category
+    categories_with_children = []
+    for main_cat in main_categories:
+        children = Category.objects.filter(parent=main_cat).annotate(
+            listing_count=Count('products__listings', filter=Q(products__listings__is_active=True))
+        ).order_by('name')
+        categories_with_children.append({
+            'main': main_cat,
+            'children': children
+        })
     
     context = {
-        'categories': categories,
+        'categories_with_children': categories_with_children,
+        'categories': main_categories,  # For backward compatibility
     }
     return render(request, 'catalog/categories_list.html', context)
 

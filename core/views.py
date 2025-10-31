@@ -10,23 +10,36 @@ from catalog.models import Category, Product
 from stores.models import Store
 
 def home(request):
-    # Öne çıkan kategoriler (en çok ilana sahip olanlar)
-    featured_categories = Category.objects.annotate(
+    # Öne çıkan kategoriler - Show main categories even if no listings yet
+    # If there are listings, show categories with most listings
+    # Otherwise, show all main categories
+    featured_categories_with_listings = Category.objects.filter(
+        parent__isnull=True
+    ).annotate(
         listing_count=Count('products__listings', filter=Q(products__listings__is_active=True))
     ).filter(listing_count__gt=0).order_by('-listing_count')[:6]
+    
+    # If no categories with listings, show all main categories
+    if featured_categories_with_listings.exists():
+        featured_categories = featured_categories_with_listings
+    else:
+        featured_categories = Category.objects.filter(parent__isnull=True).annotate(
+            listing_count=Count('products__listings', filter=Q(products__listings__is_active=True))
+        ).order_by('name')[:6]
 
-    # Son eklenen ilanlar
-    recent_listings = Listing.objects.filter(is_active=True).select_related(
-        'store', 'product', 'product__category'
-    ).prefetch_related('images')[:8]
+    # Son eklenen ilanlar - Use safe select_related to avoid errors if relationships don't exist
+    try:
+        recent_listings = Listing.objects.filter(is_active=True).select_related(
+            'store', 'product'
+        ).prefetch_related('images')[:8]
+    except Exception:
+        recent_listings = Listing.objects.none()
 
     # İstatistikler
     stats = {
         'total_listings': Listing.objects.filter(is_active=True).count(),
         'total_stores': Store.objects.filter(is_active=True).count(),
-        'total_categories': Category.objects.annotate(
-            listing_count=Count('products__listings', filter=Q(products__listings__is_active=True))
-        ).filter(listing_count__gt=0).count(),
+        'total_categories': Category.objects.filter(parent__isnull=True).count(),  # Count all main categories
     }
 
     # Doğrulanmış mağazalar
@@ -35,6 +48,7 @@ def home(request):
     context = {
         "featured_categories": featured_categories,
         "recent_listings": recent_listings,
+        "new_listings": recent_listings,  # Template uses 'new_listings'
         "stats": stats,
         "verified_stores": verified_stores,
     }
