@@ -212,3 +212,17 @@ class TrustCenterView(TemplateView):
         if not enabled:
             return HttpResponseForbidden("Bu özellik şu anda aktif değil.")
         return super().dispatch(request, *args, **kwargs)
+
+# --- Custom Error Handlers ---
+
+def handler403(request, exception):
+    """Custom 403 Forbidden error handler"""
+    return render(request, '403.html', status=403)
+
+def handler404(request, exception):
+    """Custom 404 Not Found error handler"""
+    return render(request, '404.html', status=404)
+
+def handler500(request):
+    """Custom 500 Internal Server Error handler"""
+    return render(request, '500.html', status=500)
